@@ -1,0 +1,58 @@
+ === Ideia dos Banco de dados para a Hamburgueria HEMN ===
+-> CLIENTE
+	id_cli (Chave primária);
+	id_end (Chave estrangeira);
+	nome_cli;
+	cpf_cli;
+	telefone_cli;
+	email_cli;
+
+-> ENDERECO
+	id_end (Chave primária);
+	complemento_end;
+	logradouro_end;
+	numero_end;
+	bairro_end;
+	cidade_end;
+	ponto_ref_end;
+
+-> FUNCIONARIO
+	id_funci (Chave primária);
+	nome_funci;
+	cargo_funci ('C' - "Cozinheiro", 'A' - "Atendente", 'E' - "Entregador");
+	telefone_funci;
+
+-> PRODUTO
+	id_prod (Chave primária);
+	nome_prod;
+	descricao_prod;
+	preco_prod;
+	tipo ('L' - "Lanche", 'B' - "Bebida", 'A' - "Acompanhamento");
+
+-> PEDIDO
+	id_ped (Chave primária);
+	id_cliente (Chave estrangeira);
+	id_funci (Chave estrangeira): Quem atendeu o cliente;
+	data_hora_ped;
+	status ('A' - "Aguarde", 'P' - "Pronto", 'E' - "Entregue");
+
+-> ITEM (DO PEDIDO)
+	id_it (Chave primária);
+	id_ped (Chave estrangeira);
+	id_prod (Chave estrangeira);
+	qtd_it;
+	preco_unitario_it;
+
+-> PAGAMENTO
+	id_paga (Chave primária);
+	id_ped (Chave estrangeira);
+	valor_total_pag;
+	forma_pagamento_pag ('D' - "Dinheiro", 'C' - "Cartão", 'P' - "Pix");
+	data_pagamento;
+
+=== Cardinalidades ===
+-> Um cliente pode fazer vários pedidos;
+-> Um pedido é feito por um cliente e pode ter vários itens;
+-> Um produto pode estar em vários pedidos;
+-> Um funcionário pode estar vinculado a vários pedidos;
+-> Um pedido pode ter um ou nenhum pagamento (Ex: Se ainda estiver pendente);
