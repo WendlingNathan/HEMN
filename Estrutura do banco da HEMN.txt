@@ -1,54 +1,54 @@
  === Ideia dos Banco de dados para a Hamburgueria HEMN ===
--> CLIENTE
-	id_cli (Chave primária);
-	id_end (Chave estrangeira);
-	nome_cli;
-	cpf_cli;
-	telefone_cli;
-	email_cli;
+-> Cliente
+	id_cli - int PRIMARY KEY AUTO_INCREMENT - (Chave primária);
+	id_end - int NOT NULL - FOREIGN KEY (id_end) REFERENCES Endereco(id_end) - (Chave estrangeira);
+	nome_cli - varchar(80) NOT NULL;
+	cpf_cli - varchar(11) UNIQUE NOT NULL;
+	telefone_cli - varchar(11) NOT NULL;
+	email_cli - varchar(60) UNIQUE NULL;
 
--> ENDERECO
-	id_end (Chave primária);
-	complemento_end;
-	logradouro_end;
-	numero_end;
-	bairro_end;
-	cidade_end;
-	ponto_ref_end;
+-> Endereco
+	id_end - int PRIMARY KEY AUTO_INCREMENT - (Chave primária);
+	complemento_end - varchar(20) NOT NULL;
+	logradouro_end - varchar(20) NOT NULL;
+	numero_end - int NOT NULL;
+	bairro_end - varchar(40) NOT NULL;
+	cidade_end - varchar(80) NOT NULL;
+	ponto_ref_end - varchar(80) NULL;
 
--> FUNCIONARIO
-	id_funci (Chave primária);
-	nome_funci;
-	cargo_funci ('C' - "Cozinheiro", 'A' - "Atendente", 'E' - "Entregador");
-	telefone_funci;
+-> Funcionario
+	id_funci - int PRIMARY KEY AUTO_INCREMENT - (Chave primária);
+	nome_funci - varchar(80) NOT NULL;
+	cargo_funci - char('C' - "Cozinheiro", 'A' - "Atendente", 'E' - "Entregador") NOT NULL;
+	telefone_funci - varchar(11) NULL;
 
--> PRODUTO
-	id_prod (Chave primária);
-	nome_prod;
-	descricao_prod;
-	preco_prod;
-	tipo ('L' - "Lanche", 'B' - "Bebida", 'A' - "Acompanhamento");
+-> Produto
+	id_prod - int PRIMARY KEY AUTO_INCREMENT - (Chave primária);
+	nome_prod - varchar(40) NOT NULL;
+	descricao_prod - varchar(100) NOT NULL;
+	preco_prod - numeric(4, 2) NOT NULL;
+	tipo - char('L' - "Lanche", 'B' - "Bebida", 'A' - "Acompanhamento") NOT NULL;
 
--> PEDIDO
-	id_ped (Chave primária);
-	id_cliente (Chave estrangeira);
-	id_funci (Chave estrangeira): Quem atendeu o cliente;
-	data_hora_ped;
-	status ('A' - "Aguarde", 'P' - "Pronto", 'E' - "Entregue");
+-> Pedido
+	id_ped - int PRIMARY KEY AUTO_INCREMENT - (Chave primária);
+	id_cli - int NOT NULL - FOREIGN KEY (id_cli) REFERENCES Cliente(id_cli) - (Chave estrangeira);
+	id_funci - int NOT NULL - FOREIGN KEY (id_funci) REFERENCES Funcionario(id_funci) - (Chave estrangeira): Quem atendeu o cliente;
+	data_hora_ped - timestamp DEFAULT NOT NULL CURRENT_TIMESTAMP;
+	status - char('A' - "Aguarde", 'P' - "Pronto", 'E' - "Entregue") NOT NULL;
 
--> ITEM (DO PEDIDO)
-	id_it (Chave primária);
-	id_ped (Chave estrangeira);
-	id_prod (Chave estrangeira);
-	qtd_it;
-	preco_unitario_it;
+-> Item (do Pedido)
+	id_it - int PRIMARY KEY AUTO_INCREMENT - (Chave primária);
+	id_ped - int NOT NULL - FOREIGN KEY (id_ped) REFERENCES Pedido(id_ped) - (Chave estrangeira);
+	id_prod - int NOT NULL - FOREIGN KEY (id_prod) REFERENCES Produto(id_prod) - (Chave estrangeira);
+	qtd_it - int NOT NULL;
+	preco_unitario_it - numeric(4, 2) NOT NULL;
 
--> PAGAMENTO
-	id_paga (Chave primária);
-	id_ped (Chave estrangeira);
-	valor_total_pag;
-	forma_pagamento_pag ('D' - "Dinheiro", 'C' - "Cartão", 'P' - "Pix");
-	data_pagamento;
+-> Pagamento
+	id_paga - int PRIMARY KEY AUTO_INCREMENT - (Chave primária);
+	id_ped - int NOT NULL - FOREIGN KEY (id_ped) REFERENCES Pedido(id_ped) - (Chave estrangeira);
+	valor_total_pag - numeric(4, 2) NOT NULL;
+	forma_pagamento_pag - char('D' - "Dinheiro", 'C' - "Cartão", 'P' - "Pix") NOT NULL;
+	data_pagamento - timestamp DEFAULT NOT NULL CURRENT_TIMESTAMP;
 
 === Cardinalidades ===
 -> Um cliente pode fazer vários pedidos;
