@@ -33,3 +33,31 @@ CREATE TABLE Produto (
     tipo CHAR(1) NOT NULL CHECK (tipo IN ('L', 'B', 'A'))
 );
 
+CREATE TABLE Pedido (
+    id_ped SERIAL PRIMARY KEY,
+    data_hora_ped TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    status CHAR(1) NOT NULL CHECK (status IN ('A', 'P', 'E')),
+    id_cli2 INT NOT NULL,
+    id_funci2 INT NOT NULL,
+    FOREIGN KEY (id_cli2) REFERENCES Cliente(id_cli),
+    FOREIGN KEY (id_funci2) REFERENCES Funcionario(id_funci)
+);
+
+CREATE TABLE itens (
+    id_it SERIAL PRIMARY KEY,
+    qtd_it INT NOT NULL,
+    preco_unitario_it NUMERIC(4,2) NOT NULL,
+    id_ped2 INT NOT NULL,
+    id_prod2 INT NOT NULL,
+    FOREIGN KEY (id_ped2) REFERENCES Pedido(id_ped),
+    FOREIGN KEY (id_prod2) REFERENCES Produto(id_prod)
+);
+
+CREATE TABLE Pagamento (
+    id_paga SERIAL PRIMARY KEY,
+    valor_total_pag NUMERIC(4,2) NOT NULL,
+    forma_pagameto_pag CHAR(1) NOT NULL CHECK (forma_pagameto_pag IN ('D', 'C', 'P')),
+    data_pagamento TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    id_ped INT NOT NULL,
+    FOREIGN KEY (id_ped) REFERENCES Pedido(id_ped)
+);
