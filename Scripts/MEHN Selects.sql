@@ -16,3 +16,8 @@ inner join pagamento on pedido.id_ped = pagamento.id_ped;
 //Consultar o cardápio completo com nome descrição tipo e preço
 select produto.nome_prod,produto.descricao_prod,produto.preco_prod
 from produto;
+
+//Listar clientes que fizeram pedidos  último mês
+select pedido.id_ped,pagamento.id_ped,pagamento.data_pag
+from pedido
+inner join pagamento on pedido.id_ped = pagamento.id_ped;
