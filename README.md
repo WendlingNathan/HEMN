@@ -32,20 +32,280 @@
 <div name="ferramentas" align="justify">
   <h2>Quais foram as ferramentas utilizadas?</h2>
   <ol>
-    <h3><li>DBeaver</li></h3>
+  <li>
+    <p>
+      <h2><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dbeaver/dbeaver-original.svg" width="22" style="vertical-align: middle; margin-right: 8px;"> <strong>DBeaver</strong></h2>
+    </p> 
     <p>
       Ferramenta de gerenciamento de banco de dados utilizada para criar e gerenciar o banco de dados;
     </p>
-    <h3><li>Visual Paradigm</li></h3>
+  </li>
+  <li>
     <p>
-      Ferramenta de criação de modelos relacionais (MRs) utilizada para a idealização e criação das tabelas envolvendo o banco de dados;
+      <h2><img src="https://lspot.com.br/wp-content/uploads/2024/04/Visual-paradigm-modeler-logo-1024x1024.jpg" width="22" style="vertical-align: middle; margin-right: 8px;"> <strong>Visual Paradigm</strong></h2>
     </p>
-    <h3><li>Git</li></h3>
     <p>
-      Ferramenta utilizada para versionamento do projeto para melhor andamento e segurança;
-    <h3><li>GitHub</li></h3>
-    <p>
-      Repositório em nuvem adotado para armazenar e tornar o projeto "colaborativo";
+      Utilizada para a idealização e criação das tabelas do banco de dados (modelagem);
     </p>
+  </li>
+  <li>
+    <p>
+      <h2><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="22" style="vertical-align: middle; margin-right: 8px;"> <strong>Git</strong></h2>
+    </p>
+    <p>
+      Ferramenta utilizada para o versionamento do projeto, garantindo melhor controle e segurança;
+    </p>
+  </li>
+  <li>
+    <p>
+      <h2><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="22" style="vertical-align: middle; margin-right: 8px;"> <strong>GitHub</strong></h2>
+    </p>
+    <p>
+      Repositório em nuvem adotado para armazenar e tornar o projeto colaborativo;
+    </p>
+  </li>
+</ol>
+</div>
+
+<br>
+
+<div name="mr-projeto">
+  <h2>Modelo relacional do projeto</h2>
+  --- Espaço dedicado para a imagem do MR do nosso projeto ---
+</div>
+
+<br>
+
+## Dicionário de Dados - Hamburgueria HEMN
+
+### Tabela Cliente
+
+| Coluna         | Tipo          | Descrição                                              | Restrição / Observação                   |
+|----------------|---------------|--------------------------------------------------------|-----------------------------------------|
+| id_cli         | INT           | Identificador único do cliente                          | PK, auto-increment                      |
+| id_end         | INT           | Identificador do endereço do cliente                    | FK → Endereco(id_end), obrigatório      |
+| nome_cli       | VARCHAR(80)   | Nome completo do cliente                                | NOT NULL                               |
+| cpf_cli        | VARCHAR(11)   | CPF do cliente                                         | NOT NULL, único                        |
+| telefone_cli   | VARCHAR(11)   | Telefone do cliente                                    | NOT NULL                               |
+| email_cli      | VARCHAR(60)   | E-mail do cliente                                      | Único, pode ser NULL                    |
+
+Script de criação da tabela:
+```
+CREATE TABLE Cliente (
+  id_cli       SERIAL NOT NULL, 
+  nome_cli     varchar(80) NOT NULL, 
+  cpf_cli      varchar(11) NOT NULL UNIQUE, 
+  telefone_cli int4 NOT NULL, 
+  email_cli    varchar(60) NOT NULL UNIQUE, 
+  id_end       int4 NOT NULL, 
+  CONSTRAINT cliente_pkey 
+    PRIMARY KEY (id_cli));
+COMMENT ON TABLE Cliente IS 'Tabela Cliente.';
+COMMENT ON COLUMN Cliente.id_cli IS 'Id do cliente';
+COMMENT ON COLUMN Cliente.nome_cli IS 'Nome do cliente';
+COMMENT ON COLUMN Cliente.cpf_cli IS 'CPF do cliente';
+COMMENT ON COLUMN Cliente.telefone_cli IS 'Telefone do cliente';
+```
+
+### Tabela Endereco
+
+| Coluna           | Tipo          | Descrição                                              | Restrição / Observação                   |
+|------------------|---------------|--------------------------------------------------------|-----------------------------------------|
+| id_end           | INT           | Identificador único do endereço                         | PK, auto-increment                      |
+| complemento_end  | VARCHAR(20)   | Complemento do endereço                                 | NOT NULL                               |
+| logradouro_end   | VARCHAR(20)   | Logradouro (rua, avenida, etc)                          | NOT NULL                               |
+| numero_end       | INT           | Número do endereço                                     | NOT NULL                               |
+| bairro_end       | VARCHAR(40)   | Bairro                                                | NOT NULL                               |
+| cidade_end       | VARCHAR(80)   | Cidade                                                | NOT NULL                               |
+| ponto_ref_end    | VARCHAR(80)   | Ponto de referência                                   | Pode ser NULL                          |
+
+Script de criação da tabela:
+```
+CREATE TABLE Endereco (
+  id_end          SERIAL NOT NULL, 
+  complemento_end varchar(20) NOT NULL, 
+  logradouro_end  varchar(20) NOT NULL, 
+  numero_end      int4 NOT NULL, 
+  ciadade_end     varchar(80) NOT NULL, 
+  bairro_end      varchar(40) NOT NULL, 
+  pont_ref_end    varchar(80), 
+  CONSTRAINT endereco_pkey 
+    PRIMARY KEY (id_end));
+COMMENT ON TABLE Endereco IS 'Tabela Endereco.';
+COMMENT ON COLUMN Endereco.id_end IS 'Id do endereço';
+COMMENT ON COLUMN Endereco.complemento_end IS 'Complemento do endereço';
+COMMENT ON COLUMN Endereco.logradouro_end IS 'Logradouro do endereço';
+COMMENT ON COLUMN Endereco.numero_end IS 'Número do endereço';
+COMMENT ON COLUMN Endereco.ciadade_end IS 'Cidade do endereço';
+COMMENT ON COLUMN Endereco.bairro_end IS 'Bairro do endereço';
+COMMENT ON COLUMN Endereco.pont_ref_end IS 'Ponto de referência do endereço';
+```
+
+### Tabela Funcionario
+
+| Coluna          | Tipo          | Descrição                                              | Restrição / Observação                   |
+|-----------------|---------------|--------------------------------------------------------|-----------------------------------------|
+| id_funci        | INT           | Identificador único do funcionário                      | PK, auto-increment                      |
+| nome_funci      | VARCHAR(80)   | Nome completo do funcionário                            | NOT NULL                               |
+| cargo_funci     | CHAR(1)       | Cargos dos Funcionarios (''C'' - "Cozinheiro", ''A'' - "Atentende", ''E'' - "Entregador") | NOT NULL                        |
+| telefone_funci  | VARCHAR(11)   | Telefone do funcionário                                | Pode ser NULL                          |
+
+Script de criação da tabela:
+```
+CREATE TABLE Funcionario (
+  id_funci       SERIAL NOT NULL, 
+  nome_funci     varchar(80) NOT NULL, 
+  cargo_funci    char(1) NOT NULL CHECK('C', 'A', 'E' ), 
+  telefone_funci varchar(11), 
+  CONSTRAINT funcionario_pkey 
+    PRIMARY KEY (id_funci));
+COMMENT ON TABLE Funcionario IS 'Tabela Funcionario.';
+COMMENT ON COLUMN Funcionario.id_funci IS 'Id do funcionario';
+COMMENT ON COLUMN Funcionario.nome_funci IS 'Nome do funcionario';
+COMMENT ON COLUMN Funcionario.cargo_funci IS 'Cargos dos Funcionarios (''C'' - "Cozinheiro", ''A'' - "Atentende", ''E'' - "Entregador")';
+COMMENT ON COLUMN Funcionario.telefone_funci IS 'Telefone do funcionario';
+```
+
+### Tabela Produto
+
+| Coluna          | Tipo          | Descrição                                              | Restrição / Observação                   |
+|-----------------|---------------|--------------------------------------------------------|-----------------------------------------|
+| id_prod         | INT           | Identificador único do produto                          | PK, auto-increment                      |
+| nome_prod       | VARCHAR(40)   | Nome do produto                                       | NOT NULL                               |
+| descricao_prod  | VARCHAR(100)  | Descrição do produto                                  | NOT NULL                               |
+| preco_prod      | NUMERIC(4,2)  | Preço do produto                                     | NOT NULL                               |
+| tipo_prod       | CHAR(1)       | Tipo de produto (''L'' - "Lanche", ''A'' - "Acompanhamento", ''B'' - "Bebida") | NOT NULL                        |
+
+Script de criação da tabela:
+```
+CREATE TABLE Produto (
+  id_prod        SERIAL NOT NULL, 
+  nome_prod      varchar(40) NOT NULL, 
+  descricao_prod varchar(100) NOT NULL, 
+  preco_prod     numeric(4, 2) NOT NULL, 
+  tipo_prod      char(1) NOT NULL CHECK(tipo_prod in ('L' , 'B' , 'A' )), 
+  CONSTRAINT produto_pkey 
+    PRIMARY KEY (id_prod));
+COMMENT ON TABLE Produto IS 'Tabela Produto.';
+COMMENT ON COLUMN Produto.nome_prod IS 'Nome do produto';
+COMMENT ON COLUMN Produto.descricao_prod IS 'Descrição do produto';
+COMMENT ON COLUMN Produto.preco_prod IS 'Preço do produto';
+COMMENT ON COLUMN Produto.tipo_prod IS 'Tipo de produto (''L'' - "Lanche", ''A'' - "Acompanhamento", ''B'' - "Bebida")';
+```
+
+### Tabela Pedido
+
+| Coluna           | Tipo          | Descrição                                              | Restrição / Observação                   |
+|------------------|---------------|--------------------------------------------------------|-----------------------------------------|
+| id_ped           | INT           | Identificador único do pedido                           | PK, auto-increment                      |
+| id_cli           | INT           | Identificador do cliente que fez o pedido              | FK → Cliente(id_cli), NOT NULL          |
+| id_funci         | INT           | Identificador do funcionário que atendeu o pedido      | FK → Funcionario(id_funci), NOT NULL    |
+| data_hora_ped    | TIMESTAMP     | Data e hora da realização do pedido                     | NOT NULL, padrão CURRENT_TIMESTAMP      |
+| status_ped       | CHAR(1)       | Status do pedido (''A'' - "Aguarde", ''P'' - "Pronto", ''E'' - "Entregue") | NOT NULL                        |
+
+Script de criação da tabela:
+```
+CREATE TABLE Pedido (
+  id_ped        SERIAL NOT NULL, 
+  data_hora_ped timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL, 
+  status_ped    char(1) NOT NULL CHECK(status_ped in ('A', 'P','E')), 
+  id_cli        int4 NOT NULL, 
+  id_funci      int4 NOT NULL, 
+  CONSTRAINT pedido_pkey 
+    PRIMARY KEY (id_ped));
+COMMENT ON TABLE Pedido IS 'Tabela Pedido.';
+COMMENT ON COLUMN Pedido.id_ped IS 'Id do pedido';
+COMMENT ON COLUMN Pedido.data_hora_ped IS 'Data e hora do pedido';
+COMMENT ON COLUMN Pedido.status_ped IS 'Status do pedido (''A'' - "Aguarde", ''P'' - "Pronto", ''E'' - "Entregue")';
+```
+
+### Tabela Item
+
+| Coluna             | Tipo          | Descrição                                              | Restrição / Observação                   |
+|--------------------|---------------|--------------------------------------------------------|-----------------------------------------|
+| id_ite             | INT           | Identificador único do item do pedido                   | PK, auto-increment                      |
+| id_ped             | INT           | Identificador do pedido ao qual o item pertence         | FK → Pedido(id_ped), NOT NULL           |
+| id_prod            | INT           | Identificador do produto do item                         | FK → Produto(id_prod), NOT NULL          |
+| qtd_ite            | INT           | Quantidade do produto no item                            | NOT NULL                               |
+| preco_unitario_ite | NUMERIC(4,2)  | Preço unitário do produto no momento do pedido          | NOT NULL                               |
+
+Script de criação da tabela:
+```
+CREATE TABLE Item (
+  id_ite             SERIAL NOT NULL, 
+  qtd_ite            int4 NOT NULL, 
+  preco_unitario_ite numeric(4, 2) NOT NULL, 
+  id_prod            int4 NOT NULL, 
+  id_ped             int4 NOT NULL, 
+  CONSTRAINT item_pkey 
+    PRIMARY KEY (id_ite));
+COMMENT ON TABLE Item IS 'Tabela Item - Representa cada item do pedido.';
+COMMENT ON COLUMN Item.qtd_ite IS 'Quantidade de itens do pedido';
+COMMENT ON COLUMN Item.preco_unitario_ite IS 'preço unitario do item';
+```
+
+### Tabela Pagamento
+
+| Coluna               | Tipo          | Descrição                                              | Restrição / Observação                   |
+|----------------------|---------------|--------------------------------------------------------|-----------------------------------------|
+| id_pag               | INT           | Identificador único do pagamento                        | PK, auto-increment                      |
+| id_ped               | INT           | Identificador do pedido pago                            | FK → Pedido(id_ped), NOT NULL           |
+| valor_total_pag      | NUMERIC(4,2)  | Valor total pago                                       | NOT NULL                               |
+| forma_pagamento_pag  | CHAR(1)       | Forma de pagamento (''D'' - "Dinheiro",''C'' - "Cartão",''P'' - "Pix") | NOT NULL                        |
+| data_pag             | TIMESTAMP     | Data e hora do pagamento                                | NOT NULL, padrão CURRENT_TIMESTAMP      |
+
+Script de criação da tabela:
+```
+CREATE TABLE Pagamento (
+  id_pag             SERIAL NOT NULL, 
+  valor_total_pag    numeric(4, 2) NOT NULL, 
+  forma_pagameto_pag char(1) NOT NULL CHECK(forma_pagameto_pag in ('D','C','P')), 
+  data_pag           timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL, 
+  id_ped             int4 NOT NULL, 
+  CONSTRAINT pagamento_pkey 
+    PRIMARY KEY (id_pag));
+COMMENT ON TABLE Pagamento IS 'Tabela Pagamento.';
+COMMENT ON COLUMN Pagamento.id_pag IS 'id do pagamento';
+COMMENT ON COLUMN Pagamento.valor_total_pag IS 'Valor total do pagamento';
+COMMENT ON COLUMN Pagamento.forma_pagameto_pag IS 'Forma de pagamento (''D'' - "Dinheiro",''C'' - "Cartão",''P'' - "Pix")';
+COMMENT ON COLUMN Pagamento.data_pag IS 'Data de pagamento';
+```
+
+<br>
+
+<div name="consultas">
+  <h2>Exemplos de consultas a serem feitas no banco</h2>
+  <ol>
+    <li>
+      <h3>Listar todos os pedidos com o nome do cliente, data, status e total do pedido</h3>
+      --- Espaço reservado para o select específico ---
+    </li>
+    <li>
+      <h3>Consultar o cardápio completo com nome, descrição, tipo e preço</h3>
+      --- Espaço reservado para o select específico ---
+    </li>
+    <li>
+      <h3>Listar clientes que fizeram pedidos no último mês</h3>
+      --- Espaço reservado para o select específico ---
+    </li>
+    <li>
+      <h3>Produtos mais vendidos (quantidade total) no último trimestre</h3>
+      --- Espaço reservado para o select específico ---
+    </li>
+    <li>
+      <h3>Funcionários que entregaram mais pedidos no mês atual</h3>
+      --- Espaço reservado para o select específico ---
+    </li>
   </ol>
 </div>
+
+<br>
+
+## Criadores (Perfis do GitHub)
+
+| Avatar | Nome | Link |
+|--------|------|------|
+| <img src="https://github.com/WendlingNathan.png" width="60" height="60" alt="Nathan Wendling" /> | Nathan Wendling | [github.com/WendlingNathan](https://github.com/WendlingNathan) |
+| <img src="https://github.com/marcoschons.png" width="60" height="60" alt="Marco Antônio Schons Santos" /> | Marco Antônio Schons Santos | [github.com/marcoschons](https://github.com/marcoschons) |
+| <img src="https://github.com/EduardoNofre007.png" width="60" height="60" alt="Eduardo Augusto Romio Nofre" /> | Eduardo Augusto Romio Nofre | [github.com/EduardoNofre007](https://github.com/EduardoNofre007) |
+| <img src="https://github.com/Skildim.png" width="60" height="60" alt="Heitor Cassol" /> | Heitor Cassol | [github.com/Skildim](https://github.com/Skildim) |
