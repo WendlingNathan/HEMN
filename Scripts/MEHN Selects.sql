@@ -26,3 +26,8 @@ inner join pagamento on pedido.id_ped = pagamento.id_ped;
 select item.id_ped,pedido.id_ped,item.qtd_ite,pedido.data_hora_ped
 from item
 inner join pedido on item.id_ped = pedido.id_ped;
+
+//Funcionários que entregaram mais pedidos  mês atual
+select funcionario.id_fun,pedido.id_fun,pedido.data_hora_ped
+from funcionario
+inner join pedido on funcionario.id_fun = pedido.id_fun;
