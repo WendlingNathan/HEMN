@@ -199,7 +199,7 @@ COMMENT ON COLUMN Produto.tipo_prod IS 'Tipo de produto (''L'' - "Lanche", ''A''
 |------------------|---------------|--------------------------------------------------------|-----------------------------------------|
 | id_ped           | INT           | Identificador único do pedido                           | PK, auto-increment                      |
 | id_cli           | INT           | Identificador do cliente que fez o pedido              | FK → Cliente(id_cli), NOT NULL          |
-| id_funci         | INT           | Identificador do funcionário que atendeu o pedido      | FK → Funcionario(id_funci), NOT NULL    |
+| id_fun           | INT           | Identificador do funcionário que atendeu o pedido      | FK → Funcionario(id_funci), NOT NULL    |
 | data_hora_ped    | TIMESTAMP     | Data e hora da realização do pedido                     | NOT NULL, padrão CURRENT_TIMESTAMP      |
 | status_ped       | CHAR(1)       | Status do pedido (''A'' - "Aguarde", ''P'' - "Pronto", ''E'' - "Entregue") | NOT NULL                        |
 
@@ -210,7 +210,7 @@ CREATE TABLE Pedido (
   data_hora_ped timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL, 
   status_ped    char(1) NOT NULL CHECK(status_ped in ('A', 'P','E')), 
   id_cli        int4 NOT NULL, 
-  id_funci      int4 NOT NULL, 
+  id_fun        int4 NOT NULL, 
   CONSTRAINT pedido_pkey 
     PRIMARY KEY (id_ped));
 COMMENT ON TABLE Pedido IS 'Tabela Pedido.';
