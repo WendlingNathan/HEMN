@@ -69,9 +69,9 @@
 
 <br>
 
-<div name="mr-projeto">
+<div name="mr-projeto" align="center">
   <h2>Modelo relacional do projeto</h2>
-  --- Espaço dedicado para a imagem do MR do nosso projeto ---
+  <img src="/assets/MR_HEMN_OFICIAL.jpeg" height="350px" width="550px">
 </div>
 
 <br>
