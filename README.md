@@ -145,25 +145,25 @@ COMMENT ON COLUMN Endereco.pont_ref_end IS 'Ponto de referência do endereço';
 
 | Coluna          | Tipo          | Descrição                                              | Restrição / Observação                   |
 |-----------------|---------------|--------------------------------------------------------|-----------------------------------------|
-| id_funci        | INT           | Identificador único do funcionário                      | PK, auto-increment                      |
-| nome_funci      | VARCHAR(80)   | Nome completo do funcionário                            | NOT NULL                               |
-| cargo_funci     | CHAR(1)       | Cargos dos Funcionarios (''C'' - "Cozinheiro", ''A'' - "Atentende", ''E'' - "Entregador") | NOT NULL                        |
-| telefone_funci  | VARCHAR(11)   | Telefone do funcionário                                | Pode ser NULL                          |
+| id_fun          | INT           | Identificador único do funcionário                      | PK, auto-increment                      |
+| nome_fun        | VARCHAR(80)   | Nome completo do funcionário                            | NOT NULL                               |
+| cargo_fun       | CHAR(1)       | Cargos dos Funcionarios (''C'' - "Cozinheiro", ''A'' - "Atentende", ''E'' - "Entregador") | NOT NULL                        |
+| telefone_fun    | VARCHAR(11)   | Telefone do funcionário                                | Pode ser NULL                          |
 
 Script de criação da tabela:
 ```
 CREATE TABLE Funcionario (
-  id_funci       SERIAL NOT NULL, 
-  nome_funci     varchar(80) NOT NULL, 
-  cargo_funci    char(1) NOT NULL CHECK('C', 'A', 'E' ), 
-  telefone_funci varchar(11), 
+  id_fun       SERIAL NOT NULL, 
+  nome_fun     varchar(80) NOT NULL, 
+  cargo_fun    char(1) NOT NULL CHECK('C', 'A', 'E' ), 
+  telefone_fun varchar(11), 
   CONSTRAINT funcionario_pkey 
-    PRIMARY KEY (id_funci));
+    PRIMARY KEY (id_fun));
 COMMENT ON TABLE Funcionario IS 'Tabela Funcionario.';
-COMMENT ON COLUMN Funcionario.id_funci IS 'Id do funcionario';
-COMMENT ON COLUMN Funcionario.nome_funci IS 'Nome do funcionario';
-COMMENT ON COLUMN Funcionario.cargo_funci IS 'Cargos dos Funcionarios (''C'' - "Cozinheiro", ''A'' - "Atentende", ''E'' - "Entregador")';
-COMMENT ON COLUMN Funcionario.telefone_funci IS 'Telefone do funcionario';
+COMMENT ON COLUMN Funcionario.id_fun IS 'Id do funcionario';
+COMMENT ON COLUMN Funcionario.nome_fun IS 'Nome do funcionario';
+COMMENT ON COLUMN Funcionario.cargo_fun IS 'Cargos dos Funcionarios (''C'' - "Cozinheiro", ''A'' - "Atentende", ''E'' - "Entregador")';
+COMMENT ON COLUMN Funcionario.telefone_fun IS 'Telefone do funcionario';
 ```
 
 ### Tabela Produto
