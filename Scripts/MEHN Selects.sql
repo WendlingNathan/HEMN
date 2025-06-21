@@ -18,6 +18,11 @@ select produto.nome_prod,produto.descricao_prod,produto.preco_prod
 from produto;
 
 //Listar clientes que fizeram pedidos  último mês
-select pedido.id_ped,pagamento.id_ped,pagamento.data_pag
+select pedido.id_ped,pagamento.id_ped,pedido.data_hora_ped
 from pedido
 inner join pagamento on pedido.id_ped = pagamento.id_ped;
+
+//Produtos mais vendidos quantidade total último trimestre
+select item.id_ped,pedido.id_ped,item.qtd_ite,pedido.data_hora_ped
+from item
+inner join pedido on item.id_ped = pedido.id_ped;
