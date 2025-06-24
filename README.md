@@ -71,7 +71,7 @@
 
 <div name="mr-projeto" align="center">
   <h2>Modelo relacional do projeto</h2>
-  <img src="/assets/MR_HEMN_OFICIAL.jpeg" height="350px" width="550px">
+  <img src="/assets/MR_HEMN_OFICIAL.jpg" height="600px" width="800px">
 </div>
 
 <br>
