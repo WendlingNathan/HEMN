@@ -86,7 +86,7 @@
 | id_end         | INT           | Identificador do endereço do cliente                    | FK → Endereco(id_end), obrigatório      |
 | nome_cli       | VARCHAR(80)   | Nome completo do cliente                                | NOT NULL                               |
 | cpf_cli        | VARCHAR(11)   | CPF do cliente                                         | NOT NULL, único                        |
-| telefone_cli   | VARCHAR(11)   | Telefone do cliente                                    | NOT NULL                               |
+| telefone_cli   | VARCHAR(12)   | Telefone do cliente                                    | NOT NULL                               |
 | email_cli      | VARCHAR(60)   | E-mail do cliente                                      | Único, pode ser NULL                    |
 
 Script de criação da tabela:
@@ -95,7 +95,7 @@ CREATE TABLE Cliente (
   id_cli       SERIAL NOT NULL, 
   nome_cli     varchar(80) NOT NULL, 
   cpf_cli      varchar(11) NOT NULL UNIQUE, 
-  telefone_cli int4 NOT NULL, 
+  telefone_cli varchar(12) NOT NULL, 
   email_cli    varchar(60) NOT NULL UNIQUE, 
   id_end       int4 NOT NULL, 
   CONSTRAINT cliente_pkey 
@@ -126,7 +126,7 @@ CREATE TABLE Endereco (
   complemento_end varchar(20) NOT NULL, 
   logradouro_end  varchar(20) NOT NULL, 
   numero_end      int4 NOT NULL, 
-  ciadade_end     varchar(80) NOT NULL, 
+  cidade_end      varchar(80) NOT NULL, 
   bairro_end      varchar(40) NOT NULL, 
   pont_ref_end    varchar(80), 
   CONSTRAINT endereco_pkey 
@@ -136,7 +136,7 @@ COMMENT ON COLUMN Endereco.id_end IS 'Id do endereço';
 COMMENT ON COLUMN Endereco.complemento_end IS 'Complemento do endereço';
 COMMENT ON COLUMN Endereco.logradouro_end IS 'Logradouro do endereço';
 COMMENT ON COLUMN Endereco.numero_end IS 'Número do endereço';
-COMMENT ON COLUMN Endereco.ciadade_end IS 'Cidade do endereço';
+COMMENT ON COLUMN Endereco.cidade_end IS 'Cidade do endereço';
 COMMENT ON COLUMN Endereco.bairro_end IS 'Bairro do endereço';
 COMMENT ON COLUMN Endereco.pont_ref_end IS 'Ponto de referência do endereço';
 ```

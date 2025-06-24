@@ -2,7 +2,7 @@ CREATE TABLE Cliente (
   id_cli       SERIAL NOT NULL, 
   nome_cli     varchar(80) NOT NULL, 
   cpf_cli      varchar(11) NOT NULL UNIQUE, 
-  telefone_cli int4 NOT NULL, 
+  telefone_cli varchar(12) NOT NULL, 
   email_cli    varchar(60) NOT NULL UNIQUE, 
   id_end       int4 NOT NULL, 
   CONSTRAINT cliente_pkey 
@@ -17,7 +17,7 @@ CREATE TABLE Endereco (
   complemento_end varchar(20) NOT NULL, 
   logradouro_end  varchar(20) NOT NULL, 
   numero_end      int4 NOT NULL, 
-  ciadade_end     varchar(80) NOT NULL, 
+  cidade_end      varchar(80) NOT NULL, 
   bairro_end      varchar(40) NOT NULL, 
   pont_ref_end    varchar(80), 
   CONSTRAINT endereco_pkey 
@@ -27,13 +27,13 @@ COMMENT ON COLUMN Endereco.id_end IS 'Id do endereço';
 COMMENT ON COLUMN Endereco.complemento_end IS 'Complemento do endereço';
 COMMENT ON COLUMN Endereco.logradouro_end IS 'Logradouro do endereço';
 COMMENT ON COLUMN Endereco.numero_end IS 'Número do endereço';
-COMMENT ON COLUMN Endereco.ciadade_end IS 'Cidade do endereço';
+COMMENT ON COLUMN Endereco.cidade_end IS 'Cidade do endereço';
 COMMENT ON COLUMN Endereco.bairro_end IS 'Bairro do endereço';
 COMMENT ON COLUMN Endereco.pont_ref_end IS 'Ponto de referência do endereço';
 CREATE TABLE Funcionario (
   id_fun       SERIAL NOT NULL, 
   nome_fun     varchar(80) NOT NULL, 
-  cargo_fun    char(1) NOT NULL CHECK(cargo_fun in ('C', 'A', 'E')), 
+  cargo_fun    char(1) NOT NULL CHECK('C', 'A', 'E' ), 
   telefone_fun varchar(11), 
   CONSTRAINT funcionario_pkey 
     PRIMARY KEY (id_fun));
@@ -97,4 +97,3 @@ ALTER TABLE Item ADD CONSTRAINT item_id_prod_fkey_002 FOREIGN KEY (id_prod) REFE
 ALTER TABLE Pagamento ADD CONSTRAINT pagamento_id_ped_fkey_001 FOREIGN KEY (id_ped) REFERENCES Pedido (id_ped) ON UPDATE Cascade ON DELETE Restrict;
 ALTER TABLE Pedido ADD CONSTRAINT pedido_id_cli_fkey_002 FOREIGN KEY (id_cli) REFERENCES Cliente (id_cli) ON UPDATE Cascade ON DELETE Restrict;
 ALTER TABLE Pedido ADD CONSTRAINT pedido_id_fun_fkey_001 FOREIGN KEY (id_fun) REFERENCES Funcionario (id_fun) ON UPDATE Cascade ON DELETE Restrict;
-
