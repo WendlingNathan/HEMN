@@ -33,7 +33,7 @@ COMMENT ON COLUMN Endereco.pont_ref_end IS 'Ponto de referência do endereço';
 CREATE TABLE Funcionario (
   id_fun       SERIAL NOT NULL, 
   nome_fun     varchar(80) NOT NULL, 
-  cargo_fun    char(1) NOT NULL CHECK('C', 'A', 'E' ), 
+  cargo_fun    char(1) NOT NULL CHECK(cargo_fun in ('C', 'A', 'E')), 
   telefone_fun varchar(11), 
   CONSTRAINT funcionario_pkey 
     PRIMARY KEY (id_fun));
