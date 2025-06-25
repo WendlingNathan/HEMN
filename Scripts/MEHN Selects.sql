@@ -31,3 +31,4 @@ inner join pedido on item.id_ped = pedido.id_ped;
 select funcionario.id_fun,pedido.id_fun,pedido.data_hora_ped
 from funcionario
 inner join pedido on funcionario.id_fun = pedido.id_fun;
+
