@@ -71,7 +71,7 @@
 
 <div name="mr-projeto" align="center">
   <h2>Modelo relacional do projeto</h2>
-  <img src="/assets/MR_HEMN_OFICIAL.jpg" height="600px" width="800px">
+  <img src="/assets/MR_HEMN_OFICIAL.jpg" height="600px" width="700px">
 </div>
 
 <br>
@@ -191,6 +191,51 @@ COMMENT ON COLUMN Produto.nome_prod IS 'Nome do produto';
 COMMENT ON COLUMN Produto.descricao_prod IS 'Descrição do produto';
 COMMENT ON COLUMN Produto.preco_prod IS 'Preço do produto';
 COMMENT ON COLUMN Produto.tipo_prod IS 'Tipo de produto (''L'' - "Lanche", ''A'' - "Acompanhamento", ''B'' - "Bebida")';
+```
+
+### Tabela Ingrediente
+
+| Coluna              | Tipo         | Descrição                            | Restrição / Observação           |
+|---------------------|--------------|--------------------------------------|----------------------------------|
+| id_ing              | INT          | Identificador único do ingrediente   | PK, auto-increment               |
+| nome_ing            | VARCHAR(60)  | Nome do ingrediente                  | NOT NULL                         |
+| unidade_medida_ing  | VARCHAR(10)  | Unidade de medida (ex: g, ml, un)    | NOT NULL                         |
+
+Script de criação da tabela:
+```
+CREATE TABLE Ingrediente (
+  id_ing             SERIAL NOT NULL, 
+  nome_ing           varchar(60) NOT NULL UNIQUE, 
+  unidade_medida_ing char(2) NOT NULL CHECK(unidade_medida_ing in ('G', 'ML', 'UN')), 
+  CONSTRAINT ingrediente_pkey 
+    PRIMARY KEY (id_ing));
+COMMENT ON TABLE Ingrediente IS 'Tabela do Ingrediente.';
+COMMENT ON COLUMN Ingrediente.id_ing IS 'ID do Ingrediente.';
+COMMENT ON COLUMN Ingrediente.nome_ing IS 'Nome do Ingrediente.';
+COMMENT ON COLUMN Ingrediente.unidade_medida_ing IS 'Unidade de medida ("G" - "Grama", "ML" - "Mililitro", "UN" - "Unidade").';
+```
+
+### Tabela ComposicaoProduto
+
+| Coluna           | Tipo           | Descrição                                                  | Restrição / Observação                          |
+|------------------|----------------|------------------------------------------------------------|-------------------------------------------------|
+| id_comp          | INT            | Identificador único da composição                         | PK, auto-increment                              |
+| id_prod          | INT            | Produto (ex: X-Burguer)                                    | FK → Produto(id_prod), NOT NULL                 |
+| id_ing           | INT            | Ingrediente usado na composição                           | FK → Ingrediente(id_ing), NOT NULL              |
+| quantidade_ing   | NUMERIC(6,2)   | Quantidade utilizada do ingrediente                       | NOT NULL (ex: 150.00 g, 1.00 un)                |
+
+Script de criação da tabela:
+```
+CREATE TABLE ComposicaoProduto (
+  id_comp      SERIAL NOT NULL, 
+  qtd_ing_comp numeric(5, 2) NOT NULL, 
+  id_prod      int4 NOT NULL, 
+  id_ing       int4 NOT NULL, 
+  CONSTRAINT composicaoProduto_pkey 
+    PRIMARY KEY (id_comp));
+COMMENT ON TABLE ComposicaoProduto IS 'Tabela da composição do produto.';
+COMMENT ON COLUMN ComposicaoProduto.id_comp IS 'ID da composição do produto.';
+COMMENT ON COLUMN ComposicaoProduto.qtd_ing_comp IS 'Quantidade do produto na composição.';
 ```
 
 ### Tabela Pedido

@@ -71,3 +71,42 @@ INSERT INTO Pagamento (valor_total_pag, forma_pagameto_pag, data_pag, id_ped) VA
 (44.80, 'D', NOW(), 4),
 (26.40, 'C', NOW(), 5),
 (35.50, 'P', NOW(), 6);
+
+INSERT INTO Ingrediente (nome_ing, unidade_medida_ing) VALUES
+('Pão de hambúrguer', 'UN'),
+('Carne bovina 150g', 'G'),
+('Queijo prato', 'UN'),
+('Alface', 'G'),
+('Tomate', 'G'),
+('Batata frita', 'G'),
+('Refrigerante Cola', 'ML'),
+('Suco de fruta', 'ML'),
+('Maionese', 'G');
+
+-- X-Burguer (Produto ID = 1)
+INSERT INTO ComposicaoProduto (id_prod, id_ing, qtd_ing_comp) VALUES
+(1, 1, 1),   -- Pão
+(1, 2, 150), -- Carne
+(1, 3, 1),   -- Queijo
+(1, 9, 20);  -- Maionese
+
+-- Refrigerante Lata (Produto ID = 2)
+INSERT INTO ComposicaoProduto (id_prod, id_ing, qtd_ing_comp) VALUES
+(2, 7, 350); -- Refrigerante Cola
+
+-- Porção de Batata (Produto ID = 3)
+INSERT INTO ComposicaoProduto (id_prod, id_ing, qtd_ing_comp) VALUES
+(3, 6, 150); -- Batata frita
+
+-- X-Salada (Produto ID = 4)
+INSERT INTO ComposicaoProduto (id_prod, id_ing, qtd_ing_comp) VALUES
+(4, 1, 1),   -- Pão
+(4, 2, 150), -- Carne
+(4, 3, 1),   -- Queijo
+(4, 4, 20),  -- Alface
+(4, 5, 20),  -- Tomate
+(4, 9, 20);  -- Maionese
+
+-- Suco Natural (Produto ID = 5)
+INSERT INTO ComposicaoProduto (id_prod, id_ing, qtd_ing_comp) VALUES
+(5, 8, 400); -- Suco de fruta

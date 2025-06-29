@@ -12,6 +12,16 @@ COMMENT ON COLUMN Cliente.id_cli IS 'Id do cliente';
 COMMENT ON COLUMN Cliente.nome_cli IS 'Nome do cliente';
 COMMENT ON COLUMN Cliente.cpf_cli IS 'CPF do cliente';
 COMMENT ON COLUMN Cliente.telefone_cli IS 'Telefone do cliente';
+CREATE TABLE ComposicaoProduto (
+  id_comp      SERIAL NOT NULL, 
+  qtd_ing_comp numeric(5, 2) NOT NULL, 
+  id_prod      int4 NOT NULL, 
+  id_ing       int4 NOT NULL, 
+  CONSTRAINT composicaoProduto_pkey 
+    PRIMARY KEY (id_comp));
+COMMENT ON TABLE ComposicaoProduto IS 'Tabela da composição do produto.';
+COMMENT ON COLUMN ComposicaoProduto.id_comp IS 'ID da composição do produto.';
+COMMENT ON COLUMN ComposicaoProduto.qtd_ing_comp IS 'Quantidade do produto na composição.';
 CREATE TABLE Endereco (
   id_end          SERIAL NOT NULL, 
   complemento_end varchar(20) NOT NULL, 
@@ -42,6 +52,16 @@ COMMENT ON COLUMN Funcionario.id_fun IS 'Id do funcionario';
 COMMENT ON COLUMN Funcionario.nome_fun IS 'Nome do funcionario';
 COMMENT ON COLUMN Funcionario.cargo_fun IS 'Cargos dos Funcionarios (''C'' - "Cozinheiro", ''A'' - "Atentende", ''E'' - "Entregador")';
 COMMENT ON COLUMN Funcionario.telefone_fun IS 'Telefone do funcionario';
+CREATE TABLE Ingrediente (
+  id_ing             SERIAL NOT NULL, 
+  nome_ing           varchar(60) NOT NULL UNIQUE, 
+  unidade_medida_ing char(2) NOT NULL CHECK(unidade_medida_ing in ('G', 'ML', 'UN')), 
+  CONSTRAINT ingrediente_pkey 
+    PRIMARY KEY (id_ing));
+COMMENT ON TABLE Ingrediente IS 'Tabela do Ingrediente.';
+COMMENT ON COLUMN Ingrediente.id_ing IS 'ID do Ingrediente.';
+COMMENT ON COLUMN Ingrediente.nome_ing IS 'Nome do Ingrediente.';
+COMMENT ON COLUMN Ingrediente.unidade_medida_ing IS 'Unidade de medida ("G" - "Grama", "ML" - "Mililitro", "UN" - "Unidade").';
 CREATE TABLE Item (
   id_ite             SERIAL NOT NULL, 
   qtd_ite            int4 NOT NULL, 
@@ -92,6 +112,8 @@ COMMENT ON COLUMN Produto.descricao_prod IS 'Descrição do produto';
 COMMENT ON COLUMN Produto.preco_prod IS 'Preço do produto';
 COMMENT ON COLUMN Produto.tipo_prod IS 'Tipo de produto (''L'' - "Lanche", ''A'' - "Acompanhamento", ''B'' - "Bebida")';
 ALTER TABLE Cliente ADD CONSTRAINT cliente_id_end_fkey_001 FOREIGN KEY (id_end) REFERENCES Endereco (id_end) ON UPDATE Cascade ON DELETE Restrict;
+ALTER TABLE ComposicaoProduto ADD CONSTRAINT composicaoProduto_id_ing_fkey_002 FOREIGN KEY (id_ing) REFERENCES Ingrediente (id_ing) ON UPDATE Cascade ON DELETE Restrict;
+ALTER TABLE ComposicaoProduto ADD CONSTRAINT composicaoProduto_id_prod_fkey_001 FOREIGN KEY (id_prod) REFERENCES Produto (id_prod) ON UPDATE Cascade ON DELETE Restrict;
 ALTER TABLE Item ADD CONSTRAINT item_id_ped_fkey_001 FOREIGN KEY (id_ped) REFERENCES Pedido (id_ped) ON UPDATE Cascade ON DELETE Restrict;
 ALTER TABLE Item ADD CONSTRAINT item_id_prod_fkey_002 FOREIGN KEY (id_prod) REFERENCES Produto (id_prod) ON UPDATE Cascade ON DELETE Restrict;
 ALTER TABLE Pagamento ADD CONSTRAINT pagamento_id_ped_fkey_001 FOREIGN KEY (id_ped) REFERENCES Pedido (id_ped) ON UPDATE Cascade ON DELETE Restrict;

@@ -1,63 +1,88 @@
-CREATE TABLE Endereco (
-    id_end SERIAL PRIMARY KEY,
-    complemento_end VARCHAR(20) NOT NULL,
-    logradouro_end VARCHAR(20) NOT NULL,
-    numero_end INT NOT NULL,
-    ciadade_end VARCHAR(80) NOT NULL,
-    bairro_end VARCHAR(40) NOT NULL,
-    pont_ref_end VARCHAR(80)
-);
-
 CREATE TABLE Cliente (
-    id_cli SERIAL PRIMARY KEY,
-    nome_cli VARCHAR(80) NOT NULL,
-    cpf_cli VARCHAR(11) NOT NULL UNIQUE,
-    telefone_cli INT NOT NULL,
-    email_cli VARCHAR(60) NOT NULL UNIQUE,
-    id_end2 INT NOT NULL,
-    FOREIGN KEY (id_end2) REFERENCES Endereco(id_end)
-);
+  id_cli       SERIAL NOT NULL, 
+  nome_cli     varchar(80) NOT NULL, 
+  cpf_cli      varchar(11) NOT NULL UNIQUE, 
+  telefone_cli varchar(12) NOT NULL, 
+  email_cli    varchar(60) NOT NULL UNIQUE, 
+  id_end       int4 NOT NULL, 
+  CONSTRAINT cliente_pkey 
+    PRIMARY KEY (id_cli));
+
+CREATE TABLE ComposicaoProduto (
+  id_comp      SERIAL NOT NULL, 
+  qtd_ing_comp numeric(5, 2) NOT NULL, 
+  id_prod      int4 NOT NULL, 
+  id_ing       int4 NOT NULL, 
+  CONSTRAINT composicaoProduto_pkey 
+    PRIMARY KEY (id_comp));
+
+CREATE TABLE Endereco (
+  id_end          SERIAL NOT NULL, 
+  complemento_end varchar(20) NOT NULL, 
+  logradouro_end  varchar(20) NOT NULL, 
+  numero_end      int4 NOT NULL, 
+  cidade_end      varchar(80) NOT NULL, 
+  bairro_end      varchar(40) NOT NULL, 
+  pont_ref_end    varchar(80), 
+  CONSTRAINT endereco_pkey 
+    PRIMARY KEY (id_end));
 
 CREATE TABLE Funcionario (
-    id_funci SERIAL PRIMARY KEY,
-    nome_funci VARCHAR(80) NOT NULL,
-    cargo_funci CHAR(1) NOT NULL CHECK (cargo_funci IN ('C', 'A', 'E')),
-    telefone_funci VARCHAR(11)
-);
+  id_fun       SERIAL NOT NULL, 
+  nome_fun     varchar(80) NOT NULL, 
+  cargo_fun    char(1) NOT NULL CHECK(cargo_fun in ('C', 'A', 'E')), 
+  telefone_fun varchar(11), 
+  CONSTRAINT funcionario_pkey 
+    PRIMARY KEY (id_fun));
 
-CREATE TABLE Produto (
-    id_prod SERIAL PRIMARY KEY,
-    nome_prod VARCHAR(40) NOT NULL,
-    descricao_prod VARCHAR(100) NOT NULL,
-    preco_prod NUMERIC(4,2) NOT NULL,
-    tipo CHAR(1) NOT NULL CHECK (tipo IN ('L', 'B', 'A'))
-);
+CREATE TABLE Ingrediente (
+  id_ing             SERIAL NOT NULL, 
+  nome_ing           varchar(60) NOT NULL UNIQUE, 
+  unidade_medida_ing char(2) NOT NULL CHECK(unidade_medida_ing in ('G', 'ML', 'UN')), 
+  CONSTRAINT ingrediente_pkey 
+    PRIMARY KEY (id_ing));
 
-CREATE TABLE Pedido (
-    id_ped SERIAL PRIMARY KEY,
-    data_hora_ped TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    status CHAR(1) NOT NULL CHECK (status IN ('A', 'P', 'E')),
-    id_cli2 INT NOT NULL,
-    id_funci2 INT NOT NULL,
-    FOREIGN KEY (id_cli2) REFERENCES Cliente(id_cli),
-    FOREIGN KEY (id_funci2) REFERENCES Funcionario(id_funci)
-);
-
-CREATE TABLE itens (
-    id_it SERIAL PRIMARY KEY,
-    qtd_it INT NOT NULL,
-    preco_unitario_it NUMERIC(4,2) NOT NULL,
-    id_ped2 INT NOT NULL,
-    id_prod2 INT NOT NULL,
-    FOREIGN KEY (id_ped2) REFERENCES Pedido(id_ped),
-    FOREIGN KEY (id_prod2) REFERENCES Produto(id_prod)
-);
+CREATE TABLE Item (
+  id_ite             SERIAL NOT NULL, 
+  qtd_ite            int4 NOT NULL, 
+  preco_unitario_ite numeric(4, 2) NOT NULL, 
+  id_prod            int4 NOT NULL, 
+  id_ped             int4 NOT NULL, 
+  CONSTRAINT item_pkey 
+    PRIMARY KEY (id_ite));
 
 CREATE TABLE Pagamento (
-    id_paga SERIAL PRIMARY KEY,
-    valor_total_pag NUMERIC(4,2) NOT NULL,
-    forma_pagameto_pag CHAR(1) NOT NULL CHECK (forma_pagameto_pag IN ('D', 'C', 'P')),
-    data_pagamento TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    id_ped INT NOT NULL,
-    FOREIGN KEY (id_ped) REFERENCES Pedido(id_ped)
-);
+  id_pag             SERIAL NOT NULL, 
+  valor_total_pag    numeric(4, 2) NOT NULL, 
+  forma_pagameto_pag char(1) NOT NULL CHECK(forma_pagameto_pag in ('D','C','P')), 
+  data_pag           timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL, 
+  id_ped             int4 NOT NULL, 
+  CONSTRAINT pagamento_pkey 
+    PRIMARY KEY (id_pag));
+
+CREATE TABLE Pedido (
+  id_ped        SERIAL NOT NULL, 
+  data_hora_ped timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL, 
+  status_ped    char(1) NOT NULL CHECK(status_ped in ('A', 'P','E')), 
+  id_cli        int4 NOT NULL, 
+  id_fun        int4 NOT NULL, 
+  CONSTRAINT pedido_pkey 
+    PRIMARY KEY (id_ped));
+
+CREATE TABLE Produto (
+  id_prod        SERIAL NOT NULL, 
+  nome_prod      varchar(40) NOT NULL, 
+  descricao_prod varchar(100) NOT NULL, 
+  preco_prod     numeric(4, 2) NOT NULL, 
+  tipo_prod      char(1) NOT NULL CHECK(tipo_prod in ('L' , 'B' , 'A' )), 
+  CONSTRAINT produto_pkey 
+    PRIMARY KEY (id_prod));
+
+ALTER TABLE Cliente ADD CONSTRAINT cliente_id_end_fkey_001 FOREIGN KEY (id_end) REFERENCES Endereco (id_end) ON UPDATE Cascade ON DELETE Restrict;
+ALTER TABLE ComposicaoProduto ADD CONSTRAINT composicaoProduto_id_ing_fkey_002 FOREIGN KEY (id_ing) REFERENCES Ingrediente (id_ing) ON UPDATE Cascade ON DELETE Restrict;
+ALTER TABLE ComposicaoProduto ADD CONSTRAINT composicaoProduto_id_prod_fkey_001 FOREIGN KEY (id_prod) REFERENCES Produto (id_prod) ON UPDATE Cascade ON DELETE Restrict;
+ALTER TABLE Item ADD CONSTRAINT item_id_ped_fkey_001 FOREIGN KEY (id_ped) REFERENCES Pedido (id_ped) ON UPDATE Cascade ON DELETE Restrict;
+ALTER TABLE Item ADD CONSTRAINT item_id_prod_fkey_002 FOREIGN KEY (id_prod) REFERENCES Produto (id_prod) ON UPDATE Cascade ON DELETE Restrict;
+ALTER TABLE Pagamento ADD CONSTRAINT pagamento_id_ped_fkey_001 FOREIGN KEY (id_ped) REFERENCES Pedido (id_ped) ON UPDATE Cascade ON DELETE Restrict;
+ALTER TABLE Pedido ADD CONSTRAINT pedido_id_cli_fkey_002 FOREIGN KEY (id_cli) REFERENCES Cliente (id_cli) ON UPDATE Cascade ON DELETE Restrict;
+ALTER TABLE Pedido ADD CONSTRAINT pedido_id_fun_fkey_001 FOREIGN KEY (id_fun) REFERENCES Funcionario (id_fun) ON UPDATE Cascade ON DELETE Restrict;
