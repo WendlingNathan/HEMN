@@ -71,7 +71,7 @@
 
 <div name="mr-projeto" align="center">
   <h2>Modelo relacional do projeto</h2>
-  <img src="/assets/MR_HEMN_OFICIAL.jpg" height="600px" width="700px">
+  <img src="/assets/MR_HEMN_OFICIAL.jpg" height="550px" width="95%">
 </div>
 
 <br>
@@ -318,33 +318,73 @@ COMMENT ON COLUMN Pagamento.data_pag IS 'Data de pagamento';
 
 <br>
 
-<div name="consultas">
-  <h2>Exemplos de consultas a serem feitas no banco</h2>
-  <ol>
-    <li>
-      <h3>Listar todos os pedidos com o nome do cliente, data, status e total do pedido</h3>
-      --- Espaço reservado para o select específico ---
-    </li>
-    <li>
-      <h3>Consultar o cardápio completo com nome, descrição, tipo e preço</h3>
-      --- Espaço reservado para o select específico ---
-    </li>
-    <li>
-      <h3>Listar clientes que fizeram pedidos no último mês</h3>
-      --- Espaço reservado para o select específico ---
-    </li>
-    <li>
-      <h3>Produtos mais vendidos (quantidade total) no último trimestre</h3>
-      --- Espaço reservado para o select específico ---
-    </li>
-    <li>
-      <h3>Funcionários que entregaram mais pedidos no mês atual</h3>
-      --- Espaço reservado para o select específico ---
-    </li>
-  </ol>
+## Relatórios requisitados:
+
+### 1. Relatório de cardápio ativo
+```
+select produto.nome_prod as "Produto", produto.tipo_prod as "Tipo de produto", produto.preco_prod as "Preço (R$)"
+from produto
+order by produto.nome_prod asc;
+```
+### Resultado:
+<div align="center">
+  <img src="/assets/RELATORIO_1.jpg" height="350px" width="75%">
+</div>
+
+### 2. Relatório de Ingredientes por Produto do Cardápio
+```
+select 
+  p.nome_prod as "Produto",
+  i.nome_ing as "Ingrediente",
+  cp.qtd_ing_comp || ' ' || i.unidade_medida_ing as "Quantidade"
+from ComposicaoProduto cp
+join Produto p on p.id_prod = cp.id_prod
+JOIN Ingrediente i on i.id_ing = cp.id_ing
+order by p.nome_prod, i.nome_ing;
+```
+### Resultado:
+<div align="center">
+  <img src="/assets/RELATORIO_2.jpg" height="450px" width="75%">
+</div>
+
+### 3. Relatório de Pedidos Realizados no Mês Atual
+```
+select 
+  ped.id_ped as "ID Pedido",
+  ped.data_hora_ped as "Data",
+  cli.nome_cli as "Cliente",
+  pag.valor_total_pag as "Valor Total (R$)"
+from Pedido ped
+join Cliente cli on cli.id_cli = ped.id_cli
+join Pagamento pag on pag.id_ped = ped.id_ped
+where extract(month from ped.data_hora_ped) = extract(month from CURRENT_DATE)
+  and extract(YEAR from ped.data_hora_ped) = extract(YEAR from CURRENT_DATE)
+order by ped.data_hora_ped desc;
+```
+### Resultado:
+<div align="center">
+  <img src="/assets/RELATORIO_3.jpg" height="350px" width="75%">
+</div>
+
+### 4. Relatório de Faturamento por Produto
+```
+select 
+  p.nome_prod as "Produto",
+  sum(i.qtd_ite) as "Total Vendido (unidades)",
+  sum(i.qtd_ite * i.preco_unitario_ite) as "Faturamento Total (R$)"
+from Item i
+join Produto p on p.id_prod = i.id_prod
+group by p.nome_prod
+having sum(i.qtd_ite) > 0
+order by "Faturamento Total (R$)" desc;
+```
+### Resultado:
+<div align="center">
+  <img src="/assets/RELATORIO_4.jpg" height="350px" width="75%">
 </div>
 
 <br>
+<hr>
 
 ## Criadores (Perfis do GitHub)
 
