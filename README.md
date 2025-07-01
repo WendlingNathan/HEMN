@@ -34,10 +34,18 @@
   <ol>
   <li>
     <p>
+      <h2><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="22" style="vertical-align: middle; margin-right: 8px;"> <strong>PostgreSQL</strong></h2>
+    </p> 
+    <p>
+      Gerenciador de banco de dados escolhido para criarmos o nosso projeto;
+    </p>
+  </li>
+  <li>
+    <p>
       <h2><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dbeaver/dbeaver-original.svg" width="22" style="vertical-align: middle; margin-right: 8px;"> <strong>DBeaver</strong></h2>
     </p> 
     <p>
-      Ferramenta de gerenciamento de banco de dados utilizada para criar e gerenciar o banco de dados;
+      Ferramenta cliente de gerenciamento de banco de dados utilizada para criar e gerenciar o banco de dados;
     </p>
   </li>
   <li>
@@ -61,7 +69,7 @@
       <h2><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="22" style="vertical-align: middle; margin-right: 8px;"> <strong>GitHub</strong></h2>
     </p>
     <p>
-      Repositório em nuvem adotado para armazenar e tornar o projeto colaborativo;
+      Repositório em nuvem adotado para armazenar o projeto e torná-lo colaborativo;
     </p>
   </li>
 </ol>
@@ -71,7 +79,7 @@
 
 <div name="mr-projeto" align="center">
   <h2>Modelo relacional do projeto</h2>
-  <img src="/assets/MR_HEMN_OFICIAL.jpg" height="550px" width="95%">
+  <img src="/assets/MR_HEMN_OFICIAL.jpg" height="500px" width="95%">
 </div>
 
 <br>
@@ -328,7 +336,7 @@ order by produto.nome_prod asc;
 ```
 ### Resultado:
 <div align="center">
-  <img src="/assets/RELATORIO_1.jpg" height="350px" width="75%">
+  <img src="/assets/RELATORIO_1.jpg" height="300px" width="75%">
 </div>
 
 ### 2. Relatório de Ingredientes por Produto do Cardápio
@@ -339,7 +347,7 @@ select
   cp.qtd_ing_comp || ' ' || i.unidade_medida_ing as "Quantidade"
 from ComposicaoProduto cp
 join Produto p on p.id_prod = cp.id_prod
-JOIN Ingrediente i on i.id_ing = cp.id_ing
+join Ingrediente i on i.id_ing = cp.id_ing
 order by p.nome_prod, i.nome_ing;
 ```
 ### Resultado:
@@ -363,7 +371,7 @@ order by ped.data_hora_ped desc;
 ```
 ### Resultado:
 <div align="center">
-  <img src="/assets/RELATORIO_3.jpg" height="350px" width="75%">
+  <img src="/assets/RELATORIO_3.jpg" height="300px" width="75%">
 </div>
 
 ### 4. Relatório de Faturamento por Produto
@@ -380,7 +388,7 @@ order by "Faturamento Total (R$)" desc;
 ```
 ### Resultado:
 <div align="center">
-  <img src="/assets/RELATORIO_4.jpg" height="350px" width="75%">
+  <img src="/assets/RELATORIO_4.jpg" height="300px" width="75%">
 </div>
 
 <br>
