@@ -1,0 +1,12 @@
+Abra o Agendador de Tarefas (Task Scheduler) do Windows.
+
+Crie uma nova tarefa → “Criar Tarefa Básica”.
+
+Defina o gatilho (por exemplo, “Diariamente às 23:00”).
+
+Ação → “Iniciar um programa”.
+
+Programa/script:
+C:\Users\edu\Documents\ProjetoBanco\database\Scripts\Scripts Backup Restore
+
+Salve e pronto ✅

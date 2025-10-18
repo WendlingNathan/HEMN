@@ -1,0 +1,1 @@
+pg_restore -U postgres -d postgres -v --clean "C:\Users\edu\Documents\ProjetoBanco\database\Scripts\Scripts Backup Restore\postgres_2025-10-17_23-29.dump"
