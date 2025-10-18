@@ -1,9 +1,9 @@
 @echo off
 REM === CONFIGURAÇÕES ===
-set PGPASSWORD=0605
+set PGPASSWORD=root
 set USUARIO=postgres
 set BANCO=postgres
-set CAMINHO_BACKUP=C:\Users\edu\Documents\ProjetoBanco\database\Scripts\Scripts Backup Restore
+set CAMINHO_BACKUP=C:\Desktop\
 
 REM === DATA FORMATADA ===
 for /f "tokens=2 delims==" %%I in ('"wmic os get localdatetime /value"') do set datetime=%%I
@@ -17,4 +17,4 @@ echo Iniciando backup de %BANCO%...
 pg_dump -U %USUARIO% -F c -b -v -f "%CAMINHO_BACKUP%\%BANCO%_%DATA%.dump" %BANCO%
 
 echo Backup concluído em: %CAMINHO_BACKUP%\%BANCO%_%DATA%.dump
-pause
+exit
