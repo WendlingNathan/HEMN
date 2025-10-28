@@ -1,0 +1,44 @@
+# Build do Maven
+/target/
+/out/
+
+# Pacotes gerados
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+logs/
+*.tmp
+
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+## IntelliJ IDEA
+/.idea/
+/*.iml
+/out/
+
+## Eclipse
+/.classpath
+/.project
+/.settings/
+/bin/
+
+## VS Code
+.vscode/
+
+# Arquivos de teste/temporários
+*.swp
+*.bak
+*.tmp
+
+# Banco de dados local ou arquivos temporários
+*.db
+*.sqlite
+
+# Configurações específicas do sistema
+*.env
