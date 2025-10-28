@@ -1,0 +1,2 @@
+INDEX VERSION 1.134+C:\Trabalhos_Nathan\UNOESC\Ciência da computação - Atividades\3° semestre\Banco de dados I\Projeto Final - Banco de dados I\backend\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index

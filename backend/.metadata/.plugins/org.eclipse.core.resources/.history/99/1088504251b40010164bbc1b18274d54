@@ -1,0 +1,10 @@
+package br.com.hemn.backend.model;
+
+import java.io.Serializable;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class Endereco implements Serializable {
+	private static final long serialVersionUID = 1L;
+}

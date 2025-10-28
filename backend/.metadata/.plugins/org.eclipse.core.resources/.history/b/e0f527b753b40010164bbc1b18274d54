@@ -1,0 +1,94 @@
+package br.com.hemn.backend.model;
+
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Endereco implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id_end;
+	
+	@Column()
+	private String complemento_end;
+	
+	private String logradouro_end;
+	
+	private int numero_end;
+	
+	private String cidade_end;
+	
+	private String bairro_end;
+	
+	private String pont_ref_end;
+
+	public String getCoplemento_end() {
+		return complemento_end;
+	}
+
+	public void setCoplemento_end(String coplemento_end) {
+		this.complemento_end = coplemento_end;
+	}
+
+	public String getLogradouro_end() {
+		return logradouro_end;
+	}
+
+	public void setLogradouro_end(String logradouro_end) {
+		this.logradouro_end = logradouro_end;
+	}
+
+	public int getNumero_end() {
+		return numero_end;
+	}
+
+	public void setNumero_end(int numero_end) {
+		this.numero_end = numero_end;
+	}
+
+	public String getCidade_end() {
+		return cidade_end;
+	}
+
+	public void setCidade_end(String cidade_end) {
+		this.cidade_end = cidade_end;
+	}
+
+	public String getBairro_end() {
+		return bairro_end;
+	}
+
+	public void setBairro_end(String bairro_end) {
+		this.bairro_end = bairro_end;
+	}
+
+	public String getPont_ref_end() {
+		return pont_ref_end;
+	}
+
+	public void setPont_ref_end(String pont_ref_end) {
+		this.pont_ref_end = pont_ref_end;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Long getId_end() {
+		return id_end;
+	}
+
+	@Override
+	public String toString() {
+		return "Endereco [id_end=" + id_end + ", coplemento_end=" + complemento_end + ", logradouro_end="
+				+ logradouro_end + ", numero_end=" + numero_end + ", cidade_end=" + cidade_end + ", bairro_end="
+				+ bairro_end + ", pont_ref_end=" + pont_ref_end + "]";
+	}
+}
