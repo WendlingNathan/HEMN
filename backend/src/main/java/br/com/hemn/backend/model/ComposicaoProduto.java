@@ -1,0 +1,65 @@
+package br.com.hemn.backend.model;
+
+import java.io.Serializable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+
+@Entity
+public class ComposicaoProduto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_comp")
+	private Long id_comp;
+
+	@Column(name = "qtd_ing_comp", nullable = false)
+	private double qtd_ing_comp;
+
+	@ManyToOne
+	@JoinColumn(name = "id_prod", nullable = false)
+	private Produto id_prod;
+
+	@ManyToOne
+	@JoinColumn(name = "id_ing", nullable = false)
+	private Ingrediente id_ing;
+
+	public Long getId_comp() {
+		return id_comp;
+	}
+
+	public double getQtd_ing_comp() {
+		return qtd_ing_comp;
+	}
+
+	public void setQtd_ing_comp(double qtd_ing_comp) {
+		this.qtd_ing_comp = qtd_ing_comp;
+	}
+
+	public Produto getId_prod() {
+		return id_prod;
+	}
+
+	public void setId_prod(Produto id_prod) {
+		this.id_prod = id_prod;
+	}
+
+	public Ingrediente getId_ing() {
+		return id_ing;
+	}
+
+	public void setId_ing(Ingrediente id_ing) {
+		this.id_ing = id_ing;
+	}
+
+	@Override
+	public String toString() {
+		return "ComposicaoProduto [id_comp=" + id_comp + ", qtd_ing_comp=" + qtd_ing_comp + ", id_prod=" + id_prod
+				+ ", id_ing=" + id_ing + "]";
+	}
+}
