@@ -1,26 +1,26 @@
-# Build do Maven
+# Spring Boot / Maven / Gradle
 /target/
-/out/
+/build/
+*.class
 
 # Pacotes gerados
 *.jar
 *.war
 *.ear
 
-# Logs
+# Logs e temporários
 *.log
 logs/
 *.tmp
 
-# Arquivos temporários do sistema
-.DS_Store
-Thumbs.db
+# Banco de dados local
+*.db
+*.sqlite
 
 # IDEs
 ## IntelliJ IDEA
 /.idea/
 /*.iml
-/out/
 
 ## Eclipse
 /.classpath
@@ -31,14 +31,13 @@ Thumbs.db
 ## VS Code
 .vscode/
 
-# Arquivos de teste/temporários
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Configurações de ambiente
+*.env
+
+# Arquivos de swap ou backup
 *.swp
 *.bak
-*.tmp
-
-# Banco de dados local ou arquivos temporários
-*.db
-*.sqlite
-
-# Configurações específicas do sistema
-*.env
