@@ -1,0 +1,5 @@
+package br.com.hemn.model;
+
+public class Produto {
+
+}
