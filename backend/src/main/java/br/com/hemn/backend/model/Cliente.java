@@ -19,7 +19,7 @@ public class Cliente implements Serializable {
 	private Long id_cli;
 
 	@Column(name = "nome_cli", nullable = false, length = 80)
-	private String nome_cli;
+	private String nomeCli;
 
 	@Column(name = "cpf_cli", nullable = false, unique = true, length = 11)
 	private String cpf_cli;
@@ -39,11 +39,11 @@ public class Cliente implements Serializable {
 	}
 
 	public String getNome_cli() {
-		return nome_cli;
+		return nomeCli;
 	}
 
 	public void setNome_cli(String nome_cli) {
-		this.nome_cli = nome_cli;
+		this.nomeCli = nome_cli;
 	}
 
 	public String getCpf_cli() {
@@ -80,7 +80,7 @@ public class Cliente implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cliente [id_cli=" + id_cli + ", nome_cli=" + nome_cli + ", cpf_cli=" + cpf_cli + ", telefone_cli="
+		return "Cliente [id_cli=" + id_cli + ", nome_cli=" + nomeCli + ", cpf_cli=" + cpf_cli + ", telefone_cli="
 				+ telefone_cli + ", email_cli=" + email_cli + ", id_end=" + id_end + "]";
 	}
 }

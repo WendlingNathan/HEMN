@@ -27,7 +27,7 @@ public class ComposicaoProduto implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "id_ing", nullable = false)
-	private Ingrediente id_ing;
+	private Ingrediente ingrediente;
 
 	public Long getId_comp() {
 		return id_comp;
@@ -50,16 +50,16 @@ public class ComposicaoProduto implements Serializable {
 	}
 
 	public Ingrediente getId_ing() {
-		return id_ing;
+		return ingrediente;
 	}
 
-	public void setId_ing(Ingrediente id_ing) {
-		this.id_ing = id_ing;
+	public void setId_ing(Ingrediente ingrediente) {
+		this.ingrediente = ingrediente;
 	}
 
 	@Override
 	public String toString() {
 		return "ComposicaoProduto [id_comp=" + id_comp + ", qtd_ing_comp=" + qtd_ing_comp + ", id_prod=" + id_prod
-				+ ", id_ing=" + id_ing + "]";
+				+ ", id_ing=" + ingrediente + "]";
 	}
 }

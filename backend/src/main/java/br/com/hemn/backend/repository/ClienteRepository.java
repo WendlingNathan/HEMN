@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import br.com.hemn.backend.model.Cliente;
 
 @Repository
-public interface CienteRepository extends JpaRepository<Cliente, Long>{
+public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 	List<Cliente> findByNomeCliContainingIgnoreCase(String nome_cli);
 }

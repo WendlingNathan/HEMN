@@ -19,7 +19,7 @@ public class Produto implements Serializable {
 	private Long id_prod;
 
 	@Column(name = "nome_prod", nullable = false, length = 40)
-	private String nome_prod;
+	private String nomeProd;
 
 	@Column(name = "descricao_prod", nullable = false, length = 100)
 	private String descricao_prod;
@@ -38,11 +38,11 @@ public class Produto implements Serializable {
 	}
 
 	public String getNome_prod() {
-		return nome_prod;
+		return nomeProd;
 	}
 
 	public void setNome_prod(String nome_prod) {
-		this.nome_prod = nome_prod;
+		this.nomeProd = nome_prod;
 	}
 
 	public String getDescricao_prod() {
@@ -79,7 +79,7 @@ public class Produto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Produto [id_prod=" + id_prod + ", nome_prod=" + nome_prod + ", descricao_prod=" + descricao_prod
+		return "Produto [id_prod=" + id_prod + ", nome_prod=" + nomeProd + ", descricao_prod=" + descricao_prod
 				+ ", preco_prod=" + preco_prod + ", tipo_prod=" + tipo_prod + "]";
 	}
 }

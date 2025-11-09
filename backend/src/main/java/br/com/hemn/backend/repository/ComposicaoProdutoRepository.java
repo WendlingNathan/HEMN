@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.com.hemn.backend.model.ComposicaoProduto;
 
 public interface ComposicaoProdutoRepository extends JpaRepository<ComposicaoProduto,Long>{
-	List<ComposicaoProduto> findByIngredienteIdIng(int id_ing);
+	List<ComposicaoProduto> findByIngrediente_IdIng(Long id_ing);
 }

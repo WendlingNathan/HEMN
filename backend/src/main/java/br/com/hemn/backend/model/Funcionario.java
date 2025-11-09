@@ -17,7 +17,7 @@ public class Funcionario implements Serializable {
 	private Long id_fun;
 
 	@Column(name = "nome_fun", nullable = false, length = 80)
-	private String nome_fun;
+	private String nomeFun;
 
 	@Column(name = "cargo_fun", nullable = false, length = 1)
 	private String cargo_fun;
@@ -30,11 +30,11 @@ public class Funcionario implements Serializable {
 	}
 
 	public String getNome_fun() {
-		return nome_fun;
+		return nomeFun;
 	}
 
 	public void setNome_fun(String nome_fun) {
-		this.nome_fun = nome_fun;
+		this.nomeFun = nome_fun;
 	}
 
 	public String getCargo_fun() {
@@ -55,7 +55,7 @@ public class Funcionario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Funcionario [id_fun=" + id_fun + ", nome_fun=" + nome_fun + ", cargo_fun=" + cargo_fun
+		return "Funcionario [id_fun=" + id_fun + ", nome_fun=" + nomeFun + ", cargo_fun=" + cargo_fun
 				+ ", telefone_fun=" + telefone_fun + "]";
 	}
 }

@@ -14,24 +14,24 @@ public class Ingrediente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ing")
-	private Long id_ing;
+	private Long idIng;
 
 	@Column(name = "nome_ing", nullable = false, unique = true, length = 60)
-	private String nome_ing;
+	private String nomeIng;
 
 	@Column(name = "unidade_medida_ing", nullable = false, length = 2)
 	private String unidade_medida_ing;
 
 	public Long getId_ing() {
-		return id_ing;
+		return idIng;
 	}
 
 	public String getNome_ing() {
-		return nome_ing;
+		return nomeIng;
 	}
 
 	public void setNome_ing(String nome_ing) {
-		this.nome_ing = nome_ing;
+		this.nomeIng = nome_ing;
 	}
 
 	public String getUnidade_medida_ing() {
@@ -44,7 +44,7 @@ public class Ingrediente implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Ingrediente [id_ing=" + id_ing + ", nome_ing=" + nome_ing + ", unidade_medida_ing=" + unidade_medida_ing
+		return "Ingrediente [id_ing=" + idIng + ", nome_ing=" + nomeIng + ", unidade_medida_ing=" + unidade_medida_ing
 				+ "]";
 	}
 }

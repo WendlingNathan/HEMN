@@ -25,7 +25,7 @@ public class Pedido implements Serializable {
 	private LocalDateTime data_hora_ped;
 
 	@Column(name = "status_ped", nullable = false, length = 1)
-	private String status_ped;
+	private String statusPed;
 
 	@ManyToOne
 	@JoinColumn(name = "id_cli", nullable = false)
@@ -51,11 +51,11 @@ public class Pedido implements Serializable {
 	}
 
 	public String getStatus_ped() {
-		return status_ped;
+		return statusPed;
 	}
 
 	public void setStatus_ped(String status_ped) {
-		this.status_ped = status_ped;
+		this.statusPed = status_ped;
 	}
 
 	public Cliente getId_cli() {
@@ -84,7 +84,7 @@ public class Pedido implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Pedido [id_ped=" + id_ped + ", data_hora_ped=" + data_hora_ped + ", status_ped=" + status_ped
+		return "Pedido [id_ped=" + id_ped + ", data_hora_ped=" + data_hora_ped + ", status_ped=" + statusPed
 				+ ", id_cli=" + id_cli + ", id_fun=" + id_fun + "]";
 	}
 }

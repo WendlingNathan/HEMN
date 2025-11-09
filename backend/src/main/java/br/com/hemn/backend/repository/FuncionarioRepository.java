@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.com.hemn.backend.model.Funcionario;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
-	List<Funcionario>FindByNomeFuncContainingIgnoreCase(String nome_fun);
+	List<Funcionario> findByNomeFunContainingIgnoreCase(String nome_fun);
 }
