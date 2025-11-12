@@ -14,7 +14,7 @@ import br.com.hemn.backend.model.Item;
 import br.com.hemn.backend.repository.ItemRepository;
 	
 	@RestController
-	@RequestMapping("/Item")
+	@RequestMapping("/item")
 	public class ItemController {
 
 	    @Autowired

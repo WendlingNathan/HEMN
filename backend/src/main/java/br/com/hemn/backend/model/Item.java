@@ -1,13 +1,16 @@
 package br.com.hemn.backend.model;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Item implements Serializable {
@@ -30,6 +33,7 @@ public class Item implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "id_ped", nullable = false)
+	@JsonIgnore
 	private Pedido id_ped;
 
 	public Long getId_ite() {
