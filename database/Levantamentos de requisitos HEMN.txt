@@ -1,0 +1,67 @@
+﻿Levantamentos de requisitos HEMN 
+
+
+
+
+
+
+
+
+
+Requisitos Funcionais:
+
+-----------RELATÓRIOS E CONSULTAS--------------------
+RF01-Gerar  relatórios de faturamento por produto;
+RF02-Gerar relatório de pedidos realizados no mês  atual;
+RF03 Gerar relatório de ingredientes por produtos do cardápio; 
+RF04- Gerar relatório de cardápio ativo;
+
+
+--------CADASTRO E GERENCIAMENTO---------
+RF05- O sistema deve permitir o cadastro, consulta, atualização e exclusão clientes;
+RF06- O sistema deve permitir o cadastro de endereços vinculados aos clientes;
+RF07-O sistema deve permitir o cadastro de ingredientes e sua unidades de medidas;
+RF08-O sistema deve permitir o cadastro da composição de produtos (ingredientes e quantidades);
+
+
+
+
+-------------PEDIDOS----------------------
+R09-- O sistema deve permitir registrar pagamentos vinculados a pedidos;
+RF10- O sistema deve registrar a forma de pagamento(ex: dinheiro, cartão).
+RF11-- O sistema deve armazenar a data e valor total do pagamento;
+
+
+
+
+
+
+
+
+
+
+Requisitos Não  Funcionais:
+
+RFN01-O sistema deve permitir backup e restore;
+RFN02- O sistema deve possuir interface intuitiva e responsiva para uso em diferentes dispositivos;
+RFN03-O sistema deve manter logs de operações críticas (como pagamentos e exclusões).;
+RFN04-O sistema deve ser seguro, exigindo autenticação para acesso de funcionários;
+RFN05- O sistema deve manter o usuário logado na sessão após uso; 
+RFN06- Deve ser utilizado linguagem java com a ferramenta Springboot;
+RFN07- Deve ser utilizado Postgres para a construção;
+
+
+
+
+Requisitos de Domínio: 
+
+-Um cliente pode realizar vários pedidos.
+-Cada pedido é atendido por um funcionário.
+-Um pedido pode conter vários itens (produtos).
+-Cada item está vinculado a um produto específico.
+-Um produto é composto por um ou mais ingredientes (relação Composicao Produto).
+-Cada pagamento está associado a um pedido.
+-O cliente possui um endereço cadastrado.
+-Um ingrediente pode fazer parte de vários produtos.
+-O produto tem tipo, preço e descrição.
+-O pedido possui status (ex: “A” = ativo, “F” = finalizado, “C” = cancelado).
