@@ -1,3 +1,39 @@
+CREATE TABLE Aud_pedido (
+  id_aud           SERIAL NOT NULL, 
+  id_ped           int4 NOT NULL, 
+  operacao         varchar(10) NOT NULL, 
+  dados_anteriores varchar(80) NOT NULL, 
+  dados_novos      varchar(80) NOT NULL, 
+  usuario          text NOT NULL, 
+  data_operacao    timestamp with time zone DEFAULT current_timestamp NOT NULL, 
+  CONSTRAINT aud_pedido_pkey 
+    PRIMARY KEY (id_aud));
+COMMENT ON TABLE Aud_pedido IS 'Auditoria de alterações na tabela Pedido (Antigo/Novo).';
+COMMENT ON COLUMN Aud_pedido.id_aud IS 'ID da Auditoria do pedido';
+COMMENT ON COLUMN Aud_pedido.id_ped IS 'ID do Pedido que consta na Auditoria';
+COMMENT ON COLUMN Aud_pedido.operacao IS 'Operação feita pelo usuário (UPDATE, DELETE, INSERT)';
+COMMENT ON COLUMN Aud_pedido.dados_anteriores IS 'Dados anteriores decorrentes da operação';
+COMMENT ON COLUMN Aud_pedido.dados_novos IS 'Dados novos decorrentes da operação';
+COMMENT ON COLUMN Aud_pedido.usuario IS 'Usuário que executou a operação';
+COMMENT ON COLUMN Aud_pedido.data_operacao IS 'Data da execução da operação';
+
+CREATE TABLE Aud_produto_preco (
+  id_aud        SERIAL NOT NULL, 
+  id_prod       int4 NOT NULL, 
+  preco_antigo  numeric(12, 2) NOT NULL, 
+  preco_novo    numeric(12, 2) NOT NULL, 
+  usuario       text NOT NULL, 
+  data_operacao timestamp with time zone DEFAULT current_timestamp NOT NULL, 
+  CONSTRAINT aud_produto_preco_pkey 
+    PRIMARY KEY (id_aud));
+COMMENT ON TABLE Aud_produto_preco IS 'Histórico de alteração de preços na tabela Produto.';
+COMMENT ON COLUMN Aud_produto_preco.id_aud IS 'ID da Auditoria do pedido';
+COMMENT ON COLUMN Aud_produto_preco.id_prod IS 'ID do Produto que foi alterado';
+COMMENT ON COLUMN Aud_produto_preco.preco_antigo IS 'Preço antigo do produto respectivo';
+COMMENT ON COLUMN Aud_produto_preco.preco_novo IS 'Preço novo do produto respectivo';
+COMMENT ON COLUMN Aud_produto_preco.usuario IS 'Usuário que executou a operação';
+COMMENT ON COLUMN Aud_produto_preco.data_operacao IS 'Data da execução da operação';
+
 CREATE TABLE Cliente (
   id_cli       SERIAL NOT NULL, 
   nome_cli     varchar(80) NOT NULL, 
@@ -8,10 +44,11 @@ CREATE TABLE Cliente (
   CONSTRAINT cliente_pkey 
     PRIMARY KEY (id_cli));
 COMMENT ON TABLE Cliente IS 'Tabela Cliente.';
-COMMENT ON COLUMN Cliente.id_cli IS 'Id do cliente';
-COMMENT ON COLUMN Cliente.nome_cli IS 'Nome do cliente';
-COMMENT ON COLUMN Cliente.cpf_cli IS 'CPF do cliente';
-COMMENT ON COLUMN Cliente.telefone_cli IS 'Telefone do cliente';
+COMMENT ON COLUMN Cliente.id_cli IS 'ID do Cliente';
+COMMENT ON COLUMN Cliente.nome_cli IS 'Nome do Cliente';
+COMMENT ON COLUMN Cliente.cpf_cli IS 'CPF do Cliente';
+COMMENT ON COLUMN Cliente.telefone_cli IS 'Telefone do Cliente';
+COMMENT ON COLUMN Cliente.email_cli IS 'E-mail do Cliente';
 
 CREATE TABLE ComposicaoProduto (
   id_comp      SERIAL NOT NULL, 
@@ -20,9 +57,9 @@ CREATE TABLE ComposicaoProduto (
   id_ing       int4 NOT NULL, 
   CONSTRAINT composicaoProduto_pkey 
     PRIMARY KEY (id_comp));
-COMMENT ON TABLE ComposicaoProduto IS 'Tabela da composi��o do produto.';
-COMMENT ON COLUMN ComposicaoProduto.id_comp IS 'ID da composi��o do produto.';
-COMMENT ON COLUMN ComposicaoProduto.qtd_ing_comp IS 'Quantidade do produto na composi��o.';
+COMMENT ON TABLE ComposicaoProduto IS 'Tabela da Composição do Produto.';
+COMMENT ON COLUMN ComposicaoProduto.id_comp IS 'ID da Composição do Produto.';
+COMMENT ON COLUMN ComposicaoProduto.qtd_ing_comp IS 'Quantidade do produto na composição.';
 
 CREATE TABLE Endereco (
   id_end          SERIAL NOT NULL, 
@@ -35,13 +72,13 @@ CREATE TABLE Endereco (
   CONSTRAINT endereco_pkey 
     PRIMARY KEY (id_end));
 COMMENT ON TABLE Endereco IS 'Tabela Endereco.';
-COMMENT ON COLUMN Endereco.id_end IS 'Id do endere�o';
-COMMENT ON COLUMN Endereco.complemento_end IS 'Complemento do endere�o';
-COMMENT ON COLUMN Endereco.logradouro_end IS 'Logradouro do endere�o';
-COMMENT ON COLUMN Endereco.numero_end IS 'N�mero do endere�o';
-COMMENT ON COLUMN Endereco.cidade_end IS 'Cidade do endere�o';
-COMMENT ON COLUMN Endereco.bairro_end IS 'Bairro do endere�o';
-COMMENT ON COLUMN Endereco.pont_ref_end IS 'Ponto de refer�ncia do endere�o';
+COMMENT ON COLUMN Endereco.id_end IS 'ID do Endereço';
+COMMENT ON COLUMN Endereco.complemento_end IS 'Complemento do Endereço';
+COMMENT ON COLUMN Endereco.logradouro_end IS 'Logradouro do Endereço';
+COMMENT ON COLUMN Endereco.numero_end IS 'Número do Endereço';
+COMMENT ON COLUMN Endereco.cidade_end IS 'Cidade do Endereço';
+COMMENT ON COLUMN Endereco.bairro_end IS 'Bairro do Endereço';
+COMMENT ON COLUMN Endereco.pont_ref_end IS 'Ponto de referência do Endereço';
 
 CREATE TABLE Funcionario (
   id_fun       SERIAL NOT NULL, 
@@ -51,10 +88,10 @@ CREATE TABLE Funcionario (
   CONSTRAINT funcionario_pkey 
     PRIMARY KEY (id_fun));
 COMMENT ON TABLE Funcionario IS 'Tabela Funcionario.';
-COMMENT ON COLUMN Funcionario.id_fun IS 'Id do funcionario';
-COMMENT ON COLUMN Funcionario.nome_fun IS 'Nome do funcionario';
+COMMENT ON COLUMN Funcionario.id_fun IS 'ID do Funcionário';
+COMMENT ON COLUMN Funcionario.nome_fun IS 'Nome do Funcionário';
 COMMENT ON COLUMN Funcionario.cargo_fun IS 'Cargos dos Funcionarios (''C'' - "Cozinheiro", ''A'' - "Atentende", ''E'' - "Entregador")';
-COMMENT ON COLUMN Funcionario.telefone_fun IS 'Telefone do funcionario';
+COMMENT ON COLUMN Funcionario.telefone_fun IS 'Telefone do Funcionário';
 
 CREATE TABLE Ingrediente (
   id_ing             SERIAL NOT NULL, 
@@ -66,7 +103,6 @@ COMMENT ON TABLE Ingrediente IS 'Tabela do Ingrediente.';
 COMMENT ON COLUMN Ingrediente.id_ing IS 'ID do Ingrediente.';
 COMMENT ON COLUMN Ingrediente.nome_ing IS 'Nome do Ingrediente.';
 COMMENT ON COLUMN Ingrediente.unidade_medida_ing IS 'Unidade de medida ("G" - "Grama", "ML" - "Mililitro", "UN" - "Unidade").';
-
 CREATE TABLE Item (
   id_ite             SERIAL NOT NULL, 
   qtd_ite            int4 NOT NULL, 
@@ -76,8 +112,9 @@ CREATE TABLE Item (
   CONSTRAINT item_pkey 
     PRIMARY KEY (id_ite));
 COMMENT ON TABLE Item IS 'Tabela Item - Representa cada item do pedido.';
+COMMENT ON COLUMN Item.id_ite IS 'ID do Item';
 COMMENT ON COLUMN Item.qtd_ite IS 'Quantidade de itens do pedido';
-COMMENT ON COLUMN Item.preco_unitario_ite IS 'pre�o unitario do item';
+COMMENT ON COLUMN Item.preco_unitario_ite IS 'Preço unitário do item';
 
 CREATE TABLE Pagamento (
   id_pag             SERIAL NOT NULL, 
@@ -88,10 +125,10 @@ CREATE TABLE Pagamento (
   CONSTRAINT pagamento_pkey 
     PRIMARY KEY (id_pag));
 COMMENT ON TABLE Pagamento IS 'Tabela Pagamento.';
-COMMENT ON COLUMN Pagamento.id_pag IS 'id do pagamento';
-COMMENT ON COLUMN Pagamento.valor_total_pag IS 'Valor total do pagamento';
-COMMENT ON COLUMN Pagamento.forma_pagameto_pag IS 'Forma de pagamento (''D'' - "Dinheiro",''C'' - "Cart�o",''P'' - "Pix")';
-COMMENT ON COLUMN Pagamento.data_pag IS 'Data de pagamento';
+COMMENT ON COLUMN Pagamento.id_pag IS 'ID do Pagamento';
+COMMENT ON COLUMN Pagamento.valor_total_pag IS 'Valor total do Pagamento';
+COMMENT ON COLUMN Pagamento.forma_pagameto_pag IS 'Forma de Pagamento (''D'' - "Dinheiro",''C'' - "Cartão",''P'' - "Pix")';
+COMMENT ON COLUMN Pagamento.data_pag IS 'Data de Pagamento';
 
 CREATE TABLE Pedido (
   id_ped        SERIAL NOT NULL, 
@@ -102,40 +139,9 @@ CREATE TABLE Pedido (
   CONSTRAINT pedido_pkey 
     PRIMARY KEY (id_ped));
 COMMENT ON TABLE Pedido IS 'Tabela Pedido.';
-COMMENT ON COLUMN Pedido.id_ped IS 'Id do pedido';
-COMMENT ON COLUMN Pedido.data_hora_ped IS 'Data e hora do pedido';
+COMMENT ON COLUMN Pedido.id_ped IS 'ID do Pedido';
+COMMENT ON COLUMN Pedido.data_hora_ped IS 'Data e hora do Pedido';
 COMMENT ON COLUMN Pedido.status_ped IS 'Status do pedido (''A'' - "Aguarde", ''P'' - "Pronto", ''E'' - "Entregue")';
-
--- Tabelas para uma auditoria
-CREATE TABLE IF NOT EXISTS Aud_pedido (
-  id_aud        BIGSERIAL PRIMARY KEY,
-  id_ped        INT NOT NULL,
-  operacao      VARCHAR(10) NOT NULL, -- 'UPDATE' / 'DELETE' / 'INSERT' (se desejar)
-  dados_anteriores JSONB,
-  dados_novos      JSONB,
-  usuario       TEXT DEFAULT current_user,
-  data_operacao  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-COMMENT ON TABLE Aud_pedido IS 'Auditoria de alterações na tabela Pedido (Antigo/Novo).';
-COMMENT ON COLUMN Aud_pedido.operacao IS 'Operação feita pelo usuário (UPDATE, DELETE, INSERT)';
-COMMENT ON COLUMN Aud_pedido.dados_anteriores IS 'Dados anteriores decorrentes da operação';
-COMMENT ON COLUMN Aud_pedido.dados_novos IS 'Dados movos decorrentes da operação';
-COMMENT ON COLUMN Aud_pedido.usuario IS 'Usuário que executou a operação';
-COMMENT ON COLUMN Aud_pedido.data_operacao IS 'Data da execução da operação';
-
-CREATE TABLE IF NOT EXISTS Aud_produto_preco (
-  id_aud        BIGSERIAL PRIMARY KEY,
-  id_prod       INT NOT NULL,
-  preco_antigo  NUMERIC(12,2),
-  preco_novo    NUMERIC(12,2),
-  usuario       TEXT DEFAULT current_user,
-  data_operacao TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-COMMENT ON TABLE Aud_produto_preco IS 'Histórico de alteração de preços na tabela Produto.';
-COMMENT ON COLUMN Aud_produto_preco.preco_antigo IS 'Preço antigo do produto respectivo';
-COMMENT ON COLUMN Aud_produto_preco.preco_novo IS 'Preço novo do produto respectivo';
-COMMENT ON COLUMN Aud_produto_preco.usuario IS 'Usuário que executou a operação';
-COMMENT ON COLUMN Aud_produto_preco.data_operacao IS 'Data da execução da operação';
 
 CREATE TABLE Produto (
   id_prod        SERIAL NOT NULL, 
@@ -146,10 +152,11 @@ CREATE TABLE Produto (
   CONSTRAINT produto_pkey 
     PRIMARY KEY (id_prod));
 COMMENT ON TABLE Produto IS 'Tabela Produto.';
-COMMENT ON COLUMN Produto.nome_prod IS 'Nome do produto';
-COMMENT ON COLUMN Produto.descricao_prod IS 'Descri��o do produto';
-COMMENT ON COLUMN Produto.preco_prod IS 'Pre�o do produto';
-COMMENT ON COLUMN Produto.tipo_prod IS 'Tipo de produto (''L'' - "Lanche", ''A'' - "Acompanhamento", ''B'' - "Bebida")';
+COMMENT ON COLUMN Produto.id_prod IS 'ID do Produto';
+COMMENT ON COLUMN Produto.nome_prod IS 'Nome do Produto';
+COMMENT ON COLUMN Produto.descricao_prod IS 'Descrição do Produto';
+COMMENT ON COLUMN Produto.preco_prod IS 'Preço do Produto';
+COMMENT ON COLUMN Produto.tipo_prod IS 'Tipo de Produto (''L'' - "Lanche", ''A'' - "Acompanhamento", ''B'' - "Bebida")';
 
 ALTER TABLE Cliente ADD CONSTRAINT cliente_id_end_fkey_001 FOREIGN KEY (id_end) REFERENCES Endereco (id_end) ON UPDATE Cascade ON DELETE Restrict;
 ALTER TABLE ComposicaoProduto ADD CONSTRAINT composicaoProduto_id_ing_fkey_002 FOREIGN KEY (id_ing) REFERENCES Ingrediente (id_ing) ON UPDATE Cascade ON DELETE Restrict;
