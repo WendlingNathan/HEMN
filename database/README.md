@@ -79,7 +79,7 @@
 
 <div name="mr-projeto" align="center">
   <h2>Modelo relacional do projeto</h2>
-  <img src="/assets/MR_HEMN_OFICIAL.jpg" height="500px" width="95%">
+  <img src="database/assets/Diagramas/ModeloRelacional.png" height="500px" width="95%">
 </div>
 
 <br>
@@ -394,11 +394,5 @@ order by "Faturamento Total (R$)" desc;
 <br>
 <hr>
 
-## Criadores (Perfis do GitHub)
+[← Voltar para a seção Database](../README.md#database/)
 
-| Avatar | Nome | Link |
-|--------|------|------|
-| <img src="https://github.com/WendlingNathan.png" width="60" height="60" alt="Nathan Wendling" /> | Nathan Wendling | [github.com/WendlingNathan](https://github.com/WendlingNathan) |
-| <img src="https://github.com/marcoschons.png" width="60" height="60" alt="Marco Antônio Schons Santos" /> | Marco Antônio Schons Santos | [github.com/marcoschons](https://github.com/marcoschons) |
-| <img src="https://github.com/EduardoNofre007.png" width="60" height="60" alt="Eduardo Augusto Romio Nofre" /> | Eduardo Augusto Romio Nofre | [github.com/EduardoNofre007](https://github.com/EduardoNofre007) |
-| <img src="https://github.com/Skildim.png" width="60" height="60" alt="Heitor Cassol" /> | Heitor Cassol | [github.com/Skildim](https://github.com/Skildim) |
