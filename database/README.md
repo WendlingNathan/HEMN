@@ -54,13 +54,17 @@
 
 <br>
 
-## Diagramas do projeto
 <div name="mr-projeto" align="center">
   <h2>Modelo relacional do projeto</h2>
   <img src="./assets/Diagramas/ModeloRelacional.png" height="500px" width="95%">
 </div>
 
-[Acessar Diagramas do projeto](./database/assets/Diagramas/)
+<br>
+
+## Diagramas
+Aqui, estarão todos os Diagramas requisitados pelo professor em formato ```.vpp```:
+
+[Acessar Diagramas do projeto](./assets/Diagramas/)
 
 <br>
 
