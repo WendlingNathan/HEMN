@@ -164,7 +164,8 @@ A seguir, a estrutura utilizada neste README considera apenas *backend* e *datab
 
 ## 📁 Estrutura do Repositório
 
-### 📂 `database/` — Modelagem e Scripts SQL
+### Database/  
+#### Modelagem e Scripts SQL
 
 ```text
 database/
@@ -179,7 +180,8 @@ database/
 └── README_DATABASE.md
 ```
 
-### 📂 `backend/` — API REST em Java
+### Backend/
+#### API REST em Java
 
 ```text
 backend/
