@@ -407,7 +407,7 @@ select * from vw_cardapio_ativo;
 ```
 ### Resultado:
 <div align="center">
-  <img src="./assets/RELATORIO_1.jpg" height="300px" width="75%">
+  <img src="./assets/RELATORIO_1.png" height="300px" width="75%">
 </div>
 
 ### 2. Relatório de Ingredientes por Produto do Cardápio
@@ -429,7 +429,7 @@ select * from vw_ingredientes_por_produto;
 ```
 ### Resultado:
 <div align="center">
-  <img src="./assets/RELATORIO_2.jpg" height="450px" width="75%">
+  <img src="./assets/RELATORIO_2.png" height="450px" width="75%">
 </div>
 
 ### 3. Relatório de Pedidos Realizados no Mês Atual
@@ -454,7 +454,7 @@ select * from vw_pedidos_mes_atual;
 ```
 ### Resultado:
 <div align="center">
-  <img src="./assets/RELATORIO_3.jpg" height="300px" width="75%">
+  <img src="./assets/RELATORIO_3.png" height="300px" width="75%">
 </div>
 
 ### 4. Relatório de Faturamento por Produto
@@ -476,7 +476,7 @@ select * from vw_faturamento_por_item;
 ```
 ### Resultado:
 <div align="center">
-  <img src="./assets/RELATORIO_4.jpg" height="300px" width="75%">
+  <img src="./assets/RELATORIO_4.png" height="300px" width="75%">
 </div>
 
 <br>
