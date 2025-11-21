@@ -79,7 +79,7 @@
 
 <div name="mr-projeto" align="center">
   <h2>Modelo relacional do projeto</h2>
-  <img src="database/assets/Diagramas/ModeloRelacional.png" height="500px" width="95%">
+  <img src="./assets/Diagramas/ModeloRelacional.png" height="500px" width="95%">
 </div>
 
 <br>
@@ -324,71 +324,159 @@ COMMENT ON COLUMN Pagamento.forma_pagameto_pag IS 'Forma de pagamento (''D'' - "
 COMMENT ON COLUMN Pagamento.data_pag IS 'Data de pagamento';
 ```
 
+### Tabela Aud_pedido
+
+| Coluna           | Tipo         | Descrição                                           | Restrição / Observação           |
+| ---------------- | ------------ | --------------------------------------------------- | -------------------------------- |
+| id_aud           | SERIAL       | Identificador único da auditoria                    | PK, auto-increment               |
+| id_ped           | INT          | Identificador do pedido relacionado                 | FK → Pedido(id_ped), obrigatório |
+| operacao         | VARCHAR(10)  | Tipo da operação realizada (INSERT, UPDATE, DELETE) | NOT NULL                         |
+| dados_anteriores | JSONB        | Registro completo antes da operação                 | Pode ser NULL (ex.: INSERT)      |
+| dados_novos      | JSONB        | Registro completo após a operação                   | Pode ser NULL (ex.: DELETE)      |
+| usuario          | VARCHAR(255) | Usuário responsável pela operação                   | NOT NULL                         |
+| data_operacao    | TIMESTAMP    | Data e hora em que a operação foi registrada        | DEFAULT now(), NOT NULL          |
+
 <br>
+
+Script de criação da tabela:
+```
+CREATE TABLE IF NOT EXISTS Aud_pedido (
+  id_aud        BIGSERIAL PRIMARY KEY,
+  id_ped        INT NOT NULL,
+  operacao      VARCHAR(10) NOT null,
+  dados_anteriores JSONB,
+  dados_novos      JSONB,
+  usuario       TEXT DEFAULT current_user,
+  data_operacao  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+COMMENT ON TABLE Aud_pedido IS 'Auditoria de alterações na tabela Pedido (Antigo/Novo).';
+COMMENT ON COLUMN Aud_pedido.id_aud IS 'ID da Auditoria do pedido';
+COMMENT ON COLUMN Aud_pedido.id_ped IS 'ID do Pedido que consta na Auditoria';
+COMMENT ON COLUMN Aud_pedido.operacao IS 'Operação feita pelo usuário (UPDATE, DELETE, INSERT)';
+COMMENT ON COLUMN Aud_pedido.dados_anteriores IS 'Dados anteriores decorrentes da operação';
+COMMENT ON COLUMN Aud_pedido.dados_novos IS 'Dados novos decorrentes da operação';
+COMMENT ON COLUMN Aud_pedido.usuario IS 'Usuário que executou a operação';
+COMMENT ON COLUMN Aud_pedido.data_operacao IS 'Data da execução da operação';
+```
+
+### Tabela Aud_produto_preco
+
+| Coluna        | Tipo          | Descrição                                    | Restrição / Observação             |
+| ------------- | ------------- | -------------------------------------------- | ---------------------------------- |
+| id_aud        | INT           | Identificador único do registro de auditoria | PK, auto-increment                 |
+| id_prod       | INT           | Identificador do produto                     | FK → Produto(id_prod), obrigatório |
+| preco_antigo  | NUMERIC(10,2) | Valor anterior do preço                      | NOT NULL                           |
+| preco_novo    | NUMERIC(10,2) | Novo valor do preço                          | NOT NULL                           |
+| usuario       | VARCHAR(255)  | Usuário responsável pela operação            | NOT NULL                           |
+| data_operacao | TIMESTAMP     | Data e hora da operação registrada           | NOT NULL, default: now()           |
+
+Script de criação da tabela:
+```
+CREATE TABLE IF NOT EXISTS Aud_produto_preco (
+  id_aud        BIGSERIAL PRIMARY KEY,
+  id_prod       INT NOT NULL,
+  preco_antigo  NUMERIC(12,2),
+  preco_novo    NUMERIC(12,2),
+  usuario       TEXT DEFAULT current_user,
+  data_operacao TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+COMMENT ON TABLE Aud_produto_preco IS 'Histórico de alteração de preços na tabela Produto.';
+COMMENT ON COLUMN Aud_produto_preco.id_aud IS 'ID da Auditoria do pedido';
+COMMENT ON COLUMN Aud_produto_preco.id_prod IS 'ID do Produto que foi alterado';
+COMMENT ON COLUMN Aud_produto_preco.preco_antigo IS 'Preço antigo do produto respectivo';
+COMMENT ON COLUMN Aud_produto_preco.preco_novo IS 'Preço novo do produto respectivo';
+COMMENT ON COLUMN Aud_produto_preco.usuario IS 'Usuário que executou a operação';
+COMMENT ON COLUMN Aud_produto_preco.data_operacao IS 'Data da execução da operação';
+```
 
 ## Relatórios requisitados:
 
 ### 1. Relatório de cardápio ativo
 ```
-select produto.nome_prod as "Produto", produto.tipo_prod as "Tipo de produto", produto.preco_prod as "Preço (R$)"
-from produto
-order by produto.nome_prod asc;
+create or replace view vw_cardapio_ativo as
+select
+	produto.nome_prod as "Produto",
+	produto.tipo_prod as "Tipo de produto",
+	produto.preco_prod as "Preço(R$)"
+from
+	produto
+order by
+	produto.nome_prod asc;
+
+select * from vw_cardapio_ativo;
 ```
 ### Resultado:
 <div align="center">
-  <img src="/assets/RELATORIO_1.jpg" height="300px" width="75%">
+  <img src="./assets/RELATORIO_1.jpg" height="300px" width="75%">
 </div>
 
 ### 2. Relatório de Ingredientes por Produto do Cardápio
 ```
-select 
-  p.nome_prod as "Produto",
-  i.nome_ing as "Ingrediente",
-  cp.qtd_ing_comp || ' ' || i.unidade_medida_ing as "Quantidade"
-from ComposicaoProduto cp
+create or replace view vw_ingredientes_por_produto as
+select
+	p.nome_prod as "Produto",
+	i.nome_ing as "Ingrediente",
+	cp.qtd_ing_comp || ' ' || i.unidade_medida_ing as "Quantidade"
+from
+	ComposicaoProduto cp
 join Produto p on p.id_prod = cp.id_prod
 join Ingrediente i on i.id_ing = cp.id_ing
-order by p.nome_prod, i.nome_ing;
+order by
+	p.nome_prod,
+	i.nome_ing;
+
+select * from vw_ingredientes_por_produto;
 ```
 ### Resultado:
 <div align="center">
-  <img src="/assets/RELATORIO_2.jpg" height="450px" width="75%">
+  <img src="./assets/RELATORIO_2.jpg" height="450px" width="75%">
 </div>
 
 ### 3. Relatório de Pedidos Realizados no Mês Atual
 ```
-select 
-  ped.id_ped as "ID Pedido",
-  ped.data_hora_ped as "Data",
-  cli.nome_cli as "Cliente",
-  pag.valor_total_pag as "Valor Total (R$)"
-from Pedido ped
+create or replace view vw_pedidos_mes_atual as
+select
+	ped.id_ped as "ID Pedido",
+	ped.data_hora_ped as "Data",
+	cli.nome_cli as "Cliente",
+	pag.valor_total_pag as "Valor Total(R$)"
+from
+	Pedido ped
 join Cliente cli on cli.id_cli = ped.id_cli
 join Pagamento pag on pag.id_ped = ped.id_ped
-where extract(month from ped.data_hora_ped) = extract(month from CURRENT_DATE)
-  and extract(YEAR from ped.data_hora_ped) = extract(YEAR from CURRENT_DATE)
-order by ped.data_hora_ped desc;
+where
+	extract(month from ped.data_hora_ped) = extract(month from CURRENT_DATE)
+	and extract(year from ped.data_hora_ped) = extract(year from CURRENT_DATE)
+order by
+	ped.data_hora_ped desc;
+
+select * from vw_pedidos_mes_atual;
 ```
 ### Resultado:
 <div align="center">
-  <img src="/assets/RELATORIO_3.jpg" height="300px" width="75%">
+  <img src="./assets/RELATORIO_3.jpg" height="300px" width="75%">
 </div>
 
 ### 4. Relatório de Faturamento por Produto
 ```
-select 
-  p.nome_prod as "Produto",
-  sum(i.qtd_ite) as "Total Vendido (unidades)",
-  sum(i.qtd_ite * i.preco_unitario_ite) as "Faturamento Total (R$)"
-from Item i
-join Produto p on p.id_prod = i.id_prod
-group by p.nome_prod
-having sum(i.qtd_ite) > 0
-order by "Faturamento Total (R$)" desc;
+create or replace view vw_faturamento_por_item as
+select
+	p.nome_prod as "Produto",
+	SUM(i.qtd_ite) as "Total Vendido (unidades)",
+	SUM(i.qtd_ite * i.preco_unitario_ite) as "Faturamento Total(R$)" 
+FROM Item i
+JOIN Produto p ON p.id_prod = i.id_prod 
+GROUP BY 
+	p.nome_prod HAVING SUM(i.qtd_ite) > 0 
+ORDER by
+	"Faturamento Total(R$)"
+desc;
+
+select * from vw_faturamento_por_item;
 ```
 ### Resultado:
 <div align="center">
-  <img src="/assets/RELATORIO_4.jpg" height="300px" width="75%">
+  <img src="./assets/RELATORIO_4.jpg" height="300px" width="75%">
 </div>
 
 <br>
