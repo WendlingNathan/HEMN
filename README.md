@@ -208,6 +208,8 @@ O projeto HEMN foi estruturado de forma modular, permitindo que cada camada evol
 
 Essa arquitetura facilita manutenção, expansão e reutilização do código.
 
+<br>
+
 ## ▶️ Como Executar o Projeto
 
 ### 1. ⚙️ Pré-requisitos
@@ -246,3 +248,14 @@ A API iniciará normalmente em:
 ```text
 http://localhost:8080
 ```
+
+<hr>
+
+## Criadores do projeto (Perfis do GitHub)
+
+| Avatar | Nome | Link |
+|--------|------|------|
+| <img src="https://github.com/WendlingNathan.png" width="60" height="60" alt="Nathan Wendling" /> | Nathan Wendling | [github.com/WendlingNathan](https://github.com/WendlingNathan) |
+| <img src="https://github.com/marcoschons.png" width="60" height="60" alt="Marco Antônio Schons Santos" /> | Marco Antônio Schons Santos | [github.com/marcoschons](https://github.com/marcoschons) |
+| <img src="https://github.com/EduardoNofre007.png" width="60" height="60" alt="Eduardo Augusto Romio Nofre" /> | Eduardo Augusto Romio Nofre | [github.com/EduardoNofre007](https://github.com/EduardoNofre007) |
+| <img src="https://github.com/Skildim.png" width="60" height="60" alt="Heitor Cassol" /> | Heitor Cassol | [github.com/Skildim](https://github.com/Skildim) |
