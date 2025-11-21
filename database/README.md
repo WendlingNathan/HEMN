@@ -79,7 +79,7 @@
 
 <div name="mr-projeto" align="center">
   <h2>Modelo relacional do projeto</h2>
-  <img src="database/assets/Diagramas/ModeloRelacional.png" height="500px" width="95%">
+  <img src="./assets/Diagramas/ModeloRelacional.png" height="500px" width="95%">
 </div>
 
 <br>
@@ -324,7 +324,70 @@ COMMENT ON COLUMN Pagamento.forma_pagameto_pag IS 'Forma de pagamento (''D'' - "
 COMMENT ON COLUMN Pagamento.data_pag IS 'Data de pagamento';
 ```
 
+### Tabela Aud_pedido
+
+| Coluna           | Tipo         | Descrição                                           | Restrição / Observação           |
+| ---------------- | ------------ | --------------------------------------------------- | -------------------------------- |
+| id_aud           | SERIAL       | Identificador único da auditoria                    | PK, auto-increment               |
+| id_ped           | INT          | Identificador do pedido relacionado                 | FK → Pedido(id_ped), obrigatório |
+| operacao         | VARCHAR(10)  | Tipo da operação realizada (INSERT, UPDATE, DELETE) | NOT NULL                         |
+| dados_anteriores | JSONB        | Registro completo antes da operação                 | Pode ser NULL (ex.: INSERT)      |
+| dados_novos      | JSONB        | Registro completo após a operação                   | Pode ser NULL (ex.: DELETE)      |
+| usuario          | VARCHAR(255) | Usuário responsável pela operação                   | NOT NULL                         |
+| data_operacao    | TIMESTAMP    | Data e hora em que a operação foi registrada        | DEFAULT now(), NOT NULL          |
+
 <br>
+
+Script de criação da tabela:
+```
+CREATE TABLE IF NOT EXISTS Aud_pedido (
+  id_aud        BIGSERIAL PRIMARY KEY,
+  id_ped        INT NOT NULL,
+  operacao      VARCHAR(10) NOT null,
+  dados_anteriores JSONB,
+  dados_novos      JSONB,
+  usuario       TEXT DEFAULT current_user,
+  data_operacao  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+COMMENT ON TABLE Aud_pedido IS 'Auditoria de alterações na tabela Pedido (Antigo/Novo).';
+COMMENT ON COLUMN Aud_pedido.id_aud IS 'ID da Auditoria do pedido';
+COMMENT ON COLUMN Aud_pedido.id_ped IS 'ID do Pedido que consta na Auditoria';
+COMMENT ON COLUMN Aud_pedido.operacao IS 'Operação feita pelo usuário (UPDATE, DELETE, INSERT)';
+COMMENT ON COLUMN Aud_pedido.dados_anteriores IS 'Dados anteriores decorrentes da operação';
+COMMENT ON COLUMN Aud_pedido.dados_novos IS 'Dados novos decorrentes da operação';
+COMMENT ON COLUMN Aud_pedido.usuario IS 'Usuário que executou a operação';
+COMMENT ON COLUMN Aud_pedido.data_operacao IS 'Data da execução da operação';
+```
+
+### Tabela Aud_produto_preco
+
+| Coluna        | Tipo          | Descrição                                    | Restrição / Observação             |
+| ------------- | ------------- | -------------------------------------------- | ---------------------------------- |
+| id_aud        | INT           | Identificador único do registro de auditoria | PK, auto-increment                 |
+| id_prod       | INT           | Identificador do produto                     | FK → Produto(id_prod), obrigatório |
+| preco_antigo  | NUMERIC(10,2) | Valor anterior do preço                      | NOT NULL                           |
+| preco_novo    | NUMERIC(10,2) | Novo valor do preço                          | NOT NULL                           |
+| usuario       | VARCHAR(255)  | Usuário responsável pela operação            | NOT NULL                           |
+| data_operacao | TIMESTAMP     | Data e hora da operação registrada           | NOT NULL, default: now()           |
+
+Script de criação da tabela:
+```
+CREATE TABLE IF NOT EXISTS Aud_produto_preco (
+  id_aud        BIGSERIAL PRIMARY KEY,
+  id_prod       INT NOT NULL,
+  preco_antigo  NUMERIC(12,2),
+  preco_novo    NUMERIC(12,2),
+  usuario       TEXT DEFAULT current_user,
+  data_operacao TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+COMMENT ON TABLE Aud_produto_preco IS 'Histórico de alteração de preços na tabela Produto.';
+COMMENT ON COLUMN Aud_produto_preco.id_aud IS 'ID da Auditoria do pedido';
+COMMENT ON COLUMN Aud_produto_preco.id_prod IS 'ID do Produto que foi alterado';
+COMMENT ON COLUMN Aud_produto_preco.preco_antigo IS 'Preço antigo do produto respectivo';
+COMMENT ON COLUMN Aud_produto_preco.preco_novo IS 'Preço novo do produto respectivo';
+COMMENT ON COLUMN Aud_produto_preco.usuario IS 'Usuário que executou a operação';
+COMMENT ON COLUMN Aud_produto_preco.data_operacao IS 'Data da execução da operação';
+```
 
 ## Relatórios requisitados:
 
