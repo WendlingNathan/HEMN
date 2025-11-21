@@ -169,16 +169,42 @@ A seguir, a estrutura utilizada neste README considera apenas *backend* e *datab
 
 ```text
 database/
-├── diagramas/
-│   ├── DER.png
-│   ├── Modelo_Conceitual.png
-│   └── Modelo_Lógico.png
-├── scripts/
-│   ├── 01_create_tables.sql
-│   ├── 02_insert_data.sql
-│   └── 03_constraints.sql
-└── README_DATABASE.md
+├── Constraints/
+│   └── ConstraintsUsadas.txt
+├── Scripts/
+│   ├── Script Usuario/
+│   │   └── Script Usuario.sql
+│   ├── Script Backup Restore/
+│   │   ├── Agendar_Backup.txt
+│   │   ├── Restauracao.bat
+│   │   ├── backup_postgres.bat
+│   │   └── postgres_2025-10-17_23-29.dump
+│   ├── Script Criacao/
+│   │   ├── hemn_create.sql
+│   │   ├── hemn_dados.sql
+│   │   ├── hemn_drop.sql 
+│   │   ├── hemn_relatorio.sql
+│   │   ├── hemn_selects_testes.sql
+│   │   └── hemn_triggers_funcoes.sql
+├── assets/
+│   ├── Diagramas/
+│   │   ├── DiagramaDeCasoDeUso.png
+│   │   ├── DiagramaDeAtividade.png
+│   │   ├── DiagramaDeEstadox.png
+│   │   ├── DiagramaDeClasses.png
+│   │   ├── ModeloRelacional.png
+│   │   └── DiagramaDeSequencia.png
+│   ├── RELATORIO_1.png
+│   ├── RELATORIO_2.png
+│   ├── RELATORIO_3.png
+│   └── RELATORIO_4.png 
+├── Estrutura do banco da HEMN.txt
+├── HEMN.vpp
+├── Levantamentos de requisitos HEMN.txt
+└── README.md
 ```
+
+[➡️ Acessar documentação do Banco de Dados](./database/README.md)
 
 ### Backend/
 #### API REST em Java
@@ -197,6 +223,8 @@ backend/
 │   │       └── application.properties
 └── pom.xml
 ```
+
+[➡️ Acessar documentação do Backend](./backend/README.md)
 
 ## 🧩 Integração Geral do Projeto
 
