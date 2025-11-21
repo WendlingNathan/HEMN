@@ -1,13 +1,12 @@
-CREATE TABLE Aud_pedido (
-  id_aud           SERIAL NOT NULL, 
-  id_ped           int4 NOT NULL, 
-  operacao         varchar(10) NOT NULL, 
-  dados_anteriores varchar(80) NOT NULL, 
-  dados_novos      varchar(80) NOT NULL, 
-  usuario          text NOT NULL, 
-  data_operacao    timestamp with time zone DEFAULT current_timestamp NOT NULL, 
-  CONSTRAINT aud_pedido_pkey 
-    PRIMARY KEY (id_aud));
+CREATE TABLE IF NOT EXISTS Aud_pedido (
+  id_aud        BIGSERIAL PRIMARY KEY,
+  id_ped        INT NOT NULL,
+  operacao      VARCHAR(10) NOT null,
+  dados_anteriores JSONB,
+  dados_novos      JSONB,
+  usuario       TEXT DEFAULT current_user,
+  data_operacao  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
 COMMENT ON TABLE Aud_pedido IS 'Auditoria de alterações na tabela Pedido (Antigo/Novo).';
 COMMENT ON COLUMN Aud_pedido.id_aud IS 'ID da Auditoria do pedido';
 COMMENT ON COLUMN Aud_pedido.id_ped IS 'ID do Pedido que consta na Auditoria';
@@ -17,15 +16,14 @@ COMMENT ON COLUMN Aud_pedido.dados_novos IS 'Dados novos decorrentes da operaç�
 COMMENT ON COLUMN Aud_pedido.usuario IS 'Usuário que executou a operação';
 COMMENT ON COLUMN Aud_pedido.data_operacao IS 'Data da execução da operação';
 
-CREATE TABLE Aud_produto_preco (
-  id_aud        SERIAL NOT NULL, 
-  id_prod       int4 NOT NULL, 
-  preco_antigo  numeric(12, 2) NOT NULL, 
-  preco_novo    numeric(12, 2) NOT NULL, 
-  usuario       text NOT NULL, 
-  data_operacao timestamp with time zone DEFAULT current_timestamp NOT NULL, 
-  CONSTRAINT aud_produto_preco_pkey 
-    PRIMARY KEY (id_aud));
+CREATE TABLE IF NOT EXISTS Aud_produto_preco (
+  id_aud        BIGSERIAL PRIMARY KEY,
+  id_prod       INT NOT NULL,
+  preco_antigo  NUMERIC(12,2),
+  preco_novo    NUMERIC(12,2),
+  usuario       TEXT DEFAULT current_user,
+  data_operacao TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
 COMMENT ON TABLE Aud_produto_preco IS 'Histórico de alteração de preços na tabela Produto.';
 COMMENT ON COLUMN Aud_produto_preco.id_aud IS 'ID da Auditoria do pedido';
 COMMENT ON COLUMN Aud_produto_preco.id_prod IS 'ID do Produto que foi alterado';
