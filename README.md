@@ -214,11 +214,11 @@ backend/
 ├── src/
 │   ├── main/
 │   │   ├── java/
-│   │   │   └── com.hemn.api/
+│   │   │   └── br.com.hemn.backend/
+│   │   │       ├── backend/      
 │   │   │       ├── controller/
 │   │   │       ├── model/
-│   │   │       ├── repository/
-│   │   │       └── service/
+│   │   │       └── repository/
 │   │   └── resources/
 │   │       └── application.properties
 └── pom.xml
@@ -245,7 +245,7 @@ Essa arquitetura facilita manutenção, expansão e reutilização do código.
 - Maven 3.8+
 - PostgreSQL instalado e configurado
 - Banco `HEMN` criado
-- Usuário `hemn_app` com permissões (conforme definido nos scripts)
+- Usuário `admin` com permissões (conforme definido nos scripts)
 
 ### 2. 📦 Configurar o Banco
 Execute no PostgreSQL:
@@ -256,8 +256,10 @@ Execute no PostgreSQL:
 
 Exemplo:
 ```bash
-psql -U postgres -f database/Scripts/CREATE.sql
-psql -U postgres -f database/Scripts/INSERT.sql
+psql -U postgres -f database/Scripts/Scripts Criação/hemn_create.sql
+psql -U postgres -f database/Scripts/Scripts Criação/hemn_triggers_funcoes.sql
+psql -U postgres -f database/Scripts/Script Usuários/Scrip Usuario.sql
+psql -U postgres -f database/Scripts/Scripts Criação/hemn_dados.sql
 ```
 
 ### 3. 📦 Configurar o Backend
@@ -285,5 +287,4 @@ http://localhost:8080
 |--------|------|------|
 | <img src="https://github.com/WendlingNathan.png" width="60" height="60" alt="Nathan Wendling" /> | Nathan Wendling | [github.com/WendlingNathan](https://github.com/WendlingNathan) |
 | <img src="https://github.com/marcoschons.png" width="60" height="60" alt="Marco Antônio Schons Santos" /> | Marco Antônio Schons Santos | [github.com/marcoschons](https://github.com/marcoschons) |
-| <img src="https://github.com/EduardoNofre007.png" width="60" height="60" alt="Eduardo Augusto Romio Nofre" /> | Eduardo Augusto Romio Nofre | [github.com/EduardoNofre007](https://github.com/EduardoNofre007) |
-| <img src="https://github.com/Skildim.png" width="60" height="60" alt="Heitor Cassol" /> | Heitor Cassol | [github.com/Skildim](https://github.com/Skildim) |
+| <img src="https://github.com/EduardoNofre007.png" width="60" height="60" alt="Eduardo Augusto Romio Nofre" /> | Eduardo Augusto Romio Nofre | [github.com/EduardoNofre007](https://github.com/EduardoNofre007) 
