@@ -2,7 +2,7 @@
   🍔 HEMN Hamburgueria 🍔
 </h1>
 
-> <h4>Criado por Nathan Ritter Wendling, Marco Antônio Schons Santos, Eduardo Augusto Romio Nofre e Heitor Cassol</h4>
+> <h4>Criado por Nathan Ritter Wendling, Marco Antônio Schons Santos e Eduardo Augusto Romio Nofre</h4>
 
 <hr>
 
@@ -157,10 +157,9 @@
 
 - **database/** — Contém o modelo conceitual e lógico, scripts SQL, diagramas e documentação de dados.
 - **backend/** — Aplicação Java (Spring Boot) responsável pela API REST, regras de negócio e persistência em PostgreSQL.
-- **frontend/** — (Em desenvolvimento) Interface web que consumirá a API do backend.
+- **frontend/** — Interface web que consumirá a API do backend.
 
-O projeto está dividido em três diretórios principais: `backend/`, `database/` e `frontend/` (este último ainda em desenvolvimento).  
-A seguir, a estrutura utilizada neste README considera apenas *backend* e *database*, conforme solicitado.
+O projeto está dividido em três diretórios principais: `backend/`, `database/` e `frontend/`.
 
 ## 📁 Estrutura do Repositório
 
@@ -234,7 +233,7 @@ O projeto HEMN foi estruturado de forma modular, permitindo que cada camada evol
 
 - O **backend** fornece uma API REST robusta e conectada ao banco de dados.
 - O **database** garante a base sólida de dados e documentação.
-- O **frontend** (em desenvolvimento) irá consumir os endpoints e entregar a interface final.
+- O **frontend** irá consumir os endpoints e entregar a interface final.
 
 Essa arquitetura facilita manutenção, expansão e reutilização do código.
 
