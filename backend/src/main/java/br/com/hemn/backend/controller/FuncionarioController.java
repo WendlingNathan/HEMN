@@ -13,23 +13,45 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.hemn.backend.model.Funcionario;
 import br.com.hemn.backend.repository.FuncionarioRepository;
 
-	@RestController
-	@RequestMapping("/funcionario")
-	public class FuncionarioController {
+/**
+ * Controlador responsável por gerenciar as operações relacionadas à entidade {@link Funcionario}.
+ * <p>
+ * Disponibiliza endpoints para listagem e consulta de funcionarios registrados no sistema.
+ * </p>
+ *
+ * @author Nathan Ritter Wendling
+ * @author Eduardo Augusto Romio Nofre
+ * @author Marco Antônio Schons Santos
+ */
+@RestController
+@RequestMapping("/funcionario")
+public class FuncionarioController {
 
-	    @Autowired
-	    private FuncionarioRepository funcionarioRepository;
+	/** Repositório da entidade Funcionario. */
+    @Autowired
+    private FuncionarioRepository funcionarioRepository;
 
-	    @GetMapping
-	    public List<Funcionario> listarTodos() {
-	        return funcionarioRepository.findAll();
-	    }
+    /**
+     * Retorna a lista completa de funcionários cadastrados.
+     *
+     * @return lista de funcionários
+     */
+    @GetMapping
+    public List<Funcionario> listarTodos() {
+        return funcionarioRepository.findAll();
+    }
 
-	    @GetMapping("/{id}")
-		public ResponseEntity<Funcionario> buscarPorId(@PathVariable Long id) {
-			Optional<Funcionario> funcionario =funcionarioRepository.findById(id);
-			return funcionario.map(ResponseEntity::ok)
-						   .orElse(ResponseEntity.notFound().build());
-		}
-	}
-
+    /**
+     * Busca um funcionário pelo seu identificador.
+     *
+     * @param id identificador do funcionário
+     * @return funcionário encontrado ou
+     *         {@code 404 Not Found} caso o funcionário não exista.
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Funcionario> buscarPorId(@PathVariable Long id) {
+        Optional<Funcionario> funcionario = funcionarioRepository.findById(id);
+        return funcionario.map(ResponseEntity::ok)
+                          .orElse(ResponseEntity.notFound().build());
+    }
+}

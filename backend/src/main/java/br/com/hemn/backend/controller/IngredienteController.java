@@ -13,22 +13,44 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.hemn.backend.model.Ingrediente;
 import br.com.hemn.backend.repository.IngredienteRepository;
 
+/**
+ * Controlador responsável por gerenciar as operações relacionadas à entidade {@link Ingrediente}.
+ * <p>
+ * Disponibiliza endpoints para listagem e consulta de ingredientes registrados no sistema.
+ * </p>
+ * 
+ * @author Nathan Ritter Wendling
+ * @author Eduardo Augusto Romio Nofre
+ * @author Marco Antônio Schons Santos
+ */
 @RestController
 @RequestMapping("/ingrediente")
 public class IngredienteController {
 
-	@Autowired
-	private IngredienteRepository ingredienteRepository;
+	/** Repositório da entidade Ingrediente. */
+    @Autowired
+    private IngredienteRepository ingredienteRepository;
 
-	@GetMapping
-	public List<Ingrediente> listarTodos() {
-		return ingredienteRepository.findAll();
-	}
-	
+    /**
+     * Retorna todos os ingredientes cadastrados.
+     *
+     * @return lista de ingredientes
+     */
+    @GetMapping
+    public List<Ingrediente> listarTodos() {
+        return ingredienteRepository.findAll();
+    }
+
+    /**
+     * Busca um ingrediente pelo seu ID.
+     *
+     * @param id identificador do ingrediente
+     * @return ingrediente encontrado ou {@code 404 Not Found} caso o ingrediente não exista.
+     */
     @GetMapping("/{id}")
-	public ResponseEntity<Ingrediente> buscarPorId(@PathVariable Long id) {
-		Optional<Ingrediente> ingrediente = ingredienteRepository.findById(id);
-		return ingrediente.map(ResponseEntity::ok)
-					   .orElse(ResponseEntity.notFound().build());
-	}
+    public ResponseEntity<Ingrediente> buscarPorId(@PathVariable Long id) {
+        Optional<Ingrediente> ingrediente = ingredienteRepository.findById(id);
+        return ingrediente.map(ResponseEntity::ok)
+                          .orElse(ResponseEntity.notFound().build());
+    }
 }
