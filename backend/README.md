@@ -14,26 +14,37 @@
 ```text
 backend/
 ├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── br.com.hemn./
-│   │   │       ├── backend/         # Regras de negócio
-│   │   │       ├── controller/      # Endpoints REST
-│   │   │       ├── model/           # Entidades JPA
-│   │   │       └── repository/      # Acesso ao banco via JPA      
-│   │   └── resources/
-│   │       └── application.properties
+│   └── main/
+│       ├── java/
+│       │   └── br.com.hemn.backend/
+│       │       ├── backend/      
+│       │       ├── controller/
+│       │       ├── model/
+│       │       └── repository/
+│       └── resources/
+│           └── application.properties
+├── doc/
+│   └── index.html
 └── pom.xml
 ```
 
-O backend do projeto HEMN foi desenvolvido utilizando **Java 17** e **Spring Boot**, seguindo uma arquitetura organizada em camadas para facilitar manutenção, testes e escalabilidade.
+O backend do projeto HEMN foi desenvolvido utilizando **Java 21** e **Spring Boot**, seguindo uma arquitetura organizada em camadas para facilitar manutenção, testes e escalabilidade.
 
 ### 🔧 Tecnologias Utilizadas
-- **Java 17**
+- **Java 21**
 - **Spring Boot**
 - **Spring Web**
 - **Spring Data JPA**
 - **PostgreSQL Driver**
 - **Maven**
+
+### Documentação do Backend (JavaDoc)
+Todo o código em Java foi documentado utilizando JavaDoc. A documentação está disponível dentro do repositório em ```backend/doc```.
+Para acessar diretamente a documentação, pode clicar aqui:
+<br>
+<br>
+➡ **https://wendlingnathan.github.io/HEMN/backend/doc/**
+
+<br>
 
 [← Voltar para a seção Backend](../README.md#backend/)
