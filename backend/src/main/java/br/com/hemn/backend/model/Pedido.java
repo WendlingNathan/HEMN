@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 /**
  * Representa um pedido realizado por um cliente.
@@ -24,6 +25,7 @@ import jakarta.persistence.OneToMany;
  * @author Marco Antônio Schons Santos
  */
 @Entity
+@Table(name = "pedido")
 public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;

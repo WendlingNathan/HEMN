@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  * Representa um ingrediente utilizado na composição de produtos,
@@ -19,6 +20,7 @@ import jakarta.persistence.Id;
  * @author Marco Antônio Schons Santos
  */
 @Entity
+@Table(name = "ingrediente")
 public class Ingrediente implements Serializable {
 	private static final long serialVersionUID = 1L;
 

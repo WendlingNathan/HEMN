@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Column;
 
@@ -18,6 +19,7 @@ import jakarta.persistence.Column;
  * @author Marco Antônio Schons Santos
  */
 @Entity
+@Table(name = "cliente")
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -3,12 +3,15 @@ package br.com.hemn.backend.model;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 /**
  * Representa um produto cadastrado no sistema.
@@ -21,6 +24,7 @@ import jakarta.persistence.OneToMany;
  * @author Marco Antônio Schons Santos
  */
 @Entity
+@Table(name = "produto")
 public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,9 +64,12 @@ public class Produto implements Serializable {
 
     /**
      * Lista de ingredientes que compõem o produto.
+     * 
+     * <p>Ignorado na serialização JSON para evitar loops entre Pedido → Item → Pedido.</p>
      */
     @OneToMany(mappedBy = "id_prod")
-    private List<ComposicaoProduto> composicao_produto;
+	@JsonIgnore
+    private List<ComposicaoProduto> composicaoProduto;
 
     /**
      * Retorna o identificador do produto.
@@ -131,14 +138,14 @@ public class Produto implements Serializable {
      * Retorna a lista de composições do produto.
      */
     public List<ComposicaoProduto> getComposicao_produto() {
-        return composicao_produto;
+        return composicaoProduto;
     }
 
     /**
      * Define a lista de composições do produto.
      */
-    public void setComposicao_produto(List<ComposicaoProduto> composicao_produto) {
-        this.composicao_produto = composicao_produto;
+    public void setComposicao_produto(List<ComposicaoProduto> composicaoProduto) {
+        this.composicaoProduto = composicaoProduto;
     }
 
     @Override

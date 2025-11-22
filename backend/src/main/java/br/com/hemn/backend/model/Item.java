@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  * Representa um item pertencente a um pedido, contendo informações
@@ -27,6 +28,7 @@ import jakarta.persistence.ManyToOne;
  * @author Marco Antônio Schons Santos
  */
 @Entity
+@Table(name = "item")
 public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -52,9 +54,12 @@ public class Item implements Serializable {
 
 	/**
 	 * Produto associado ao item.
+	 * 
+	 * <p>Ignorado na serialização JSON para evitar loops entre Pedido → Item → Pedido.</p>
 	 */
 	@ManyToOne
 	@JoinColumn(name = "id_prod", nullable = false)
+	@JsonIgnore
 	private Produto id_prod;
 
 	/**

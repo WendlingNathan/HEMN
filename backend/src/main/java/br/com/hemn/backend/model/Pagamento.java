@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 
 /**
@@ -19,6 +20,7 @@ import jakarta.persistence.JoinColumn;
  * @author Marco Antônio Schons Santos
  */
 @Entity
+@Table(name = "pagamento")
 public class Pagamento implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,12 +1,16 @@
 package br.com.hemn.backend.model;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 
 /**
@@ -21,6 +25,7 @@ import jakarta.persistence.JoinColumn;
  * @author Marco Antônio Schons Santos
  */
 @Entity
+@Table(name = "composicaoproduto")
 public class ComposicaoProduto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -41,17 +46,23 @@ public class ComposicaoProduto implements Serializable {
 	/**
 	 * Produto ao qual esta composição pertence.
 	 * Relacionamento: muitos registros de composição para um produto.
+	 * 
+	 * <p>Ignorado na serialização JSON para evitar loops entre Pedido → Item → Pedido.</p>
 	 */
 	@ManyToOne
 	@JoinColumn(name = "id_prod", nullable = false)
+	@JsonIgnore
 	private Produto id_prod;
 
 	/**
 	 * Ingrediente associado à composição.
 	 * Relacionamento: muitos registros de composição para um ingrediente.
+	 * 
+	 * <p>Ignorado na serialização JSON para evitar loops entre Pedido → Item → Pedido.</p>
 	 */
 	@ManyToOne
 	@JoinColumn(name = "id_ing", nullable = false)
+	@JsonIgnore
 	private Ingrediente ingrediente;
 
 	/**
