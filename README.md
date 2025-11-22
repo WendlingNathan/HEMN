@@ -212,15 +212,17 @@ database/
 ```text
 backend/
 ├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── br.com.hemn.backend/
-│   │   │       ├── backend/      
-│   │   │       ├── controller/
-│   │   │       ├── model/
-│   │   │       └── repository/
-│   │   └── resources/
-│   │       └── application.properties
+│   └── main/
+│       ├── java/
+│       │   └── br.com.hemn.backend/
+│       │       ├── backend/      
+│       │       ├── controller/
+│       │       ├── model/
+│       │       └── repository/
+│       └── resources/
+│           └── application.properties
+├── doc/
+│   └── index.html
 └── pom.xml
 ```
 
