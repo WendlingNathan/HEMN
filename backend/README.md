@@ -22,6 +22,8 @@ backend/
 │       │       ├── model/
 │       │       └── repository/
 │       └── resources/
+│           ├── templates/
+│           │   └── cardapio.html
 │           └── application.properties
 ├── doc/
 │   └── index.html
