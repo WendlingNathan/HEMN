@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio</title>
+    <style>
+        body { font-family: Arial; background-color: #f8f8f8; margin:0; padding:0; }
+        header { background-color: #ff6f00; color: white; text-align:center; padding:1rem; }
+        .cardapio-container { display:flex; flex-wrap:wrap; justify-content:center; padding:2rem; }
+        .card-produto { background:white; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); margin:1rem; padding:1.5rem; width:250px; transition: transform 0.2s; }
+        .card-produto:hover { transform: scale(1.05); }
+        .card-produto h2 { margin-top:0; color:#333; }
+        .descricao { font-size:0.9rem; color:#555; margin:0.5rem 0; }
+        .preco { font-weight:bold; color:#ff6f00; font-size:1.2rem; }
+        footer { text-align:center; padding:1rem; background:#333; color:white; position:fixed; width:100%; bottom:0; }
+        @media (max-width: 600px) { .card-produto { width:90%; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Cardápio</h1>
+</header>
+
+<div class="cardapio-container">
+    <div th:each="produto : ${produtos}" class="card-produto">
+        <h2 th:text="${produto.nome_prod}">Produto</h2>
+        <p class="descricao" th:text="${produto.descricao_prod}">Descrição do produto</p>
+        <p class="preco" th:text="'R$ ' + ${#numbers.formatDecimal(produto.preco_prod, 1, 'COMMA', 2, 'POINT')}">Preço</p>
+        <!-- Se quiser, pode adicionar composição aqui -->
+    </div>
+</div>
+
+<footer>
+    &copy; 2025 HEMN Hamburgueria
+</footer>
+
+</body>
+</html>
