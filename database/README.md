@@ -2,7 +2,7 @@
   🍔 HEMN Hamburgueria 🍔
 </h1>
 
-> <h4>Criado por Nathan Ritter Wendling, Marco Antônio Schons Santos, Eduardo Augusto Romio Nofre e Heitor Cassol</h4>
+> <h4>Criado por Nathan Ritter Wendling, Marco Antônio Schons Santos e Eduardo Augusto Romio Nofre</h4>
 
 <hr>
 
