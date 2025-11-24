@@ -1,6 +1,7 @@
 package br.com.hemn.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,11 +39,9 @@ public class FuncionarioService {
      *
      * @param id identificador do funcionário
      * @return funcionário encontrado
-     * @throws RuntimeException caso o funcionário não exista
      */
-    public Funcionario buscarPorId(Long id) {
-        return funcionarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Funcionário não encontrado: ID " + id));
+    public Optional<Funcionario> buscarPorId(Long id) {
+        return funcionarioRepository.findById(id);
     }
 
     /**

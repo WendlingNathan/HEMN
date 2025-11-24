@@ -1,7 +1,6 @@
 package br.com.hemn.backend.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hemn.backend.model.Ingrediente;
-import br.com.hemn.backend.repository.IngredienteRepository;
+import br.com.hemn.backend.service.IngredienteService;
 
 /**
  * Controlador responsável por gerenciar as operações relacionadas à entidade {@link Ingrediente}.
@@ -27,9 +26,9 @@ import br.com.hemn.backend.repository.IngredienteRepository;
 @RequestMapping("/ingrediente")
 public class IngredienteController {
 
-	/** Repositório da entidade Ingrediente. */
+    /** Serviço responsável pela lógica de negócio da entidade Ingrediente. */
     @Autowired
-    private IngredienteRepository ingredienteRepository;
+    private IngredienteService ingredienteService;
 
     /**
      * Retorna todos os ingredientes cadastrados.
@@ -38,19 +37,19 @@ public class IngredienteController {
      */
     @GetMapping
     public List<Ingrediente> listarTodos() {
-        return ingredienteRepository.findAll();
+        return ingredienteService.listarTodos();
     }
 
     /**
      * Busca um ingrediente pelo seu ID.
      *
      * @param id identificador do ingrediente
-     * @return ingrediente encontrado ou {@code 404 Not Found} caso o ingrediente não exista.
+     * @return ingrediente encontrado ou {@code 404 Not Found} caso não exista
      */
     @GetMapping("/{id}")
     public ResponseEntity<Ingrediente> buscarPorId(@PathVariable Long id) {
-        Optional<Ingrediente> ingrediente = ingredienteRepository.findById(id);
-        return ingrediente.map(ResponseEntity::ok)
-                          .orElse(ResponseEntity.notFound().build());
+        return ingredienteService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

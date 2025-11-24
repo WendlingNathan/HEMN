@@ -1,7 +1,6 @@
 package br.com.hemn.backend.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hemn.backend.model.ComposicaoProduto;
-import br.com.hemn.backend.repository.ComposicaoProdutoRepository;
+import br.com.hemn.backend.service.ComposicaoProdutoService;
 
 /**
  * Controlador responsável por gerenciar as operações ligadas à entidade
  * {@link ComposicaoProduto}.
+ *
  * <p>
  * Disponibiliza endpoints para consulta das composições dos produtos cadastrados,
  * incluindo ingredientes e quantidades utilizadas.
@@ -29,32 +29,31 @@ import br.com.hemn.backend.repository.ComposicaoProdutoRepository;
 @RequestMapping("/composicaoproduto")
 public class ComposicaoProdutoController {
 
-	/** Repositório da entidade ComposicaoProduto. */
+    /** Serviço responsável pela lógica de negócios de ComposicaoProduto. */
     @Autowired
-    private ComposicaoProdutoRepository composicaoProdutoRepository;
+    private ComposicaoProdutoService composicaoProdutoService;
 
     /**
      * Retorna todas as composições de produtos registradas no sistema.
      *
-     * @return Lista contendo todas as instâncias de {@link ComposicaoProduto} ou 
-     *         {@code 404 Not Found} caso a composição não exista.
+     * @return lista contendo todas as instâncias de {@link ComposicaoProduto}.
      */
     @GetMapping
     public List<ComposicaoProduto> listarTodos() {
-        return composicaoProdutoRepository.findAll();
+        return composicaoProdutoService.listarTodos();
     }
-    
+
     /**
-     * Busca um composição específica pelo seu identificador.
+     * Busca uma composição específica pelo seu identificador.
      *
-     * @param id Identificador único da composição a ser buscada.
+     * @param id identificador único da composição
      * @return {@link ResponseEntity} contendo a composição encontrada ou
-     *         {@code 404 Not Found} caso a composição não exista.
+     *         {@code 404 Not Found} caso não exista
      */
     @GetMapping("/{id}")
     public ResponseEntity<ComposicaoProduto> buscarPorId(@PathVariable Long id) {
-        Optional<ComposicaoProduto> composicaoProduto = composicaoProdutoRepository.findById(id);
-        return composicaoProduto.map(ResponseEntity::ok)
-                      .orElse(ResponseEntity.notFound().build());
+        return composicaoProdutoService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

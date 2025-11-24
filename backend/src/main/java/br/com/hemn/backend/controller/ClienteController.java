@@ -1,7 +1,6 @@
 package br.com.hemn.backend.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hemn.backend.model.Cliente;
-import br.com.hemn.backend.repository.ClienteRepository;
+import br.com.hemn.backend.service.ClienteService;
 
 /**
  * Controlador responsável por gerenciar as operações relacionadas à entidade {@link Cliente}.
+ *
  * <p>
  * Disponibiliza endpoints para listagem e consulta de clientes registrados no sistema.
+ * A comunicação com o banco de dados ocorre por meio da camada de serviço.
  * </p>
  *
  * @author Nathan Ritter Wendling
@@ -27,31 +28,31 @@ import br.com.hemn.backend.repository.ClienteRepository;
 @RequestMapping("/cliente")
 public class ClienteController {
 
-	/** Repositório da entidade Cliente. */
+    /** Serviço responsável pelas operações envolvendo {@link Cliente}. */
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteService clienteService;
 
     /**
-     * Retorna uma lista com todos os clientes cadastrados.
+     * Retorna todos os clientes cadastrados.
      *
-     * @return Lista contendo todos os {@link Cliente} presentes no banco de dados.
+     * @return lista contendo todos os {@link Cliente}.
      */
     @GetMapping
     public List<Cliente> listarTodos() {
-        return clienteRepository.findAll();
+        return clienteService.listarTodos();
     }
 
     /**
-     * Busca um cliente específico pelo seu identificador.
+     * Busca um cliente pelo seu identificador único.
      *
-     * @param id Identificador único do cliente a ser buscado.
-     * @return {@link ResponseEntity} contendo o cliente encontrado ou
-     *         {@code 404 Not Found} caso o cliente não exista.
+     * @param id identificador do cliente
+     * @return {@link ResponseEntity} contendo o cliente, caso exista;
+     *         caso contrário, retorna {@code 404 Not Found}.
      */
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id) {
-        Optional<Cliente> cliente = clienteRepository.findById(id);
-        return cliente.map(ResponseEntity::ok)
-                      .orElse(ResponseEntity.notFound().build());
+        return clienteService.buscarPorId(id)
+        		.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

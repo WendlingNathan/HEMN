@@ -1,6 +1,7 @@
 package br.com.hemn.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,12 +39,11 @@ public class ClienteService {
      *
      * @param id identificador do cliente
      * @return cliente encontrado
-     * @throws RuntimeException caso o cliente não exista
      */
-    public Cliente buscarPorId(Long id) {
-        return clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado: ID " + id));
+    public Optional<Cliente> buscarPorId(Long id) {
+        return clienteRepository.findById(id);
     }
+
 
     /**
      * Salva ou atualiza um cliente.

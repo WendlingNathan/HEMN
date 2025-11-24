@@ -1,6 +1,7 @@
 package br.com.hemn.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,11 +38,9 @@ public class ItemService {
      *
      * @param id identificador do item
      * @return item encontrado
-     * @throws RuntimeException caso não exista
      */
-    public Item buscarPorId(Long id) {
-        return itemRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Item não encontrado: ID " + id));
+    public Optional<Item> buscarPorId(Long id) {
+        return itemRepository.findById(id);
     }
 
     /**

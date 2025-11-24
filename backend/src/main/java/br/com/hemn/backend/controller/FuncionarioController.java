@@ -1,7 +1,6 @@
 package br.com.hemn.backend.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hemn.backend.model.Funcionario;
-import br.com.hemn.backend.repository.FuncionarioRepository;
+import br.com.hemn.backend.service.FuncionarioService;
 
 /**
  * Controlador responsável por gerenciar as operações relacionadas à entidade {@link Funcionario}.
  * <p>
- * Disponibiliza endpoints para listagem e consulta de funcionarios registrados no sistema.
+ * Disponibiliza endpoints para listagem e consulta de funcionários registrados no sistema.
  * </p>
  *
  * @author Nathan Ritter Wendling
@@ -27,9 +26,9 @@ import br.com.hemn.backend.repository.FuncionarioRepository;
 @RequestMapping("/funcionario")
 public class FuncionarioController {
 
-	/** Repositório da entidade Funcionario. */
+    /** Serviço responsável pelo gerenciamento de funcionários. */
     @Autowired
-    private FuncionarioRepository funcionarioRepository;
+    private FuncionarioService funcionarioService;
 
     /**
      * Retorna a lista completa de funcionários cadastrados.
@@ -38,20 +37,19 @@ public class FuncionarioController {
      */
     @GetMapping
     public List<Funcionario> listarTodos() {
-        return funcionarioRepository.findAll();
+        return funcionarioService.listarTodos();
     }
 
     /**
      * Busca um funcionário pelo seu identificador.
      *
      * @param id identificador do funcionário
-     * @return funcionário encontrado ou
-     *         {@code 404 Not Found} caso o funcionário não exista.
+     * @return funcionário encontrado ou {@code 404 Not Found} caso não exista
      */
     @GetMapping("/{id}")
     public ResponseEntity<Funcionario> buscarPorId(@PathVariable Long id) {
-        Optional<Funcionario> funcionario = funcionarioRepository.findById(id);
-        return funcionario.map(ResponseEntity::ok)
-                          .orElse(ResponseEntity.notFound().build());
+        return funcionarioService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

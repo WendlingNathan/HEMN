@@ -7,14 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import br.com.hemn.backend.model.Cliente;
 import br.com.hemn.backend.model.Produto;
-import br.com.hemn.backend.repository.ProdutoRepository;
+import br.com.hemn.backend.service.ProdutoService;
 
 /**
- * Controlador responsável por gerenciar a operação relacionada à exibição do cardápio no frontend {@link Cliente}.
+ * Controlador responsável por gerenciar a exibição do cardápio no frontend.
+ *
  * <p>
- * Disponibiliza um endpoint para listagem e consulta dos produtos registrados no sistema, mostrando-os no frontend.
+ * Disponibiliza um endpoint para listagem dos produtos registrados no sistema,
+ * repassando-os à camada de visualização.
  * </p>
  *
  * @author Nathan Ritter Wendling
@@ -24,18 +25,20 @@ import br.com.hemn.backend.repository.ProdutoRepository;
 @Controller
 public class CardapioController {
 
-	/** Repositório da entidade Produto. */
+    /** Serviço responsável pelas operações relacionadas a {@link Produto}. */
     @Autowired
-    private ProdutoRepository produtoRepository;
+    private ProdutoService produtoService;
 
     /**
-     * Faz uma checagem e gera uma lista com todos os produtos cadastrados.
+     * Obtém todos os produtos cadastrados e envia a lista ao modelo para exibição
+     * na página de cardápio.
      *
-     * @return Aciona a página do cardápio, listando todos os {@link Produtos} presentes no banco de dados.
+     * @param model modelo utilizado para repassar atributos à view
+     * @return nome da página de cardápio a ser renderizada
      */
     @GetMapping("/cardapio")
     public String mostrarCardapio(Model model) {
-        List<Produto> produtos = produtoRepository.findAll();
+        List<Produto> produtos = produtoService.listarTodos();
         model.addAttribute("produtos", produtos);
         return "cardapio";
     }

@@ -1,6 +1,7 @@
 package br.com.hemn.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,11 +39,9 @@ public class ProdutoService {
      *
      * @param id identificador do produto
      * @return produto encontrado
-     * @throws RuntimeException caso não exista
      */
-    public Produto buscarPorId(Long id) {
-        return produtoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado: ID " + id));
+    public Optional<Produto> buscarPorId(Long id) {
+        return produtoRepository.findById(id);
     }
 
     /**

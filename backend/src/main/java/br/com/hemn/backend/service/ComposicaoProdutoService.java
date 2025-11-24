@@ -1,6 +1,7 @@
 package br.com.hemn.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,12 +39,11 @@ public class ComposicaoProdutoService {
      *
      * @param id identificador da composição
      * @return composição encontrada
-     * @throws RuntimeException caso não exista
      */
-    public ComposicaoProduto buscarPorId(Long id) {
-        return composicaoProdutoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Composição não encontrada: ID " + id));
+    public Optional<ComposicaoProduto> buscarPorId(Long id) {
+        return composicaoProdutoRepository.findById(id);
     }
+
 
     /**
      * Salva ou atualiza uma composição.

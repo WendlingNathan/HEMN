@@ -1,6 +1,7 @@
 package br.com.hemn.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,11 +38,9 @@ public class IngredienteService {
      *
      * @param id identificador do ingrediente
      * @return ingrediente encontrado
-     * @throws RuntimeException caso o ingrediente não exista
      */
-    public Ingrediente buscarPorId(Long id) {
-        return ingredienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ingrediente não encontrado: ID " + id));
+    public Optional<Ingrediente> buscarPorId(Long id) {
+        return ingredienteRepository.findById(id);
     }
 
     /**

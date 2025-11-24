@@ -1,6 +1,7 @@
 package br.com.hemn.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,12 +39,11 @@ public class EnderecoService {
      *
      * @param id identificador do endereço
      * @return endereço encontrado
-     * @throws RuntimeException caso o endereço não exista
      */
-    public Endereco buscarPorId(Long id) {
-        return enderecoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Endereço não encontrado: ID " + id));
+    public Optional<Endereco> buscarPorId(Long id) {
+        return enderecoRepository.findById(id);
     }
+
 
     /**
      * Salva ou atualiza um endereço.

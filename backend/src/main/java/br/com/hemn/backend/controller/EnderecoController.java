@@ -1,7 +1,6 @@
 package br.com.hemn.backend.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,13 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hemn.backend.model.Endereco;
-import br.com.hemn.backend.repository.EnderecoRepository;
+import br.com.hemn.backend.service.EnderecoService;
 
 /**
  * Controlador responsável por expor endpoints relacionados aos endereços
  * cadastrados no sistema.
  *
- * Disponibiliza endpoints para listagem e consulta de endereços registrados no sistema.
+ * <p>
+ * Permite listar todos os endereços registrados e consultar um endereço
+ * específico a partir de seu identificador.
  * </p>
  *
  * @author Nathan Ritter Wendling
@@ -28,9 +29,9 @@ import br.com.hemn.backend.repository.EnderecoRepository;
 @RequestMapping("/endereco")
 public class EnderecoController {
 
-	/** Repositório da entidade Endereco. */
+    /** Serviço responsável pelo gerenciamento de endereços. */
     @Autowired
-    private EnderecoRepository enderecoRepository;
+    private EnderecoService enderecoService;
 
     /**
      * Retorna a lista completa de endereços cadastrados.
@@ -39,20 +40,20 @@ public class EnderecoController {
      */
     @GetMapping
     public List<Endereco> listarTodos() {
-        return enderecoRepository.findAll();
+        return enderecoService.listarTodos();
     }
 
     /**
      * Busca um endereço específico pelo seu identificador.
      *
      * @param id Identificador do endereço.
-     * @return {@link ResponseEntity} contendo o endereço encontrado ou 
+     * @return {@link ResponseEntity} contendo o endereço encontrado ou
      *         {@code 404 Not Found} caso o endereço não exista.
      */
     @GetMapping("/{id}")
     public ResponseEntity<Endereco> buscarPorId(@PathVariable Long id) {
-        Optional<Endereco> endereco = enderecoRepository.findById(id);
-        return endereco.map(ResponseEntity::ok)
-                       .orElse(ResponseEntity.notFound().build());
+        return enderecoService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
