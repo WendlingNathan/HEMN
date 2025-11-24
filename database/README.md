@@ -5,53 +5,6 @@
 > <h4>Criado por Nathan Ritter Wendling, Marco Antônio Schons Santos e Eduardo Augusto Romio Nofre</h4>
 
 <hr>
-
-<div name="ferramentas" align="justify">
-  <h2>Quais foram as ferramentas utilizadas?</h2>
-  <ol>
-  <li>
-    <p>
-      <h2><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="22" style="vertical-align: middle; margin-right: 8px;"> <strong>PostgreSQL</strong></h2>
-    </p> 
-    <p>
-      Gerenciador de banco de dados escolhido para criarmos o nosso projeto;
-    </p>
-  </li>
-  <li>
-    <p>
-      <h2><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dbeaver/dbeaver-original.svg" width="22" style="vertical-align: middle; margin-right: 8px;"> <strong>DBeaver</strong></h2>
-    </p> 
-    <p>
-      Ferramenta cliente de gerenciamento de banco de dados utilizada para criar e gerenciar o banco de dados;
-    </p>
-  </li>
-  <li>
-    <p>
-      <h2><img src="https://lspot.com.br/wp-content/uploads/2024/04/Visual-paradigm-modeler-logo-1024x1024.jpg" width="22" style="vertical-align: middle; margin-right: 8px;"> <strong>Visual Paradigm</strong></h2>
-    </p>
-    <p>
-      Utilizada para a idealização e criação das tabelas do banco de dados (modelagem);
-    </p>
-  </li>
-  <li>
-    <p>
-      <h2><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="22" style="vertical-align: middle; margin-right: 8px;"> <strong>Git</strong></h2>
-    </p>
-    <p>
-      Ferramenta utilizada para o versionamento do projeto, garantindo melhor controle e segurança;
-    </p>
-  </li>
-  <li>
-    <p>
-      <h2><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="22" style="vertical-align: middle; margin-right: 8px;"> <strong>GitHub</strong></h2>
-    </p>
-    <p>
-      Repositório em nuvem adotado para armazenar o projeto e torná-lo colaborativo;
-    </p>
-  </li>
-</ol>
-</div>
-
 <br>
 
 <div name="mr-projeto" align="center">
