@@ -89,7 +89,7 @@
 
   <hr>
   
-  <h3>🎨 Frontend (Tecnologias previstas)</h3>
+  <h3>🎨 Frontend /h3>
   <ol>
     <li>
       <h2>
@@ -219,9 +219,11 @@ backend/
 │       │       ├── model/
 │       │       └── repository/
 │       └── resources/
+│           ├── templates/
+│           │   └── cardapio.html
 │           └── application.properties
 ├── doc/
-│   └── cardapio.html
+│   └── index.html
 └── pom.xml
 ```
 
