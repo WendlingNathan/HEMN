@@ -57,7 +57,7 @@
       <h2>
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
              width="22" style="vertical-align: middle; margin-right: 8px;">
-        <strong>Java 17</strong>
+        <strong>Java 21</strong>
       </h2>
       <p>Linguagem utilizada no desenvolvimento da API que conecta o frontend ao banco de dados.</p>
     </li>
@@ -221,7 +221,7 @@ backend/
 │       └── resources/
 │           └── application.properties
 ├── doc/
-│   └── index.html
+│   └── cardapio.html
 └── pom.xml
 ```
 
@@ -242,7 +242,7 @@ Essa arquitetura facilita manutenção, expansão e reutilização do código.
 ## ▶️ Como Executar o Projeto
 
 ### 1. ⚙️ Pré-requisitos
-- Java 17+
+- Java 21+
 - Maven 3.8+
 - PostgreSQL instalado e configurado
 - Banco `HEMN` criado
