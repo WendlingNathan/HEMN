@@ -217,7 +217,8 @@ backend/
 │       │       ├── backend/      
 │       │       ├── controller/
 │       │       ├── model/
-│       │       └── repository/
+│       │       ├── repository/
+│       │       └── service/
 │       └── resources/
 │           ├── templates/
 │           │   └── cardapio.html
