@@ -271,7 +271,7 @@ grant grupo_clientes to cliente;
 ```
 
 ### ❗❗ Outro ponto importante é a política de backup e restore que estabelecemos ❗❗
-Utilizamos pg_dump é a ferramenta oficial do PostgreSQL utilizada para gerar backups lógicos de um banco de dados. Ele exporta toda a estrutura e dados do banco para um arquivo externo, permitindo restaurar o conteúdo posteriormente com segurança. Esse processo foi construído em:
+Utilizamos ```pg_dump``` é a ferramenta oficial do PostgreSQL utilizada para gerar backups lógicos de um banco de dados. Ele exporta toda a estrutura e dados do banco para um arquivo externo, permitindo restaurar o conteúdo posteriormente com segurança. Esse processo foi construído em:
 ```text
 database/Scripts/Scripts Backup Restore/
 ```
