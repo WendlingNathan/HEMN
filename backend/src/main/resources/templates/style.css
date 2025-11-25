@@ -1,0 +1,122 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("Imagens/hamburguer.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 20px;
+}
+
+/* ===== 3 caixas lado a lado ===== */
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px; /* AUMENTEI o espaço entre as caixas */
+    flex-wrap: nowrap;
+}
+
+/* ===== Caixa grande ===== */
+.category-box {
+    background: #FBC770;
+    border-radius: 20px;
+    padding: 20px;
+    width: 33%;
+    min-width: 300px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    height: auto;
+}
+
+/* ===== Títulos das categorias ===== */
+.category-box h2 {
+    font-size: 22px;  /* DIMINUI */
+    margin-bottom: 20px;
+}
+
+/* ===== Itens dentro da caixa ===== */
+.item {
+    background: #ffcf87;
+    padding: 12px;  /* Reduzi levemente */
+    margin-bottom: 25px; /* MAIS espaço entre itens */
+    border-radius: 15px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* Nome do item */
+.item h3 {
+    font-size: 18px; /* DIMINUI */
+    margin-bottom: 8px;
+}
+
+/* Descrição */
+.item p {
+    font-size: 14px; /* DIMINUI bastante */
+    margin-bottom: 10px;
+}
+
+/* Preço */
+.price {
+    font-weight: bold;
+    display: block;
+    margin-top: 6px;
+    font-size: 16px; /* DIMINUI */
+}
+
+button {
+    background: #FFA500;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px; /* DIMINUI */
+    margin-top: 5px;
+    color: white;
+}
+
+/* ===== MENU SUPERIOR ===== */
+.top-menu {
+    background-color: #F89E35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    position: relative;
+}
+
+/* Logo */
+.top-menu .logo {
+    position: absolute;
+    left: 20px;
+    width: 90px; /* DIMINUI */
+}
+
+/* Texto MENU */
+.top-menu .menu-title {
+    font-size: 48px; /* DIMINUI */
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 4px 4px #000;
+    margin: 0;
+}
+.header {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    /* REMOVE o fundo laranja */
+    background: transparent;
+    /* ou: background-color: transparent; */
+}
+
+.logo {
+    width: 180px;
+    height: auto;
+}
+
+.titulo {
+    font-size: 60px;
+    color: white;
+    text-shadow: 3px 3px 0px black;
+    margin: 0 auto;
+}

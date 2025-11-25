@@ -11,86 +11,73 @@
 
     <!-- ===== MENU SUPERIOR ===== -->
     <header class="header">
-    <img src="imagens/logo.png" alt="Logo" class="logo">
-    <h1 class="titulo">MENU</h1>
-</header>
+        <img src="imagens/logo.png" alt="Logo" class="logo">
+        <h1 class="titulo">MENU</h1>
+    </header>
 
-    <div class="menu-container">
+    <div class="menu-container" id="menu"></div>
 
-        <!-- ======== BURGERS ======== -->
-        <div class="category-box">
-            <h2>BURGUERS</h2>
+    <script>
+        // 🔗 URL do backend
+        const API_URL = "http://localhost:8080/produto";
 
-            <div class="item">
-                <h3>Simples Bacon Empanado</h3>
-                <p>Pão, Maionese Verde, Hambúrguer de 150g, queijo prato e bacon empanado</p>
-                <span class="price">R$30,00</span>
-                <button>+</button>
-            </div>
+        // 🔄 Mapeamento do tipo_prod → categoria exibida
+        const categorias = {
+            "L": "LANCHES",
+            "B": "BEBIDAS",
+            "D": "DOCES"
+        };
 
-            <div class="item">
-                <h3>Duplo Caramelizado</h3>
-                <p>Pão, Dois Hambúrgueres 150g, queijo prato, maionese especial, bacon e cebola caramelizada</p>
-                <span class="price">R$40,00</span>
-                <button>+</button>
-            </div>
+        // Agrupador de categorias
+        function agruparPorCategoria(produtos) {
+            const grupos = {};
 
-            <div class="item">
-                <h3>Duplo Tradicional</h3>
-                <p>Pão, queijo prato, maionese especial, bacon, alface, tomate e 2 hambúrgueres 150g</p>
-                <span class="price">R$38,00</span>
-                <button>+</button>
-            </div>
-        </div>
+            produtos.forEach(p => {
+                const categoria = categorias[p.tipo_prod] || "OUTROS";
 
-        <!-- ======== BEBIDAS ======== -->
-        <div class="category-box">
-            <h2>BEBIDAS</h2>
+                if (!grupos[categoria]) {
+                    grupos[categoria] = [];
+                }
+                grupos[categoria].push(p);
+            });
 
-            <div class="item">
-                <h3>Energético Monster</h3>
-                <span class="price">R$14,00</span>
-                <button>+</button>
-            </div>
+            return grupos;
+        }
 
-            <div class="item">
-                <h3>Refrigerante Coca-Cola 2L</h3>
-                <span class="price">R$17,00</span>
-                <button>+</button>
-            </div>
+        // Criar HTML de cada item
+        function criarItem(prod) {
+            return `
+                <div class="item">
+                    <h3>${prod.nome_prod}</h3>
+                    ${prod.descricao_prod ? `<p>${prod.descricao_prod}</p>` : ""}
+                    <span class="price">R$ ${prod.preco_prod.toFixed(2)}</span>
+                    <button>+</button>
+                </div>
+            `;
+        }
 
-            <div class="item">
-                <h3>Água Mineral</h3>
-                <span class="price">R$4,00</span>
-                <button>+</button>
-            </div>
-        </div>
+        // Carregar produtos
+        fetch(API_URL)
+            .then(r => r.json())
+            .then(produtos => {
+                const menu = document.getElementById("menu");
+                const grupos = agruparPorCategoria(produtos);
 
-        <!-- ======== CHICLÉ E DOCES ======== -->
-        <div class="category-box">
-            <h2>CHICLÉ E DOCES</h2>
+                // Criar um bloco por categoria
+                Object.keys(grupos).forEach(categoria => {
+                    const categoriaBox = document.createElement("div");
+                    categoriaBox.classList.add("category-box");
 
-            <div class="item">
-                <h3>Halls Menta</h3>
-                <span class="price">R$3,00</span>
-                <button>+</button>
-            </div>
+                    categoriaBox.innerHTML = `
+                        <h2>${categoria}</h2>
+                        ${grupos[categoria].map(criarItem).join("")}
+                    `;
 
-            <div class="item">
-                <h3>Halls Morango</h3>
-                <span class="price">R$3,00</span>
-                <button>+</button>
-            </div>
-
-            <div class="item">
-                <h3>Trident Hortelã</h3>
-                <span class="price">R$5,00</span>
-                <button>+</button>
-            </div>
-
-        </div>
-
-    </div>
+                    menu.appendChild(categoriaBox);
+                });
+            })
+            .catch(err => console.error("Erro ao carregar produtos:", err));
+    </script>
 
 </body>
 </html>

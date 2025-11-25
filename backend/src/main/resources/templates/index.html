@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Cardápio</title>
+
+<style>
+/* Seu CSS aqui (mantido igual) */
+body {
+	font-family: Arial, sans-serif;
+	background-image: url("/imagens/hamburguer.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	padding: 20px;
+}
+
+.menu-container {
+	display: flex;
+	justify-content: space-between;
+	gap: 40px;
+	flex-wrap: nowrap;
+}
+
+.category-box {
+	background: #FBC770;
+	border-radius: 20px;
+	padding: 20px;
+	width: 33%;
+	min-width: 300px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.category-box h2 {
+	font-size: 22px;
+	margin-bottom: 20px;
+}
+
+.item {
+	background: #ffcf87;
+	padding: 12px;
+	margin-bottom: 25px;
+	border-radius: 15px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+	transition: transform 0.2s;
+}
+
+.item:hover { 
+	transform: scale(1.05)
+}
+
+.item h3 {
+	font-size: 18px;
+	margin-bottom: 8px;
+}
+
+.item p {
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.price {
+	font-weight: bold;
+	display: block;
+	margin-top: 6px;
+	font-size: 16px;
+}
+
+.header {
+	width: 100%;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: transparent;
+}
+
+.logo {
+	width: 420px;
+	height: auto;
+	margin: -105px -105px -105px -105px;
+}
+
+.titulo {
+	font-size: 60px;
+	color: white;
+	text-shadow: 3px 3px 0px black;
+	margin-right: 585px;
+}
+</style>
+</head>
+
+<body>
+
+	<!-- ===== MENU SUPERIOR ===== -->
+	<header class="header">
+		<img src="/imagens/logo.png" alt="Logo" class="logo">
+		<h1 class="titulo">MENU</h1>
+	</header>
+	
+	<hr>
+	
+	<br>
+
+	<div class="menu-container">
+
+        <!-- ================== LANCHES ================== -->
+        <div class="category-box">
+            <h2>LANCHES</h2>
+
+            <div th:each="p : ${produtos}"
+                 th:if="${p.tipo_prod == 'L'}"
+                 class="item">
+
+                <h3 th:text="${p.nome_prod}"></h3>
+
+                <p th:if="${p.descricao_prod != null}"
+                   th:text="${p.descricao_prod}"></p>
+
+                <span class="price"
+                      th:text="'R$ ' + ${p.preco_prod}"></span>
+            </div>
+        </div>
+
+        <!-- ================== BEBIDAS ================== -->
+        <div class="category-box">
+            <h2>BEBIDA</h2>
+
+            <div th:each="p : ${produtos}"
+                 th:if="${p.tipo_prod == 'B'}"
+                 class="item">
+
+                <h3 th:text="${p.nome_prod}"></h3>
+
+                <p th:if="${p.descricao_prod != null}"
+                   th:text="${p.descricao_prod}"></p>
+
+                <span class="price"
+                      th:text="'R$ ' + ${p.preco_prod}"></span>
+
+            </div>
+        </div>
+
+        <!-- ================== DOCES ================== -->
+        <div class="category-box">
+            <h2>ACOMPANHAMENTO</h2>
+
+            <div th:each="p : ${produtos}"
+                 th:if="${p.tipo_prod == 'A'}"
+                 class="item">
+
+                <h3 th:text="${p.nome_prod}"></h3>
+
+                <p th:if="${p.descricao_prod != null}"
+                   th:text="${p.descricao_prod}"></p>
+
+                <span class="price"
+                      th:text="'R$ ' + ${p.preco_prod}"></span>
+
+            </div>
+        </div>
+
+	</div>
+</body>
+</html>

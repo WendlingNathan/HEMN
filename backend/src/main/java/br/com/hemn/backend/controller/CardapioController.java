@@ -40,6 +40,6 @@ public class CardapioController {
     public String mostrarCardapio(Model model) {
         List<Produto> produtos = produtoService.listarTodos();
         model.addAttribute("produtos", produtos);
-        return "cardapio";
+        return "index";
     }
 }
