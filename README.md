@@ -89,7 +89,7 @@
 
   <hr>
   
-  <h3>🎨 Frontend /h3>
+  <h3>🎨 Frontend</h3>
   <ol>
     <li>
       <h2>
@@ -221,6 +221,7 @@ backend/
 │       │       └── service/
 │       └── resources/
 │           ├── templates/
+│           │   ├── index.html
 │           │   └── cardapio.html
 │           └── application.properties
 ├── doc/
@@ -240,6 +241,43 @@ O projeto HEMN foi estruturado de forma modular, permitindo que cada camada evol
 
 Essa arquitetura facilita manutenção, expansão e reutilização do código.
 
+<br>
+
+## 🔐 Usuários e suas permissões
+Dentro do banco de dados, foram criados 3 usuários bases com suas respectivas concessões de privilégios:
+```text
+database/Scripts/Script Usuários
+```
+```text
+-- Criando roles (grupos)
+create role grupo_admin nologin;
+create role grupo_funcionario nologin;
+create role grupo_clientes nologin;
+
+-- Criando usuários 
+create user Administrator with password 'admin20';
+create user funcionario with password 'fun5420';
+create user cliente with password 'cli123';
+
+-- Concessão dos privilégios
+grant all privileges on all tables in schema public to grupo_admin;
+grant select, insert, update on all tables in schema public to grupo_funcionario;
+grant select on all tables in schema public to grupo_clientes;
+
+-- Associando usuários aos grupos
+grant grupo_admin to administrator;
+grant grupo_funcionario to funcionario;
+grant grupo_clientes to cliente;
+```
+
+### ❗❗ Outro ponto importante é a política de backup e restore que estabelecemos ❗❗
+Utilizamos pg_dump é a ferramenta oficial do PostgreSQL utilizada para gerar backups lógicos de um banco de dados. Ele exporta toda a estrutura e dados do banco para um arquivo externo, permitindo restaurar o conteúdo posteriormente com segurança. Esse processo foi construído em:
+```text
+database/Scripts/Scripts Backup Restore/
+```
+
+
+<hr>
 <br>
 
 ## ▶️ Como Executar o Projeto
