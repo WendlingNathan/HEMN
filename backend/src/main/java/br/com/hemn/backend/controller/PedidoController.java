@@ -21,7 +21,7 @@ import br.com.hemn.backend.service.PedidoService;
  * authors...
  */
 @RestController
-@RequestMapping("/pedido")
+@RequestMapping("/api/pedido")
 public class PedidoController {
 
     /** Serviço da entidade Pedido. */

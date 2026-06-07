@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido — HEMN Hamburgueria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            min-height: 100vh;
+            background-image: url("/imagens/hamburguer.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 0;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 16px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: transparent;
+        }
+
+        .btn-home {
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,0.15);
+            border: 1.5px solid rgba(255,255,255,0.4);
+            padding: 8px 20px;
+            border-radius: 10px;
+            letter-spacing: 1px;
+            transition: background 0.2s, border-color 0.2s;
+            backdrop-filter: blur(4px);
+        }
+        .btn-home:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.7);
+        }
+
+        .titulo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 52px;
+            color: white;
+            text-shadow: 3px 3px 0px black;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            letter-spacing: 2px;
+        }
+
+        hr {
+            position: relative;
+            z-index: 1;
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.25);
+            margin: 0 28px;
+        }
+
+        /* ===== CONTEÚDO ===== */
+        .conteudo {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 20px 120px;
+            gap: 16px;
+        }
+
+        /* ===== CARD DE ITEM DO PEDIDO ===== */
+        .item-card {
+            background: #FBC770;
+            border-radius: 20px;
+            padding: 16px 20px;
+            width: 100%;
+            max-width: 680px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+            animation: fadeUp 0.4s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .item-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 14px;
+            background: #ffcf87;
+            object-fit: cover;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-info h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 20px;
+            color: #5a3000;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .item-info p {
+            font-size: 13px;
+            color: #7a4400;
+            margin-bottom: 6px;
+        }
+
+        .item-info .item-preco {
+            font-weight: 700;
+            font-size: 15px;
+            color: #5a3000;
+        }
+
+        .item-qtd {
+            background: #ffcf87;
+            border-radius: 10px;
+            padding: 8px 16px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            color: #5a3000;
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .item-qtd span {
+            display: block;
+            font-family: 'Nunito', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: #c08040;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== LOADING / ERRO ===== */
+        .msg {
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 40px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+        }
+
+        /* ===== RODAPÉ FIXO: TOTAL + BOTÃO ===== */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+            background: rgba(251, 199, 112, 0.97);
+            backdrop-filter: blur(6px);
+            padding: 14px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+        }
+
+        .total-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+            color: #5a3000;
+            letter-spacing: 1px;
+        }
+
+        .total-valor {
+            background: #ffcf87;
+            border-radius: 12px;
+            padding: 10px 28px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 24px;
+            color: #5a3000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            min-width: 140px;
+            text-align: center;
+        }
+
+        .btn-pagamento {
+            background: #FFA500;
+            border: none;
+            border-radius: 14px;
+            padding: 12px 36px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 20px;
+            letter-spacing: 1px;
+            color: white;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
+        }
+
+        .btn-pagamento:hover {
+            background: #e69400;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+        }
+
+        .btn-pagamento:active {
+            transform: translateY(0);
+        }
+
+        /* ===== POPUP DE PAGAMENTO ===== */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 10;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .overlay.aberto {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        .popup {
+            background: #FBC770;
+            border-radius: 24px;
+            padding: 48px 44px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+            animation: popUp 0.25s ease both;
+            position: relative;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes popUp {
+            from { opacity: 0; transform: scale(0.92) translateY(16px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .popup-fechar {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: #7a4400;
+            cursor: pointer;
+            line-height: 1;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+        }
+
+        .popup h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 26px;
+            color: #5a3000;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <a href="/cardapio" class="btn-home">← HOME</a>
+        <h1 class="titulo">PEDIDO</h1>
+    </header>
+    <hr>
+
+    <!-- ===== LISTA DE ITENS ===== -->
+    <div class="conteudo" id="conteudo">
+        <p class="msg" id="loading">Carregando pedido...</p>
+    </div>
+
+    <!-- ===== RODAPÉ ===== -->
+    <footer>
+        <span class="total-label">TOTAL =</span>
+        <div class="total-valor" id="totalValor">R$ 0,00</div>
+        <button class="btn-pagamento" onclick="abrirPopup()">PAGAMENTO</button>
+    </footer>
+
+    <!-- ===== POPUP ===== -->
+    <div class="overlay" id="overlay" onclick="fecharPopupFora(event)">
+        <div class="popup">
+            <button class="popup-fechar" onclick="fecharPopup()">✕</button>
+            <h2>PAGAMENTO</h2>
+            <!-- conteúdo futuro aqui -->
+        </div>
+    </div>
+
+    <script>
+        const API_ITENS   = "http://localhost:8080/item";
+        const API_PRODUTO = "http://localhost:8080/produto";
+
+        function carregarPedido() {
+            const conteudo = document.getElementById("conteudo");
+            const loading  = document.getElementById("loading");
+
+            const itens = [
+                { nome: "X-Burguer",        descricao: "Pão, carne e queijo",                 preco: 18.90, qtd: 1, emoji: "🍔" },
+                { nome: "X-Salada",          descricao: "Pão, carne, queijo, alface e tomate", preco: 21.00, qtd: 2, emoji: "🥗" },
+                { nome: "Refrigerante Lata", descricao: "350ml de refrigerante",               preco: 6.00,  qtd: 2, emoji: "🥤" },
+                { nome: "Porção de Batata",  descricao: "150g de batata frita crocante",       preco: 8.50,  qtd: 1, emoji: "🍟" },
+            ];
+
+            loading.remove();
+
+            let total = 0;
+
+            itens.forEach((item, i) => {
+                total += item.preco * item.qtd;
+
+                const card = document.createElement("div");
+                card.className = "item-card";
+                card.style.animationDelay = (i * 0.08) + "s";
+
+                card.innerHTML = `
+                    <div class="item-img">${item.emoji}</div>
+                    <div class="item-info">
+                        <h3>${item.nome}</h3>
+                        <p>${item.descricao}</p>
+                        <span class="item-preco">R$ ${item.preco.toFixed(2).replace(".", ",")}</span>
+                    </div>
+                    <div class="item-qtd">
+                        <span>QTD</span>
+                        ${item.qtd}
+                    </div>
+                `;
+
+                conteudo.appendChild(card);
+            });
+
+            document.getElementById("totalValor").textContent =
+                "R$ " + total.toFixed(2).replace(".", ",");
+        }
+
+        function abrirPopup() {
+            document.getElementById("overlay").classList.add("aberto");
+        }
+
+        function fecharPopup() {
+            document.getElementById("overlay").classList.remove("aberto");
+        }
+
+        function fecharPopupFora(e) {
+            if (e.target === document.getElementById("overlay")) fecharPopup();
+        }
+
+        carregarPedido();
+    </script>
+</body>
+</html>

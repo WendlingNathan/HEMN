@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — HEMN Hamburgueria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            min-height: 100vh;
+            background-image: url("/imagens/hamburguer.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Overlay escuro para legibilidade */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 0;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 16px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: transparent;
+        }
+
+        .logo {
+            width: 140px;
+            height: auto;
+        }
+
+        .titulo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 56px;
+            color: white;
+            text-shadow: 3px 3px 0px black;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            letter-spacing: 2px;
+        }
+
+        hr {
+            position: relative;
+            z-index: 1;
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.25);
+            margin: 0 28px;
+        }
+
+        /* ===== CENTRO ===== */
+        .center {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* ===== CARD DE LOGIN ===== */
+        .login-card {
+            background: #FBC770;
+            border-radius: 24px;
+            padding: 48px 44px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+            animation: fadeUp 0.5s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-card h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 28px;
+            text-align: center;
+            color: #5a3000;
+            margin-bottom: 32px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== CAMPOS ===== */
+        .field {
+            background: #ffcf87;
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        }
+
+        .field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #7a4400;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
+        }
+
+        .field input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Nunito', sans-serif;
+            font-size: 15px;
+            color: #3d1f00;
+            font-weight: 600;
+        }
+
+        .field input::placeholder {
+            color: #c08040;
+            font-weight: 400;
+        }
+
+        /* ===== BOTÃO ===== */
+        .btn-entrar {
+            width: 100%;
+            margin-top: 8px;
+            padding: 14px;
+            background: #FFA500;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            letter-spacing: 1px;
+            color: white;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.25);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+        }
+
+        .btn-entrar:hover {
+            background: #e69400;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+        }
+
+        .btn-entrar:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        /* ===== MENSAGEM DE ERRO (Thymeleaf) ===== */
+        .erro {
+            background: #ffe0e0;
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: #c0392b;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+
+        .erro.visivel { display: block; }
+
+        /* ===== LINK VOLTAR ===== */
+        .voltar {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+            transition: color 0.2s;
+        }
+        .voltar:hover { color: #FBC770; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER (mesmo padrão do menu) ===== -->
+    <header>
+        <img src="/imagens/logo.png" alt="Logo HEMN" class="logo">
+        <h1 class="titulo">LOGIN</h1>
+    </header>
+    <hr>
+
+    <!-- ===== CARD DE LOGIN ===== -->
+    <div class="center">
+        <div class="login-card">
+            <h2>ACESSO AO SISTEMA</h2>
+
+            <!-- Mensagem de erro (ativar via Thymeleaf ou JS) -->
+            <div class="erro" id="erroMsg" th:classappend="${erro != null} ? 'visivel'" th:text="${erro}">
+                Usuário ou senha inválidos.
+            </div>
+
+            <form th:action="@{/login}" method="post">
+
+                <div class="field">
+                    <label for="usuario">Usuário</label>
+                    <input type="text" id="usuario" name="username"
+                           placeholder="Digite seu usuário" autocomplete="username" required>
+                </div>
+
+                <div class="field">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="password"
+                           placeholder="Digite sua senha" autocomplete="current-password" required>
+                </div>
+
+                <button type="submit" class="btn-entrar">ENTRAR</button>
+
+            </form>
+        </div>
+    </div>
+
+    <a href="/cardapio" class="voltar">
+   
+</body>
+</html>
