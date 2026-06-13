@@ -2,11 +2,21 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Pedido — HEMN Hamburgueria</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Nunito:wght@400;600;700&display=swap"
+          rel="stylesheet">
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Nunito', sans-serif;
@@ -28,6 +38,7 @@
         }
 
         /* ===== HEADER ===== */
+
         header {
             position: relative;
             z-index: 1;
@@ -36,7 +47,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: transparent;
         }
 
         .btn-home {
@@ -48,13 +58,7 @@
             border: 1.5px solid rgba(255,255,255,0.4);
             padding: 8px 20px;
             border-radius: 10px;
-            letter-spacing: 1px;
-            transition: background 0.2s, border-color 0.2s;
             backdrop-filter: blur(4px);
-        }
-        .btn-home:hover {
-            background: rgba(255,255,255,0.25);
-            border-color: rgba(255,255,255,0.7);
         }
 
         .titulo {
@@ -65,7 +69,6 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            letter-spacing: 2px;
         }
 
         hr {
@@ -77,18 +80,19 @@
         }
 
         /* ===== CONTEÚDO ===== */
+
         .conteudo {
             position: relative;
             z-index: 1;
-            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 32px 20px 120px;
             gap: 16px;
+            padding: 32px 20px 20px;
         }
 
-        /* ===== CARD DE ITEM DO PEDIDO ===== */
+        /* ===== CARD ===== */
+
         .item-card {
             background: #FBC770;
             border-radius: 20px;
@@ -99,12 +103,6 @@
             align-items: center;
             gap: 20px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-            animation: fadeUp 0.4s ease both;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0); }
         }
 
         .item-img {
@@ -112,8 +110,6 @@
             height: 90px;
             border-radius: 14px;
             background: #ffcf87;
-            object-fit: cover;
-            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -126,76 +122,103 @@
 
         .item-info h3 {
             font-family: 'Oswald', sans-serif;
-            font-size: 20px;
             color: #5a3000;
-            margin-bottom: 4px;
-            letter-spacing: 0.5px;
         }
 
         .item-info p {
             font-size: 13px;
             color: #7a4400;
-            margin-bottom: 6px;
         }
 
-        .item-info .item-preco {
-            font-weight: 700;
-            font-size: 15px;
+        .item-preco {
+            font-weight: bold;
             color: #5a3000;
         }
 
         .item-qtd {
             background: #ffcf87;
             border-radius: 10px;
-            padding: 8px 16px;
-            font-family: 'Oswald', sans-serif;
-            font-size: 18px;
-            color: #5a3000;
-            flex-shrink: 0;
+            padding: 10px 16px;
             text-align: center;
+            font-family: 'Oswald', sans-serif;
         }
 
-        .item-qtd span {
-            display: block;
-            font-family: 'Nunito', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            color: #c08040;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* ===== LOADING / ERRO ===== */
         .msg {
             color: white;
-            font-size: 16px;
-            text-align: center;
-            margin-top: 40px;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
         }
 
-        /* ===== RODAPÉ FIXO: TOTAL + BOTÃO ===== */
+        /* ===== ENDEREÇO ===== */
+
+        .endereco-box {
+            position: relative;
+            z-index: 1;
+            background: #FBC770;
+            border-radius: 20px;
+            padding: 24px;
+            width: 100%;
+            max-width: 680px;
+            margin: 20px auto 120px auto;
+        }
+
+        .endereco-box h2 {
+            font-family: 'Oswald', sans-serif;
+            color: #5a3000;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .grid-endereco {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .grid-endereco input {
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            background: #ffcf87;
+            outline: none;
+        }
+
+        .btn-frete {
+            width: 100%;
+            margin-top: 16px;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            background: #FFA500;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        #freteInfo {
+            margin-top: 12px;
+            text-align: center;
+            font-weight: bold;
+            color: #5a3000;
+        }
+
+        /* ===== FOOTER ===== */
+
         footer {
             position: fixed;
             bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 2;
+            width: 100%;
             background: rgba(251, 199, 112, 0.97);
-            backdrop-filter: blur(6px);
-            padding: 14px 28px;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             gap: 32px;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+            padding: 14px 28px;
+            z-index: 2;
         }
 
         .total-label {
             font-family: 'Oswald', sans-serif;
             font-size: 22px;
             color: #5a3000;
-            letter-spacing: 1px;
         }
 
         .total-valor {
@@ -204,10 +227,6 @@
             padding: 10px 28px;
             font-family: 'Oswald', sans-serif;
             font-size: 24px;
-            color: #5a3000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            min-width: 140px;
-            text-align: center;
         }
 
         .btn-pagamento {
@@ -215,179 +234,504 @@
             border: none;
             border-radius: 14px;
             padding: 12px 36px;
-            font-family: 'Oswald', sans-serif;
-            font-size: 20px;
-            letter-spacing: 1px;
             color: white;
-            text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
         }
 
-        .btn-pagamento:hover {
-            background: #e69400;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.28);
-        }
+        /* ===== POPUP ===== */
 
-        .btn-pagamento:active {
-            transform: translateY(0);
-        }
-
-        /* ===== POPUP DE PAGAMENTO ===== */
         .overlay {
             position: fixed;
             inset: 0;
             background: rgba(0,0,0,0.6);
-            z-index: 10;
             display: none;
-            align-items: center;
             justify-content: center;
-            animation: fadeIn 0.2s ease;
+            align-items: center;
+            z-index: 10;
         }
 
         .overlay.aberto {
             display: flex;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-        }
-
         .popup {
             background: #FBC770;
             border-radius: 24px;
-            padding: 48px 44px;
+            padding: 48px;
             width: 100%;
             max-width: 420px;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-            animation: popUp 0.25s ease both;
             position: relative;
-            min-height: 220px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        @keyframes popUp {
-            from { opacity: 0; transform: scale(0.92) translateY(16px); }
-            to   { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .popup-fechar {
             position: absolute;
             top: 14px;
             right: 18px;
-            background: none;
             border: none;
+            background: none;
             font-size: 22px;
-            color: #7a4400;
             cursor: pointer;
-            line-height: 1;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 700;
         }
 
-        .popup h2 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 26px;
-            color: #5a3000;
-            letter-spacing: 1px;
-        }
     </style>
 </head>
+
 <body>
 
-    <!-- ===== HEADER ===== -->
-    <header>
-        <a href="/cardapio" class="btn-home">← HOME</a>
-        <h1 class="titulo">PEDIDO</h1>
-    </header>
-    <hr>
+<header>
+    <a href="/cardapio" class="btn-home">
+        ← HOME
+    </a>
 
-    <!-- ===== LISTA DE ITENS ===== -->
-    <div class="conteudo" id="conteudo">
-        <p class="msg" id="loading">Carregando pedido...</p>
+    <h1 class="titulo">
+        PEDIDO
+    </h1>
+</header>
+
+<hr>
+
+<div class="conteudo" id="conteudo">
+    <p class="msg" id="loading">
+        Carregando pedido...
+    </p>
+</div>
+
+<!-- ENDEREÇO -->
+<div class="endereco-box">
+
+    <h2>ENDEREÇO DE ENTREGA</h2>
+
+    <div class="grid-endereco">
+
+        <input type="text"
+               id="cep"
+               placeholder="CEP">
+
+        <input type="text"
+               id="rua"
+               placeholder="Rua">
+
+        <input type="text"
+               id="numero"
+               placeholder="Número">
+
+        <input type="text"
+               id="bairro"
+               placeholder="Bairro">
+
+        <input type="text"
+               id="cidade"
+               placeholder="Cidade">
+
+        <input type="text"
+               id="estado"
+               placeholder="Estado">
+
     </div>
 
-    <!-- ===== RODAPÉ ===== -->
-    <footer>
-        <span class="total-label">TOTAL =</span>
-        <div class="total-valor" id="totalValor">R$ 0,00</div>
-        <button class="btn-pagamento" onclick="abrirPopup()">PAGAMENTO</button>
-    </footer>
+    <button onclick="calcularFrete()"
+            class="btn-frete">
 
-    <!-- ===== POPUP ===== -->
-    <div class="overlay" id="overlay" onclick="fecharPopupFora(event)">
-        <div class="popup">
-            <button class="popup-fechar" onclick="fecharPopup()">✕</button>
-            <h2>PAGAMENTO</h2>
-            <!-- conteúdo futuro aqui -->
+        CALCULAR FRETE
+
+    </button>
+
+    <div id="freteInfo">
+        Frete: R$ 0,00
+    </div>
+
+</div>
+
+<footer>
+    <span class="total-label">
+        TOTAL =
+    </span>
+
+    <div class="total-valor"
+         id="totalValor">
+
+        R$ 0,00
+    </div>
+
+    <button class="btn-pagamento"
+            onclick="abrirPopup()">
+
+        PAGAMENTO
+    </button>
+</footer>
+
+<div class="overlay"
+     id="overlay"
+     onclick="fecharPopupFora(event)">
+
+    <div class="popup">
+
+        <button class="popup-fechar"
+                onclick="fecharPopup()">
+            ✕
+        </button>
+
+        <h2 style="text-align:center;
+                   color:#5a3000;
+                   font-family:Oswald;
+                   margin-bottom:20px;">
+
+            PAGAMENTO
+
+        </h2>
+
+        <div style="display:flex;
+                    flex-direction:column;
+                    gap:10px;">
+
+            <label>
+                <input type="radio"
+                       name="pagamento"
+                       value="pix"
+                       checked
+                       onchange="trocarPagamento()">
+
+                PIX
+            </label>
+
+            <label>
+                <input type="radio"
+                       name="pagamento"
+                       value="cartao"
+                       onchange="trocarPagamento()">
+
+                CARTÃO
+            </label>
+
+            <label>
+                <input type="radio"
+                       name="pagamento"
+                       value="dinheiro"
+                       onchange="trocarPagamento()">
+
+                DINHEIRO
+            </label>
+
         </div>
+
+        <!-- PIX -->
+        <div id="pixArea"
+             style="margin-top:20px;
+                    text-align:center;">
+
+            <img id="qrCode"
+                 width="220">
+
+            <p style="margin-top:12px;">
+                Chave PIX:
+                <strong>hemn@pix.com</strong>
+            </p>
+
+            <p id="pixTotal">
+                Total: R$ 0,00
+            </p>
+
+        </div>
+
+        <!-- CARTÃO -->
+        <div id="cartaoArea"
+             style="display:none;
+                    margin-top:20px;">
+
+            <input type="text"
+                   placeholder="Número do cartão"
+                   style="width:100%;
+                          padding:12px;
+                          margin-bottom:10px;">
+
+            <input type="text"
+                   placeholder="Nome do titular"
+                   style="width:100%;
+                          padding:12px;
+                          margin-bottom:10px;">
+
+            <div style="display:flex; gap:10px;">
+
+                <input type="text"
+                       placeholder="Validade"
+                       style="flex:1;
+                              padding:12px;">
+
+                <input type="text"
+                       placeholder="CVV"
+                       style="flex:1;
+                              padding:12px;">
+            </div>
+
+        </div>
+
+        <!-- DINHEIRO -->
+        <div id="dinheiroArea"
+             style="display:none;
+                    margin-top:20px;">
+
+            <label>
+                Troco para:
+            </label>
+
+            <input type="number"
+                   id="trocoInput"
+                   placeholder="Ex: 100"
+                   oninput="calcularTroco()"
+                   style="width:100%;
+                          padding:12px;
+                          margin-top:10px;">
+
+            <p id="trocoResultado"
+               style="margin-top:12px;
+                      font-weight:bold;">
+            </p>
+
+        </div>
+
+        <button onclick="confirmarPagamento()"
+                style="width:100%;
+                       margin-top:20px;
+                       border:none;
+                       background:#FFA500;
+                       color:white;
+                       padding:14px;
+                       border-radius:12px;
+                       font-size:18px;
+                       cursor:pointer;">
+
+            CONFIRMAR PAGAMENTO
+
+        </button>
+
     </div>
 
-    <script>
-        const API_ITENS   = "http://localhost:8080/item";
-        const API_PRODUTO = "http://localhost:8080/produto";
+</div>
 
-        function carregarPedido() {
-            const conteudo = document.getElementById("conteudo");
-            const loading  = document.getElementById("loading");
+<script>
 
-            const itens = [
-                { nome: "X-Burguer",        descricao: "Pão, carne e queijo",                 preco: 18.90, qtd: 1, emoji: "🍔" },
-                { nome: "X-Salada",          descricao: "Pão, carne, queijo, alface e tomate", preco: 21.00, qtd: 2, emoji: "🥗" },
-                { nome: "Refrigerante Lata", descricao: "350ml de refrigerante",               preco: 6.00,  qtd: 2, emoji: "🥤" },
-                { nome: "Porção de Batata",  descricao: "150g de batata frita crocante",       preco: 8.50,  qtd: 1, emoji: "🍟" },
-            ];
+function trocarPagamento() {
 
-            loading.remove();
+    const tipo =
+        document.querySelector(
+            'input[name="pagamento"]:checked'
+        ).value;
 
-            let total = 0;
+    document.getElementById("pixArea").style.display = "none";
+    document.getElementById("cartaoArea").style.display = "none";
+    document.getElementById("dinheiroArea").style.display = "none";
 
-            itens.forEach((item, i) => {
-                total += item.preco * item.qtd;
+    if (tipo === "pix") {
+        document.getElementById("pixArea").style.display = "block";
+    }
 
-                const card = document.createElement("div");
-                card.className = "item-card";
-                card.style.animationDelay = (i * 0.08) + "s";
+    if (tipo === "cartao") {
+        document.getElementById("cartaoArea").style.display = "block";
+    }
 
-                card.innerHTML = `
-                    <div class="item-img">${item.emoji}</div>
-                    <div class="item-info">
-                        <h3>${item.nome}</h3>
-                        <p>${item.descricao}</p>
-                        <span class="item-preco">R$ ${item.preco.toFixed(2).replace(".", ",")}</span>
-                    </div>
-                    <div class="item-qtd">
-                        <span>QTD</span>
-                        ${item.qtd}
-                    </div>
-                `;
+    if (tipo === "dinheiro") {
+        document.getElementById("dinheiroArea").style.display = "block";
+    }
+}
 
-                conteudo.appendChild(card);
-            });
+function atualizarQrCode() {
 
-            document.getElementById("totalValor").textContent =
-                "R$ " + total.toFixed(2).replace(".", ",");
+    const total = totalPedido + frete;
+
+    document.getElementById("pixTotal")
+        .textContent =
+        `Total: R$ ${total.toFixed(2).replace(".", ",")}`;
+
+    const pixTexto =
+        `PIX HEMN | TOTAL ${total}`;
+
+    const qrUrl =
+        "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="
+        + encodeURIComponent(pixTexto);
+
+    document.getElementById("qrCode").src = qrUrl;
+}
+
+function calcularTroco() {
+
+    const valorPago =
+        parseFloat(
+            document.getElementById("trocoInput").value
+        );
+
+    const total =
+        totalPedido + frete;
+
+    if (!valorPago) {
+        document.getElementById(
+            "trocoResultado"
+        ).textContent = "";
+
+        return;
+    }
+
+    const troco =
+        valorPago - total;
+
+    document.getElementById(
+        "trocoResultado"
+    ).textContent =
+        troco >= 0
+        ? `Troco: R$ ${troco.toFixed(2).replace(".", ",")}`
+        : "Valor insuficiente";
+}
+
+function confirmarPagamento() {
+
+    const tipo =
+        document.querySelector(
+            'input[name="pagamento"]:checked'
+        ).value;
+
+    alert(
+        `Pagamento via ${tipo.toUpperCase()} confirmado!`
+    );
+
+    fecharPopup();
+}
+
+let frete = 0;
+let totalPedido = 0;
+
+function carregarPedido() {
+
+    const conteudo =
+        document.getElementById("conteudo");
+
+    document.getElementById("loading").remove();
+
+    const itens = [
+        {
+            nome: "X-Burguer",
+            descricao: "Pão, carne e queijo",
+            preco: 18.90,
+            qtd: 1,
+            emoji: "🍔"
+        },
+        {
+            nome: "X-Salada",
+            descricao:
+            "Pão, carne, queijo, alface e tomate",
+            preco: 21.00,
+            qtd: 2,
+            emoji: "🥗"
         }
+    ];
 
-        function abrirPopup() {
-            document.getElementById("overlay").classList.add("aberto");
-        }
+    let total = 0;
 
-        function fecharPopup() {
-            document.getElementById("overlay").classList.remove("aberto");
-        }
+    itens.forEach(item => {
 
-        function fecharPopupFora(e) {
-            if (e.target === document.getElementById("overlay")) fecharPopup();
-        }
+        total += item.preco * item.qtd;
 
-        carregarPedido();
-    </script>
-</body>
-</html>
+        const card =
+            document.createElement("div");
+
+        card.className = "item-card";
+
+        card.innerHTML = `
+            <div class="item-img">
+                ${item.emoji}
+            </div>
+
+            <div class="item-info">
+                <h3>${item.nome}</h3>
+                <p>${item.descricao}</p>
+
+                <span class="item-preco">
+                    R$ ${item.preco
+                        .toFixed(2)
+                        .replace(".", ",")}
+                </span>
+            </div>
+
+            <div class="item-qtd">
+                ${item.qtd}
+            </div>
+        `;
+
+        conteudo.appendChild(card);
+    });
+
+    totalPedido = total;
+
+    atualizarTotal();
+}
+
+function calcularFrete() {
+
+    const cep =
+        document.getElementById("cep").value;
+
+    if (!cep) {
+        alert("Digite o CEP");
+        return;
+    }
+
+    fetch(`/frete?cep=${cep}`)
+        .then(res => res.json())
+        .then(valorFrete => {
+
+            frete = valorFrete;
+
+            document.getElementById(
+                "freteInfo"
+            ).textContent =
+            `Frete: R$ ${frete
+                .toFixed(2)
+                .replace(".", ",")}`;
+
+            atualizarTotal();
+        });
+}
+
+function atualizarTotal() {
+
+    const totalFinal =
+        totalPedido + frete;
+
+    document.getElementById(
+        "totalValor"
+    ).textContent =
+    `R$ ${totalFinal
+        .toFixed(2)
+        .replace(".", ",")}`;
+}
+
+function abrirPopup() {
+
+    atualizarQrCode();
+
+    document
+        .getElementById("overlay")
+        .classList
+        .add("aberto");
+}
+
+function fecharPopup() {
+
+    document
+        .getElementById("overlay")
+        .classList
+        .remove("aberto");
+}
+
+function fecharPopupFora(event) {
+
+    const overlay =
+        document.getElementById("overlay");
+
+    if (event.target === overlay) {
+        fecharPopup();
+    }
+}
+
+/* CARREGA O PEDIDO */
+carregarPedido();
+
+</script>

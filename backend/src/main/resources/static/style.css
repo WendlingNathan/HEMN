@@ -7,106 +7,15 @@ body {
     padding: 20px;
 }
 
-/* ===== 3 caixas lado a lado ===== */
-.menu-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 40px; /* AUMENTEI o espaço entre as caixas */
-    flex-wrap: nowrap;
-}
-
-/* ===== Caixa grande ===== */
-.category-box {
-    background: #FBC770;
-    border-radius: 20px;
-    padding: 20px;
-    width: 33%;
-    min-width: 300px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.2);
-    height: auto;
-}
-
-/* ===== Títulos das categorias ===== */
-.category-box h2 {
-    font-size: 22px;  /* DIMINUI */
-    margin-bottom: 20px;
-}
-
-/* ===== Itens dentro da caixa ===== */
-.item {
-    background: #ffcf87;
-    padding: 12px;  /* Reduzi levemente */
-    margin-bottom: 25px; /* MAIS espaço entre itens */
-    border-radius: 15px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
-}
-
-/* Nome do item */
-.item h3 {
-    font-size: 18px; /* DIMINUI */
-    margin-bottom: 8px;
-}
-
-/* Descrição */
-.item p {
-    font-size: 14px; /* DIMINUI bastante */
-    margin-bottom: 10px;
-}
-
-/* Preço */
-.price {
-    font-weight: bold;
-    display: block;
-    margin-top: 6px;
-    font-size: 16px; /* DIMINUI */
-}
-
-button {
-    background: #FFA500;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 16px; /* DIMINUI */
-    margin-top: 5px;
-    color: white;
-}
-
 /* ===== MENU SUPERIOR ===== */
-.top-menu {
-    background-color: #F89E35;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 20px;
-    position: relative;
-}
 
-/* Logo */
-.top-menu .logo {
-    position: absolute;
-    left: 20px;
-    width: 90px; /* DIMINUI */
-}
-
-/* Texto MENU */
-.top-menu .menu-title {
-    font-size: 48px; /* DIMINUI */
-    font-weight: 900;
-    color: #fff;
-    text-shadow: 4px 4px #000;
-    margin: 0;
-}
 .header {
     width: 100%;
     padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    /* REMOVE o fundo laranja */
     background: transparent;
-    /* ou: background-color: transparent; */
 }
 
 .logo {
@@ -119,4 +28,157 @@ button {
     color: white;
     text-shadow: 3px 3px 0px black;
     margin: 0 auto;
+}
+
+/* ===== 3 caixas lado a lado ===== */
+
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: nowrap;
+}
+
+/* ===== Caixa grande ===== */
+
+.category-box {
+    background: #FBC770;
+    border-radius: 20px;
+    padding: 20px;
+    width: 33%;
+    min-width: 300px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    height: auto;
+}
+
+/* ===== Títulos ===== */
+
+.category-box h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+/* ===== Itens ===== */
+
+.item {
+    background: #ffcf87;
+    padding: 12px;
+    margin-bottom: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.item h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.item p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-weight: bold;
+    display: block;
+    margin-top: 6px;
+    font-size: 16px;
+}
+
+/* ===== BOTÕES ===== */
+
+button {
+    background: #FFA500;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 5px;
+    color: white;
+}
+
+/* ===== MENU TOPO ===== */
+
+.top-menu {
+    background-color: #F89E35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    position: relative;
+}
+
+.top-menu .logo {
+    position: absolute;
+    left: 20px;
+    width: 90px;
+}
+
+.top-menu .menu-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 4px 4px #000;
+    margin: 0;
+}
+
+/* ===== ENDEREÇO ===== */
+
+.endereco-box {
+    position: relative;
+    z-index: 1;
+    background: #FBC770;
+    border-radius: 20px;
+    padding: 24px;
+    width: 100%;
+    max-width: 680px;
+    margin: 20px auto 120px auto;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.endereco-box h2 {
+    font-family: Arial, sans-serif;
+    color: #5a3000;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.grid-endereco {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.grid-endereco input {
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    background: #ffcf87;
+    font-size: 14px;
+    outline: none;
+}
+
+.btn-frete {
+    margin-top: 16px;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    background: #FFA500;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn-frete:hover {
+    background: #e69400;
+}
+
+#freteInfo {
+    margin-top: 12px;
+    font-weight: bold;
+    color: #5a3000;
+    text-align: center;
+    font-size: 18px;
 }
